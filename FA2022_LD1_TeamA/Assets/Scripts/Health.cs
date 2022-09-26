@@ -9,6 +9,10 @@ public class Health : MonoBehaviour
     public Combat EntityCombat;
     public float HitInvulnerability = 1.5f;
 
+    private void Start()
+    {
+        Debug.Log(EntityCombat);
+    }
     public int Heal(int amount)
     {
         CurrentHealth += amount;

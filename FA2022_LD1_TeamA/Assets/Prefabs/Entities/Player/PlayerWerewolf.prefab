@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8672326560223897442, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_SlopeLimit
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 747497439447639912, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_Name
       value: PlayerWerewolf
@@ -59,7 +63,23 @@ PrefabInstance:
     - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: EntityCombat
       value: 
-      objectReference: {fileID: 1864091044615712791}
+      objectReference: {fileID: 7463001885408780828}
+    - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Size.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77ee4f368c57dbd429f72eea2a39ec99, type: 3}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9119468024028264899, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -67,12 +87,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+--- !u!4 &6530480655313304402 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4277214936659684014, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+  m_PrefabInstance: {fileID: 7060331248091795964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7756589616967218836 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 747497439447639912, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
   m_PrefabInstance: {fileID: 7060331248091795964}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1864091044615712791
+--- !u!114 &7463001885408780828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,4 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae28e0aa33756fb43b9afbcbe1e25730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackerTransform: {fileID: 6530480655313304402}
   Damage: 1
+  IsAttacking: 0
+  AttackDistance: 10
+  AttackRadius: 1

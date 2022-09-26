@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyLumberJack
       objectReference: {fileID: 0}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: EntityCombat
+      value: 
+      objectReference: {fileID: 1031468843654836924}
     - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -62,15 +66,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.b
-      value: 0.24442929
+      value: 0.5754717
       objectReference: {fileID: 0}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.g
-      value: 0.8962264
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.r
-      value: 0.1986917
+      value: 0.11669347
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -89,7 +93,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6335926599683978631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae28e0aa33756fb43b9afbcbe1e25730, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b9420b57d936514fbb8b9ae761ca14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackerTransform: {fileID: 7415641927435860033}
   Damage: 1
+  IsAttacking: 0
+--- !u!4 &7415641927435860033 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+  m_PrefabInstance: {fileID: 6579238077133126805}
+  m_PrefabAsset: {fileID: 0}

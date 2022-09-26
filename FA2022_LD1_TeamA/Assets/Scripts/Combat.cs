@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
+    public Transform AttackerTransform;
     public int Damage;
     public float Invulnerability { get; set; }
-    
+    public bool IsAttacking = false;
 
+    
     private void Update()
     {
-        // suppose invlunerable for 3 seconds
-            // if using frames to determine timer, then the timer for thirty seconds would be different for each pc
-            // if using delta.Time, same case, since a frame can take longer than 3 seconds before loading
-
         if (Invulnerability > 0)
         {
             Invulnerability -= Time.deltaTime;
@@ -27,5 +25,16 @@ public class Combat : MonoBehaviour
         Invulnerability = seconds;
 
         // do animations.
+    }
+
+    public virtual void Attack()
+    {
+        Debug.Log("Using Base Combat");
+    }
+
+
+    public void ChargeAttack() 
+    {
+        Debug.Log("Using Base Combat");
     }
 }
