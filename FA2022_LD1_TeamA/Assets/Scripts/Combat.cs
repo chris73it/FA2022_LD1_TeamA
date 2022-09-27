@@ -9,7 +9,7 @@ public class Combat : MonoBehaviour
     public float Invulnerability { get; set; }
     public bool IsAttacking = false;
 
-    
+    // Check if overriden by derived classes, needs Invulnerability section    
     private void Update()
     {
         if (Invulnerability > 0)

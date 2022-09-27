@@ -112,5 +112,5 @@ MonoBehaviour:
   AttackerTransform: {fileID: 6530480655313304402}
   Damage: 1
   IsAttacking: 0
-  AttackDistance: 10
+  AttackDistance: 64
   AttackRadius: 1

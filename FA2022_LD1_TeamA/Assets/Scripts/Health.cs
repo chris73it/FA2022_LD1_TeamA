@@ -8,11 +8,6 @@ public class Health : MonoBehaviour
     public int CurrentHealth = 1;
     public Combat EntityCombat;
     public float HitInvulnerability = 1.5f;
-
-    private void Start()
-    {
-        Debug.Log(EntityCombat);
-    }
     public int Heal(int amount)
     {
         CurrentHealth += amount;
@@ -23,9 +18,12 @@ public class Health : MonoBehaviour
         if (EntityCombat.Invulnerability <= 0)
         {
             CurrentHealth -= amount;
-            EntityCombat.SetGeneralInvulnerability(HitInvulnerability);
+            if (gameObject.tag == "Player")
+            {
+                EntityCombat.SetGeneralInvulnerability(HitInvulnerability);
+            }
             // Check Death
-            Debug.Log("Health:" + CurrentHealth);
+            Debug.Log(gameObject.tag + " Health:" + CurrentHealth);
         }
         return CurrentHealth;
     } 

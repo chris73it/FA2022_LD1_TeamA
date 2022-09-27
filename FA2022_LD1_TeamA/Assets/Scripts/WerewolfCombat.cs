@@ -23,8 +23,10 @@ public class WerewolfCombat : Combat
     private Vector3 getAttackDistance()
     {
         Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.nearClipPlane + 1;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        mousePos.y = AttackerTransform.up.y;
+        mousePos.y = 0f;
+
         return mousePos;
     }
     public override void Attack()
@@ -34,7 +36,10 @@ public class WerewolfCombat : Combat
         {
             for (int i = 0; i < Damaged.Length; i++)
             {
-                //Debug.Log(Damaged[i]);
+                if (Damaged[i].gameObject.tag == "Enemy")
+                {
+                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                }
             }
         }
     }
@@ -44,7 +49,7 @@ public class WerewolfCombat : Combat
         Gizmos.color = Color.red;
         //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
             //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-       Gizmos.DrawWireCube(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius, AttackRadius, AttackRadius));
+       Gizmos.DrawWireCube(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius * 2, AttackRadius * 2, AttackRadius * 2));
     }
 
 
