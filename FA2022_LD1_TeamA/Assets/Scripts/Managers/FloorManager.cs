@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FloorManager : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class FloorManager : MonoBehaviour
     }
 
     public FloorTypes Type = FloorTypes.Base;
-    private const int _roomSize = 2;
-    public Room[,] Floor = new Room[_roomSize, _roomSize];
+    public static int RoomTreeHeight = 3;
+    public Room StartingFloor;
 
     // Init:
     // Check if instance exists already, if not set instance = this;
@@ -40,22 +41,20 @@ public class FloorManager : MonoBehaviour
         // Switch to next Floor Type
         Type++; // ?
 
-        // Fills Floor with Void Rooms
-        for (int i = 0; i < Floor.GetLength(0); i++)
-        {
-            for (int j = 0; i < Floor.GetLength(1); j++)
-            {
-                var r = new Room(Room.RoomTypes.Void);
-                Floor[i, j] = r;
-            }
-        }
+        // Generate Starting Room
+        StartingFloor = new Room(SceneManager.GetSceneByName("EmptyRoom"), Room.RoomTypes.Empty);
+        // if room instanstiation doesnt work just move the Room constructor to an private Awake
 
-        // Choose Start Room
+        // Generate Starting Room Connections
+
     }
     private void createDoors()
     {
 
     }
-        
-       
+      
+      // generate starting room
+      // generate its connections
+      // repeat until for loop reaches height,
+      // then make all last rooms connect to boss
 }
