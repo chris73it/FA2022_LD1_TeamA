@@ -5,62 +5,52 @@ using UnityEngine.SceneManagement;
 
 public class Room : MonoBehaviour
 {
-    public Scene SceneRoom { get; set; }
-    public enum RoomTypes
+    public Scene SceneRoom { get; set; } // Might just have to be a string
+    public enum RoomTypes // Make sure names are same as Scene names
     {
-        Void, // Inaccessible rooms
-        Empty,
-        Regular 
+        EmptyRoom, 
+        RegularRoom 
     }
     public RoomTypes Type { get; set; }
     public int Depth;
     public static int Height;
     public List<Room> ConnectedRooms;
-    public int Choices = 2;
+    public int Choices = 2; // might be random later?
     // Door
     // Entites, Pickups, Powerups array
-    private bool _isCleared = false;
-    private bool _hasEntered = false;
+    public bool IsCleared = false;
     // array or list that holds number of entities in a room in the room
 
     // Constructors
     public Room()
     {
-        SceneRoom = getRandomScene();
-        Type = getRandomType();
-    }
-
-    public Room(Scene s)
-    {
-        SceneRoom = s;
         Type = getRandomType();
     }
 
     public Room(RoomTypes t)
     {
-        SceneRoom = getRandomScene();
-        Type = t;
-    }
-
-    public Room(Scene s, RoomTypes t)
-    {
-        SceneRoom = s;
         Type = t;
     }
 
     // Methods
+    // Takes a random scene from the scene list and returns it
     private static Scene getRandomScene()
     {
         var randomScene = Random.Range(0, SceneManager.sceneCountInBuildSettings - 1);
-        return SceneManager.GetSceneByBuildIndex(randomScene);
+        return new Scene();//SceneManager.GetSceneByBuildIndex(randomScene);
     }
 
+    // Gets a random enum RoomTypes and returns it
     private static RoomTypes getRandomType()
     {
         var roomTypesLength = RoomTypes.GetNames(typeof(RoomTypes)).Length;
         return (RoomTypes)Random.Range(0, roomTypesLength); // might have to cast to int first?
     }
 
+    // Sets the Depth of the room to depth, then fills the Room's Connections with a new Room. It calls
+    // itself to fill the new Room's connections. This continues until depth is equal to the Height of the
+    // Room class, then adds the Boss room to the current Room's Connections. Repeats until all of the Room's
+    // Connections are filled properly
     public void GenerateRooms(int depth)
     {
         Depth = depth;
@@ -69,7 +59,7 @@ public class Room : MonoBehaviour
         {
             for (int i = 0; i < Choices; i++)
             {
-                Room r = new Room(SceneManager.GetSceneByName("EmptyRoom"), Room.RoomTypes.Empty); // testing with only empty rooms
+                Room r = new Room(Room.RoomTypes.EmptyRoom); // testing with only empty rooms
                 ConnectedRooms.Add(r);
                 r.GenerateRooms(depth++);
             }
@@ -79,9 +69,16 @@ public class Room : MonoBehaviour
         }
     }
 
-    /* Fill Rooms
-     * Go to one
-     * Repeat until hit depth - 1 or array is full
-     * 
-    */
+    public void OnRoomEnter() 
+    {
+        // Check if ...
+            // room is full of enemies
+                // if true, room is cleared
+            //room
+    }
+
+    private void spawnRoomItems()
+    {
+        // spawns entites, powerups, pickups, doors, etc
+    }
 }

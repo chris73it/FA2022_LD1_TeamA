@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1818537716816905183}
   - component: {fileID: 640494242466964577}
+  - component: {fileID: 9196489595442112751}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -45,7 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2737b04053dbbc749988e63bee5c6e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextRoom: {fileID: 0}
+  test:
+    m_Handle: 0
+--- !u!65 &9196489595442112751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693274975398958043}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3880385150110973452
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 3880385150110973452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1818537716816905183}

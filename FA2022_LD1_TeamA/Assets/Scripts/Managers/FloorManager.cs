@@ -33,6 +33,9 @@ public class FloorManager : MonoBehaviour
         }
 
         ResetFloor();
+
+        string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), StartingFloor.Type);
+        SceneManager.LoadScene(roomName, LoadSceneMode.Single);
     }
 
     // Methods
@@ -42,15 +45,11 @@ public class FloorManager : MonoBehaviour
         Type++; // ?
 
         // Generate Starting Room
-        StartingFloor = new Room(SceneManager.GetSceneByName("EmptyRoom"), Room.RoomTypes.Empty);
+        StartingFloor = new Room(Room.RoomTypes.EmptyRoom);
         // if room instanstiation doesnt work just move the Room constructor to an private Awake
 
-        // Generate Starting Room Connections
-
-    }
-    private void createDoors()
-    {
-
+        // Generate All Rooms
+        StartingFloor.GenerateRooms(0);
     }
       
       // generate starting room
