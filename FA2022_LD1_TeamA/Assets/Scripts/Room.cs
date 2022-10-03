@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Room : MonoBehaviour
+public class Room
 {
     public Scene SceneRoom { get; set; } // Might just have to be a string
     public enum RoomTypes // Make sure names are same as Scene names
@@ -13,13 +13,22 @@ public class Room : MonoBehaviour
     }
     public RoomTypes Type { get; set; }
     public int Depth;
-    public static int Height;
-    public List<Room> ConnectedRooms;
+    public static int Height = 3;
+    public List<Room> ConnectedRooms = new List<Room>();
     public int Choices = 2; // might be random later?
     // Door
-    // Entites, Pickups, Powerups array
+    public List<GameObject> PickUps; // PickUps
     public bool IsCleared = false;
     // array or list that holds number of entities in a room in the room
+    private string _roomName;
+    public string RoomName
+    {
+        get {
+            //Debug.Log(Room.RoomTypes.GetName(typeof(Room.RoomTypes), Type)); 
+            return Room.RoomTypes.GetName(typeof(Room.RoomTypes), Type); }
+    }
+
+    //private bool _loadingRoom = false;
 
     // Constructors
     public Room()
@@ -59,9 +68,13 @@ public class Room : MonoBehaviour
         {
             for (int i = 0; i < Choices; i++)
             {
-                Room r = new Room(Room.RoomTypes.EmptyRoom); // testing with only empty rooms
+                Room r = new Room(RoomTypes.EmptyRoom); // testing with only empty rooms
+
+                // Rooms are emtpy
                 ConnectedRooms.Add(r);
-                r.GenerateRooms(depth++);
+                //Debug.Log("Count: " + ConnectedRooms.Count);
+
+                r.GenerateRooms(++depth);
             }
         } else if (depth == Height)
         {
@@ -71,14 +84,48 @@ public class Room : MonoBehaviour
 
     public void OnRoomEnter() 
     {
-        // Check if ...
-            // room is full of enemies
-                // if true, room is cleared
-            //room
+        //Debug.Log("StartCoroutine");
+        //_loadingRoom = true;
+        //SceneManager.LoadScene(RoomName, LoadSceneMode.Single);
+
+        //Debug.Log(IsCleared);
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(RoomName));
+        //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
+
+        spawnRoomItems();
     }
 
     private void spawnRoomItems()
     {
-        // spawns entites, powerups, pickups, doors, etc
+        //Debug.Log(GameObject.FindGameObjectsWithTag("Spawner").Length);
+
+        
+        // Always spawn pickups
+        // Only spawn enemies if not cleared
+        // only spawn doors if cleared
+        GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
+        int choicesCounter = 0;
+        GameObject go;
+
+        for (int i = 0; i < o.Length; i++)
+        {
+            if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Door)
+            {
+                if (IsCleared)
+                {
+                    //Debug.Log("Spawning...");
+                    go = o[i].GetComponent<Spawner>().InstantiateObject();
+                    
+                    //Debug.Log(go.name);
+
+                    go.GetComponent<RoomTransport>().NextRoom = ConnectedRooms[choicesCounter];
+                    choicesCounter++;
+                }
+            } else
+            {
+                o[i].GetComponent<Spawner>().InstantiateObject();
+            }
+        }          
     }
 }
