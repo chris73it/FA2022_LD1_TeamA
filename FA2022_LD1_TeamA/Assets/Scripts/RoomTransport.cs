@@ -9,10 +9,6 @@ public class RoomTransport : MonoBehaviour
     public float NewX = 0;
     public float NewY = 0;
 
-    private void Start()
-    {
-        NextRoom = new Room(Room.RoomTypes.RegularRoom);
-    }
     // Method: OnCollisionEnter, transports player to nextRoom
     private void OnCollisionEnter(Collision collision)
     {
