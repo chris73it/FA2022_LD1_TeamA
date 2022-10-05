@@ -58,6 +58,13 @@ public class FloorManager : MonoBehaviour
         //SceneManager.LoadScene(roomName, LoadSceneMode.Single);
     }
 
+    private void Update() // to be removed
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            CurrentRoom.IsCleared = true;
+        }
+    }
     // Methods
     public void ResetFloor()
     {

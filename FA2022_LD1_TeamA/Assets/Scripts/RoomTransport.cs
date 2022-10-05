@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class RoomTransport : MonoBehaviour
 {
     public Room NextRoom; // Should be set on creation of door which is after floor manager and its room have been created
-    public float NewX = 0;
-    public float NewY = 0;
 
     // Method: OnCollisionEnter, transports player to nextRoom
     private void OnCollisionEnter(Collision collision)
@@ -21,9 +19,10 @@ public class RoomTransport : MonoBehaviour
             //Debug.Log(p.ToString());
             //SceneManager.LoadScene(roomName, LoadSceneMode.Single); 
 
-            Debug.Log(NextRoom.RoomName);
+            //Debug.Log(NextRoom.RoomName);
+           
             FloorManager.CurrentRoom = NextRoom;
-            collision.gameObject.transform.position = new Vector3(NewX, 0, NewY);
+            
         }
     }
 }

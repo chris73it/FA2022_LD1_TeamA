@@ -8,8 +8,10 @@ public class Room
     public Scene SceneRoom { get; set; } // Might just have to be a string
     public enum RoomTypes // Make sure names are same as Scene names
     {
-        EmptyRoom, 
-        RegularRoom 
+        EmptyRoom,
+        RegularRoom,
+        BossRoom, // No BossRoom Scene
+        ShopRoom, // No ShopRoom Scene
     }
     public RoomTypes Type { get; set; }
     public int Depth;
@@ -18,7 +20,14 @@ public class Room
     public int Choices = 2; // might be random later?
     // Door
     public List<GameObject> PickUps; // PickUps
-    public bool IsCleared = false;
+    private bool _isCleared = false;
+    public bool IsCleared 
+    { 
+        get { return _isCleared; } 
+        set { _isCleared = value;
+            spawnRoomItems();
+        } 
+    }
     // array or list that holds number of entities in a room in the room
     private string _roomName;
     public string RoomName
@@ -36,6 +45,10 @@ public class Room
         Type = getRandomType();
     }
 
+    public Room(int start, int end)
+    {
+        Type = getRandomType(start, end);
+    }
     public Room(RoomTypes t)
     {
         Type = t;
@@ -56,6 +69,11 @@ public class Room
         return (RoomTypes)Random.Range(0, roomTypesLength); // might have to cast to int first?
     }
 
+    private static RoomTypes getRandomType(int start = 0, int end = 2) // end is not inclusive
+    {
+        return (RoomTypes)Random.Range(start, end); // might have to cast to int first?
+    }
+
     // Sets the Depth of the room to depth, then fills the Room's Connections with a new Room. It calls
     // itself to fill the new Room's connections. This continues until depth is equal to the Height of the
     // Room class, then adds the Boss room to the current Room's Connections. Repeats until all of the Room's
@@ -68,7 +86,7 @@ public class Room
         {
             for (int i = 0; i < Choices; i++)
             {
-                Room r = new Room(RoomTypes.EmptyRoom); // testing with only empty rooms
+                Room r = new Room(0, 2);
 
                 // Rooms are emtpy
                 ConnectedRooms.Add(r);
@@ -76,9 +94,12 @@ public class Room
 
                 r.GenerateRooms(++depth);
             }
+        } else if (depth == Height - 1)
+        {
+           // ConnectedRooms.Add(new Room(RoomTypes.BossRoom));
         } else if (depth == Height)
         {
-            //ConnectedRooms.Add(Boss room);
+            // ConnectedRooms.Add(new Room(RoomTypes.ShopRoom));
         }
     }
 
@@ -89,8 +110,21 @@ public class Room
         //SceneManager.LoadScene(RoomName, LoadSceneMode.Single);
 
         //Debug.Log(IsCleared);
+        
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(RoomName));
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
+
+        foreach (GameObject element in o)
+        {
+            if (element.GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Player)
+            {
+                player.transform.position = element.transform.position;
+            }
+        }
+
         //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
 
         spawnRoomItems();
@@ -114,13 +148,15 @@ public class Room
             {
                 if (IsCleared)
                 {
-                    //Debug.Log("Spawning...");
-                    go = o[i].GetComponent<Spawner>().InstantiateObject();
-                    
-                    //Debug.Log(go.name);
-
-                    go.GetComponent<RoomTransport>().NextRoom = ConnectedRooms[choicesCounter];
-                    choicesCounter++;
+                    if (ConnectedRooms.Count > 0)
+                    {
+                        //Debug.Log("Spawning...");
+                        go = o[i].GetComponent<Spawner>().InstantiateObject();
+                        //Debug.Log(go.name);
+                        //Rooms currently dont spawn anything since they the rest are not cleared
+                        go.GetComponent<RoomTransport>().NextRoom = ConnectedRooms[choicesCounter];
+                        choicesCounter++;
+                    }   
                 }
             } else
             {

@@ -10,7 +10,8 @@ public class Spawner : MonoBehaviour
         Pickup,
         Powerup,
         Door,
-        Enemy
+        Enemy,
+        Player
     }
     public SpawnerTypes Type;
 
