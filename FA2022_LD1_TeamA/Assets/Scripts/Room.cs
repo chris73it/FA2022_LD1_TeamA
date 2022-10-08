@@ -10,12 +10,12 @@ public class Room
     {
         EmptyRoom,
         RegularRoom,
-        BossRoom, // No BossRoom Scene
-        ShopRoom, // No ShopRoom Scene
+        BossRoom,
+        ShopRoom, 
     }
     public RoomTypes Type { get; set; }
     public int Depth;
-    public static int Height = 3;
+    public static int Height;
     public List<Room> ConnectedRooms = new List<Room>();
     public int Choices = 2; // might be random later?
     // Door
@@ -29,7 +29,6 @@ public class Room
         } 
     }
     // array or list that holds number of entities in a room in the room
-    private string _roomName;
     public string RoomName
     {
         get {
@@ -82,7 +81,14 @@ public class Room
     {
         Depth = depth;
 
-        if (depth < Height)
+        if (depth == Height - 1)
+        {
+            Choices = 1;
+            Room b = new Room(RoomTypes.BossRoom);
+            ConnectedRooms.Add(b);
+            b.GenerateRooms(++depth);
+
+        } else if (depth < Height)
         {
             for (int i = 0; i < Choices; i++)
             {
@@ -94,12 +100,10 @@ public class Room
 
                 r.GenerateRooms(++depth);
             }
-        } else if (depth == Height - 1)
+        } else
         {
-           // ConnectedRooms.Add(new Room(RoomTypes.BossRoom));
-        } else if (depth == Height)
-        {
-            // ConnectedRooms.Add(new Room(RoomTypes.ShopRoom));
+            Choices = 1;
+            ConnectedRooms.Add(new Room(RoomTypes.ShopRoom));
         }
     }
 
@@ -113,21 +117,26 @@ public class Room
         
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(RoomName));
+        //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
+
+        spawnRoomItems();
+
+        GameObject player = GameObject.FindWithTag("Player");
         GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
 
         foreach (GameObject element in o)
         {
             if (element.GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Player)
             {
-                player.transform.position = element.transform.position;
+                //Debug.Log("Player: " + player.name);
+                //player.GetComponent<CharacterController>().enabled = false;
+                player.transform.position = element.transform.position; // Enabling Auto Sync Transforms in Physics settings
+                //player.GetComponent<CharacterController>().enabled = true;
+
             }
         }
-
-        //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
-
-        spawnRoomItems();
     }
 
     private void spawnRoomItems()
@@ -148,7 +157,7 @@ public class Room
             {
                 if (IsCleared)
                 {
-                    if (ConnectedRooms.Count > 0)
+                    if (choicesCounter < Choices && ConnectedRooms.Count > 0)
                     {
                         //Debug.Log("Spawning...");
                         go = o[i].GetComponent<Spawner>().InstantiateObject();
@@ -160,7 +169,10 @@ public class Room
                 }
             } else
             {
-                o[i].GetComponent<Spawner>().InstantiateObject();
+                if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Player)
+                {
+                    o[i].GetComponent<Spawner>().InstantiateObject();
+                }
             }
         }          
     }

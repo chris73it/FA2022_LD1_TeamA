@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject FloorManagerPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
+    public GameObject ChosenPlayerCharacter;
     public enum GameStates
     {
         MainMenu,
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public enum MenuStates
     {
+        None,
         Pause
     }
 
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour
                 //Debug.Log("CurrentRoom assigned");
 
                 // Spawn Player
-                GameObject ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
+                ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
                 DontDestroyOnLoad(ChosenPlayerCharacter);
 
                 UpdateGameState(GameStates.Game);

@@ -16,7 +16,8 @@ public class FloorManager : MonoBehaviour
     }
 
     public FloorTypes Type = FloorTypes.Base;
-    public static int RoomTreeHeight = 3;
+    public static int RoomsEntered = 0;
+    public static int RoomTreeHeight = 5;
     public static Room StartingFloor { get; set; }
     private static Room _currentRoom;
     public static Room CurrentRoom 
@@ -73,7 +74,7 @@ public class FloorManager : MonoBehaviour
 
         // Generate Starting Room
         StartingFloor = new Room(Room.RoomTypes.EmptyRoom);
-        // if room instanstiation doesnt work just move the Room constructor to an private Awake
+        Room.Height = RoomTreeHeight;
 
         // Generate All Rooms
         StartingFloor.GenerateRooms(0);
@@ -82,6 +83,8 @@ public class FloorManager : MonoBehaviour
     private void onLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
         CurrentRoom.OnRoomEnter();
+        Debug.Log(RoomsEntered + ": " + CurrentRoom.RoomName);
+        RoomsEntered++;
     }
       // generate starting room
       // generate its connections
