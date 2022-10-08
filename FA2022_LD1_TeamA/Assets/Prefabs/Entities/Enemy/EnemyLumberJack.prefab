@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: EntityCombat
       value: 
       objectReference: {fileID: 1031468843654836924}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: HitInvulnerability
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -142,10 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c045d0b677cf31040b794472f54a5c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: -8672326560223897442}
   TopSpeed: 5
   Acceleration: 3
   Decceleration: 1
+  CurrentSpeed: 0
+  Controller: {fileID: -8672326560223897442}
 --- !u!114 &5321270852538148134
 MonoBehaviour:
   m_ObjectHideFlags: 0

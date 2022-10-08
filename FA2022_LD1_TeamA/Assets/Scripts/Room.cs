@@ -160,7 +160,7 @@ public class Room
 
         for (int i = 0; i < o.Length; i++)
         {
-            if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Door)
+            if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Door) // maybe turn this all into a switch later
             {
                 if (IsCleared)
                 {
@@ -174,13 +174,14 @@ public class Room
                         choicesCounter++;
                     }   
                 }
-            } else
+            } else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Enemy && !IsCleared)
             {
-                if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Player)
-                {
-                    o[i].GetComponent<Spawner>().InstantiateObject();
-                }
+                o[i].GetComponent<Spawner>().InstantiateObject();
+            } else if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Enemy)
+            {
+                o[i].GetComponent<Spawner>().InstantiateObject();
             }
+
         }          
     }
 }

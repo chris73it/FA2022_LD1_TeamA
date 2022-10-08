@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LumberJackCombat : Combat
+public class LumberJackCombat : EnemyCombat
 {
 
 }
