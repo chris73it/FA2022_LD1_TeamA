@@ -22,18 +22,25 @@ public class Room
     public List<GameObject> PickUps; // PickUps
     private bool _isCleared = false;
     public bool IsCleared 
-    { 
-        get { return _isCleared; } 
-        set { _isCleared = value;
+    {
+        get
+        {
+            return _isCleared;
+        }
+        set 
+        { 
+            _isCleared = value;
             spawnRoomItems();
         } 
     }
     // array or list that holds number of entities in a room in the room
     public string RoomName
     {
-        get {
+        get 
+        {
             //Debug.Log(Room.RoomTypes.GetName(typeof(Room.RoomTypes), Type)); 
-            return Room.RoomTypes.GetName(typeof(Room.RoomTypes), Type); }
+            return Room.RoomTypes.GetName(typeof(Room.RoomTypes), Type); 
+        }
     }
 
     //private bool _loadingRoom = false;
