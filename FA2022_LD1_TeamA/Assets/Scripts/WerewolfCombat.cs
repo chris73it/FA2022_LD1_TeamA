@@ -6,7 +6,14 @@ public class WerewolfCombat : Combat
 {
     public float AttackDistance;
     public float AttackRadius;
+    public float offsetScaleX;
+    public float offsetScaleZ;
 
+    void Start()
+    {
+        offsetScaleX = 8.4f;
+        offsetScaleZ = 8.4f;
+    }
     void Update()
     {
         if (Invulnerability > 0)
@@ -26,8 +33,18 @@ public class WerewolfCombat : Combat
         mousePos.z = Camera.main.nearClipPlane + 1;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.y = 0f;
+        mousePos.z = mousePos.z * offsetScaleZ;
+        mousePos.x = mousePos.x * offsetScaleX;
+        mousePos.z -= AttackerTransform.position.z;
+        mousePos.x -= AttackerTransform.position.x;
+        mousePos.z *= 2;
+        mousePos.x *= 2;
+        float radius = Mathf.Sqrt(Mathf.Pow(mousePos.z, 2) + Mathf.Pow(mousePos.x, 2));
+        mousePos.x = mousePos.x / radius * 2;
+        mousePos.z = mousePos.z / radius * 2;
 
-        return mousePos;
+        Vector3 distance = mousePos;
+        return distance;
     }
     public override void Attack()
     {
@@ -47,9 +64,7 @@ public class WerewolfCombat : Combat
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
-            //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-       Gizmos.DrawWireCube(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius * 2, AttackRadius * 2, AttackRadius * 2));
+        Gizmos.DrawWireSphere(AttackerTransform.position + getAttackDistance(), 1);
     }
 
 

@@ -21,6 +21,7 @@ public class EnemyMovement : Movement
     // Update is called once per frame
     void Update()
     {
+        // replace rooms walls with cubes instead of planes
         if (StateTimer <= 0)
         {
             ChooseNewState();
