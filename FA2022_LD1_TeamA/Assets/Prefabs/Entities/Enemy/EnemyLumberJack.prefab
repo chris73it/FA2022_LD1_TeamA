@@ -103,6 +103,7 @@ MonoBehaviour:
   AttackerTransform: {fileID: 7415641927435860033}
   Damage: 1
   IsAttacking: 0
+  AttackRange: 0
 --- !u!4 &7415641927435860033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}

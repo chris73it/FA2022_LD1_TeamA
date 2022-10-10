@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject FloorManagerPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
-    public GameObject ChosenPlayerCharacter;
+    public static GameObject ChosenPlayerCharacter;
     public enum GameStates
     {
         MainMenu,
@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        Application.targetFrameRate = 60;
 
         DontDestroyOnLoad(gameObject);
     }
@@ -79,7 +81,6 @@ public class GameManager : MonoBehaviour
                 DontDestroyOnLoad(ChosenPlayerCharacter);
 
                 UpdateGameState(GameStates.Game);
-
                 break;
 
             case GameStates.GameOver:

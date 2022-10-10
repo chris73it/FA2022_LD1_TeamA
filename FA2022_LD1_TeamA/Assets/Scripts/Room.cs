@@ -99,7 +99,9 @@ public class Room
         {
             for (int i = 0; i < Choices; i++)
             {
-                Room r = new Room(0, 2);
+                //Room r = new Room(0, 2);
+
+                Room r = new Room(RoomTypes.RegularRoom);
 
                 // Rooms are emtpy
                 ConnectedRooms.Add(r);

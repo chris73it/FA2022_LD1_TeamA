@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     // Updates Entity using its acceleration, decceleration, and topspeed
     public float UpdateSpeed()
     {
-        if (Horizontal != 0 || Vertical != 0)
+        if (Horizontal != 0f || Vertical != 0f)
         {
             if (CurrentSpeed + Acceleration < TopSpeed)
             {
