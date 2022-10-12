@@ -40,15 +40,17 @@ public class GameManager : MonoBehaviour
 
             switch (GameState)
             {
-                case GameStates.Menu:
+                case GameStates.Menu: 
                     Time.timeScale = 0;
+                   
                     break;
 
                 case GameStates.Game:
+                    MenuState = MenuStates.None;
                     Time.timeScale = 1;
                     break;
 
-                case GameStates.Loading: // When player choses "Start Game" in Main Menu
+                case GameStates.Loading:
                     // Create Floor Manager
                     if (FloorManager.Instance == null)
                     {
@@ -74,7 +76,8 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case GameStates.GameOver:
-                    Instantiate(Menus[1]);
+                    Instantiate(Menus[1]); // maybe move menu instantiating to switch menustate case
+                    MenuState = MenuStates.GameOver;
                     Time.timeScale = 0;
                     break;
 
