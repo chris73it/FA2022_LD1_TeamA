@@ -92,6 +92,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4277214936659684014, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
   m_PrefabInstance: {fileID: 7060331248091795964}
   m_PrefabAsset: {fileID: 0}
+--- !u!143 &7376580826939607394 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: -8672326560223897442, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+  m_PrefabInstance: {fileID: 7060331248091795964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7756589616967218836 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 747497439447639912, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
@@ -110,7 +115,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackerTransform: {fileID: 6530480655313304402}
+  controller: {fileID: 7376580826939607394}
   Damage: 1
   IsAttacking: 0
   AttackDistance: 64
   AttackRadius: 1
+  offsetScaleX: 0
+  offsetScaleZ: 0
+  ChargeCooldown: 0
+  ChargeDirection: {x: 0, y: 0, z: 0}
+  Charged: 0
+  ChargeAttackTime: 0

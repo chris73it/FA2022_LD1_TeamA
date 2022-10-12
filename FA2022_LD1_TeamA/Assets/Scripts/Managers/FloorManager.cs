@@ -66,10 +66,12 @@ public class FloorManager : MonoBehaviour
 
     private void Update() // to be removed
     {
+        /*
         if (Input.GetButtonDown("Fire2"))
         {
             CurrentRoom.IsCleared = true;
         }
+        */
     }
     // Methods
     public void ResetFloor()
