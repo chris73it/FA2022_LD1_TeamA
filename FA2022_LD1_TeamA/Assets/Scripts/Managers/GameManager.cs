@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject FloorManagerPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
+    public List<GameObject> Menus;
     public static GameObject ChosenPlayerCharacter;
     public enum GameStates
     {
-        MainMenu,
+        Menu,
         Game,
         Loading,
         GameOver,
@@ -20,10 +21,69 @@ public class GameManager : MonoBehaviour
     public enum MenuStates
     {
         None,
+        Main,
+        GameOver,
         Pause
     }
+    public MenuStates MenuState = MenuStates.Main;
 
-    public GameStates State = GameStates.MainMenu;
+    private GameStates gameState = GameStates.Menu;
+    public GameStates GameState
+    {
+        get 
+        { 
+            return gameState; 
+        }
+        set 
+        {
+            gameState = value;
+
+            switch (GameState)
+            {
+                case GameStates.Menu:
+                    Time.timeScale = 0;
+                    break;
+
+                case GameStates.Game:
+                    Time.timeScale = 1;
+                    break;
+
+                case GameStates.Loading: // When player choses "Start Game" in Main Menu
+                    // Create Floor Manager
+                    if (FloorManager.Instance == null)
+                    {
+                        GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                        DontDestroyOnLoad(FloorManagerObject);
+                    }
+                    
+                    //Generate Floor
+                    FloorManager.Instance.ResetFloor();
+
+                    // Load Floor
+                    //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), FloorManager.StartingFloor.Type);
+                    //SceneManager.LoadScene(roomName, LoadSceneMode.Single);
+                    FloorManager.StartingFloor.IsCleared = true;
+                    FloorManager.CurrentRoom = FloorManager.StartingFloor;
+                    //Debug.Log("CurrentRoom assigned");
+
+                    // Spawn Player
+                    ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
+                    DontDestroyOnLoad(ChosenPlayerCharacter);
+
+                    GameState = GameStates.Game;
+                    break;
+
+                case GameStates.GameOver:
+                    Instantiate(Menus[1]);
+                    Time.timeScale = 0;
+                    break;
+
+                default:
+                    break;
+
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -47,48 +107,5 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void UpdateGameState(GameStates newState)
-    {
-        State = newState;
-
-        switch (State)
-        {
-            case GameStates.MainMenu:
-                break;
-
-            case GameStates.Game:
-                break;
-
-            case GameStates.Loading: // When player choses "Start Game" in Main Menu
-                // Create Floor Manager
-                GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0,0,0), Quaternion.identity);
-                DontDestroyOnLoad(FloorManagerObject);
-
-                //Generate Floor
-                FloorManager.Instance.ResetFloor();
-
-                // Load Floor
-                //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), FloorManager.StartingFloor.Type);
-                //SceneManager.LoadScene(roomName, LoadSceneMode.Single);
-                FloorManager.StartingFloor.IsCleared = true;
-                FloorManager.CurrentRoom = FloorManager.StartingFloor;
-                //Debug.Log("CurrentRoom assigned");
-
-                // Spawn Player
-                ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
-                DontDestroyOnLoad(ChosenPlayerCharacter);
-
-                UpdateGameState(GameStates.Game);
-                break;
-
-            case GameStates.GameOver:
-                break;
-
-            default:
-                break;
-
-        }
     }
 }

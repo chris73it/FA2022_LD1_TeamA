@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyMovement : Movement
 {
-    public Rigidbody Body;
     public NavMeshAgent NavMeshAgent;
     public GameObject Player;
     public Vector3 Destination;
@@ -33,6 +32,7 @@ public class EnemyMovement : Movement
     // Update is called once per frame
     void Update()
     {
+        /*
         if (StateTimer <= 0f) // rethink statetimer usage
         {
             ChooseNewState();
@@ -64,25 +64,43 @@ public class EnemyMovement : Movement
                 StateTimer -= Time.deltaTime;
             }
         }
+        */
+
+        if (IsPlayerInRange(ChaseRange))
+        {
+            Chase();
+        }
+        else
+        {
+            if (Random.Range(0,2) == 0)
+            {
+                Idle();
+            } else
+            {
+                Wander();
+            }
+        }
+        
+        //Debug.Log("Type: " + Type);
 
         Move();
     }
 
     public void Idle()
     {
+        Type = EnemyMovementTypes.Idle;
         Destination = transform.position;
-        StateTimer = 2f;
     }
 
     public void Wander()
     {
+        Type = EnemyMovementTypes.Wander;
         Vector3 randomPosition = Random.insideUnitSphere * WanderRange;
         randomPosition += transform.position;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPosition, out hit, WanderRange, 1);
         Destination = hit.position;
         Debug.Log(transform.position);
-        StateTimer = 3f;
     }
 
     public override void Move()
@@ -94,6 +112,7 @@ public class EnemyMovement : Movement
 
     public void ChooseNewState()
     {
+        /*
         int statesLength = EnemyMovementTypes.GetNames(typeof(EnemyMovementTypes)).Length;
         EnemyMovementTypes newState = Type;
 
@@ -103,17 +122,22 @@ public class EnemyMovement : Movement
         }
 
         Type = newState;
-        Debug.Log("Type: " + Type);
+        */
     }
 
     public void Chase()
     {
+        Type = EnemyMovementTypes.Chase;
         Destination = Player.transform.position;
-        StateTimer = 5f;
     }
 
     public bool IsPlayerInRange(float range)
     {
-        return Vector3.Distance(transform.position, Player.transform.position) <= range;
+        if (Player != null)
+        {
+            return Vector3.Distance(transform.position, Player.transform.position) <= range;
+        }
+
+        return false;
     } 
 }

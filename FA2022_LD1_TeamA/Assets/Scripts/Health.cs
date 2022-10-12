@@ -39,7 +39,9 @@ public class Health : MonoBehaviour
         IsDead = true;
         if (gameObject.tag == "Player")
         {
-            // Game over
+            Destroy(gameObject);
+            GameManager.Instance.GameState = GameManager.GameStates.GameOver;
+
         } else if (gameObject.tag == "Enemy")
         {
             // Drop pickup chance

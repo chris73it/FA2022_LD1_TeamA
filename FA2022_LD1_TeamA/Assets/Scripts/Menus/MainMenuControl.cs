@@ -12,7 +12,7 @@ public class MainMenuControl : MonoBehaviour
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        StartGame = root.Q<Button>("Start-Game");
+        StartGame = root.Q<Button>("StartGame");
 
         StartGame.clicked += StartGamePressed;
     }
@@ -20,6 +20,6 @@ public class MainMenuControl : MonoBehaviour
     private void StartGamePressed()
     {
         //Debug.Log(GameManager.Instance);
-        GameManager.Instance.UpdateGameState(GameManager.GameStates.Loading);
+        GameManager.Instance.GameState = GameManager.GameStates.Loading;
     }
 }

@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Button tabindex="-1" text="Restart" display-tooltip-when-elided="true" name="Restart" />
+    <ui:Button tabindex="-1" text="Main Menu" display-tooltip-when-elided="true" name="MainMenu" />
+    <ui:Button tabindex="-1" text="Quit" display-tooltip-when-elided="true" name="Quit" />
+</ui:UXML>
