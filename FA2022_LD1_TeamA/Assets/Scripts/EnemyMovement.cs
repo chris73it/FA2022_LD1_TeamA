@@ -1,109 +1,103 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMovement : Movement
 {
     public Rigidbody Body;
+    public NavMeshAgent NavMeshAgent;
+    public GameObject Player;
+    public Vector3 Destination;
     public enum EnemyMovementTypes
     {
         Idle,
         Wander,
-        /*
         Chase,
+        /*
         Attack
         */
     }
-    public EnemyMovementTypes Type = EnemyMovementTypes.Wander;
+    public EnemyMovementTypes Type = EnemyMovementTypes.Idle;
     public float StateTimer = 0f;
-    public float SightRange = 30f;
+    public float WanderRange = 1f;
+    public float ChaseRange = 3f;
 
+    private void Awake()
+    {
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        NavMeshAgent.speed = TopSpeed;
+        NavMeshAgent.acceleration = Acceleration;
+        Player = GameManager.ChosenPlayerCharacter;
+    }
     // Update is called once per frame
     void Update()
     {
-        // replace rooms walls with cubes instead of planes
-        if (StateTimer <= 0)
+        if (StateTimer <= 0f) // rethink statetimer usage
         {
             ChooseNewState();
             switch (Type)
             {
                 case (EnemyMovementTypes.Idle):
                     Idle();
-                    StateTimer = 5f;
                     break;
 
                 case (EnemyMovementTypes.Wander):
                     Wander();
-                    StateTimer = 3f;
+                    break;
+
+                case (EnemyMovementTypes.Chase):
+                    Chase();
                     break;
             }
         } else
         {
-            StateTimer -= Time.deltaTime;
+            if (NavMeshAgent.remainingDistance <= 0)
+            {
+                StateTimer = 0f;
+            } else if (IsPlayerInRange(ChaseRange))
+            {
+                StateTimer = 0f;
+                Type = EnemyMovementTypes.Chase;
+            } else
+            {
+                StateTimer -= Time.deltaTime;
+            }
         }
-        //Debug.Log("CurrentSpeed: " + CurrentSpeed);
-        UpdateSpeed();
+
         Move();
     }
 
-    public virtual void Idle()
+    public void Idle()
     {
-        Horizontal = 0;
-        Vertical = 0;
+        Destination = transform.position;
+        StateTimer = 2f;
     }
 
-    public virtual void Wander()
+    public void Wander()
     {
-        //cannot think of a better way to do this...
-        float r = 0;
-
-        while (r == 0)
-        {
-            r = Random.Range(-1, 2);
-
-        }
-
-        Horizontal = r; 
-
-        while (r == 0)
-        {
-            r = Random.Range(-1, 2);
-
-        }
-
-        Vertical = r = Random.Range(-1f, 1f);
-        Debug.Log("Horizontal: " + Horizontal);
-        Debug.Log("Vertical: " + Vertical);
+        Vector3 randomPosition = Random.insideUnitSphere * WanderRange;
+        randomPosition += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomPosition, out hit, WanderRange, 1);
+        Destination = hit.position;
+        Debug.Log(transform.position);
+        StateTimer = 3f;
     }
 
-    public virtual void Chase()
+    public override void Move()
     {
-        Vector3 playerLocation = GameManager.ChosenPlayerCharacter.transform.position;
-
-        if (playerLocation.x < transform.position.x)
-        {
-            Horizontal = Random.Range(-1, 0);
-        } else
-        {
-            Horizontal = Random.Range(0, 1);
-        }
-
-        if (playerLocation.z < transform.position.z)
-        {
-            Vertical = Random.Range(-1, 0);
-        }
-        else
-        {
-            Vertical = Random.Range(0, 1);
-        }
+        //Debug.Log("Move");
+        NavMeshAgent.destination = Destination;
     }
+
 
     public void ChooseNewState()
     {
         int statesLength = EnemyMovementTypes.GetNames(typeof(EnemyMovementTypes)).Length;
         EnemyMovementTypes newState = Type;
 
-        while (newState == Type)
+        while (newState == Type || (Type == EnemyMovementTypes.Chase && IsPlayerInRange(ChaseRange)))
         {
             newState = (EnemyMovementTypes)Random.Range(0, statesLength);
         }
@@ -112,9 +106,14 @@ public class EnemyMovement : Movement
         Debug.Log("Type: " + Type);
     }
 
-    public override void Move()
+    public void Chase()
     {
-        Vector3 direction = transform.right * Horizontal + transform.forward * Vertical;
-        Body.MovePosition(transform.position + direction * CurrentSpeed * Time.deltaTime);
+        Destination = Player.transform.position;
+        StateTimer = 5f;
     }
+
+    public bool IsPlayerInRange(float range)
+    {
+        return Vector3.Distance(transform.position, Player.transform.position) <= range;
+    } 
 }

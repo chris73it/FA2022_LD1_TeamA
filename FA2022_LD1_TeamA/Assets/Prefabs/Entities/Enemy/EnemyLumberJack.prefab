@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyLumberJack
       objectReference: {fileID: 0}
+    - target: {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: TopSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: Acceleration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: EntityCombat
       value: 
