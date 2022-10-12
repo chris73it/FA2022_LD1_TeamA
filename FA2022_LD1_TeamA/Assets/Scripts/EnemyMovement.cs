@@ -19,14 +19,14 @@ public class EnemyMovement : Movement
     }
     public EnemyMovementTypes Type = EnemyMovementTypes.Idle;
     public float StateTimer = 0f;
-    public float WanderRange = 1f;
-    public float ChaseRange = 3f;
+    public float WanderRange = 3f;
+    public float ChaseRange = 7f;
 
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
         NavMeshAgent.speed = TopSpeed;
-        NavMeshAgent.acceleration = Acceleration;
+        NavMeshAgent.acceleration = TopSpeed;
         Player = GameManager.ChosenPlayerCharacter;
     }
     // Update is called once per frame
@@ -72,16 +72,21 @@ public class EnemyMovement : Movement
         }
         else
         {
-            if (Random.Range(0,2) == 0)
+            if (StateTimer <= 0)
             {
-                Idle();
-            } else
-            {
-                Wander();
-            }
+                if (Random.Range(0, 2) == 0)
+                {
+                    Idle();
+                }
+                else
+                {
+                    Wander();
+                }
+            } 
         }
-        
-        //Debug.Log("Type: " + Type);
+
+        StateTimer -= Time.deltaTime;
+        Debug.Log("Type: " + Type);
 
         Move();
     }
@@ -89,7 +94,8 @@ public class EnemyMovement : Movement
     public void Idle()
     {
         Type = EnemyMovementTypes.Idle;
-        Destination = transform.position;
+        StateTimer = 1.5f;
+        Destination = gameObject.transform.position;
     }
 
     public void Wander()
@@ -99,8 +105,9 @@ public class EnemyMovement : Movement
         randomPosition += transform.position;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPosition, out hit, WanderRange, 1);
+        StateTimer = 3f;
         Destination = hit.position;
-        Debug.Log(transform.position);
+        //Debug.Log(transform.position);
     }
 
     public override void Move()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Combat : MonoBehaviour
 {
     public Transform AttackerTransform;
+    public CharacterController controller;
     public int Damage;
     public float Invulnerability { get; set; }
     public bool IsAttacking = false;
@@ -33,7 +34,7 @@ public class Combat : MonoBehaviour
     }
 
 
-    public void ChargeAttack() 
+    public virtual void ChargeAttack()
     {
         Debug.Log("Using Base Combat");
     }

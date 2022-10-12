@@ -8,11 +8,18 @@ public class WerewolfCombat : Combat
     public float AttackRadius;
     public float offsetScaleX;
     public float offsetScaleZ;
+    public float ChargeCooldown;
+    public Vector3 ChargeDirection;
+    public bool Charged;
+    public float ChargeAttackTime;
 
     void Start()
     {
         offsetScaleX = 8.4f;
         offsetScaleZ = 8.4f;
+        ChargeCooldown = 0f;
+        Charged = false;
+        ChargeAttackTime = 0f;
     }
     void Update()
     {
@@ -25,6 +32,32 @@ public class WerewolfCombat : Combat
         if (Input.GetButtonDown("Fire1"))
         {
             Attack();
+        }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            ChargeAttack();
+        }
+        if (ChargeCooldown > 0)
+        {
+            ChargeCooldown -= Time.deltaTime;
+            controller.Move(ChargeDirection * Time.deltaTime * 10);
+            if (ChargeCooldown <= 0)
+            {
+                AttackRadius = 3;
+                Charged = true;
+                ChargeAttackTime = 0.2f;
+                Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
+                if (Damaged.Length > 0)
+                {
+                    for (int i = 0; i < Damaged.Length; i++)
+                    {
+                        if (Damaged[i].gameObject.tag == "Enemy")
+                        {
+                            Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                        }
+                    }
+                }
+            }
         }
     }
     private Vector3 getAttackDistance()
@@ -48,6 +81,7 @@ public class WerewolfCombat : Combat
     }
     public override void Attack()
     {
+        AttackRadius = 1;
         Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius, AttackRadius, AttackRadius));
         if (Damaged.Length > 0)
         {
@@ -60,11 +94,28 @@ public class WerewolfCombat : Combat
             }
         }
     }
-
+    public override void ChargeAttack()
+    {
+        ChargeDirection = getAttackDistance();
+        ChargeCooldown = 0.4f;
+    }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(AttackerTransform.position + getAttackDistance(), 1);
+        if (Charged == true)
+        {
+            Gizmos.DrawWireSphere(AttackerTransform.position, 3);
+            ChargeAttackTime -= Time.deltaTime;
+            if (ChargeAttackTime <= 0)
+            {
+                Charged = false;
+            }
+        }
+        else
+        {
+            Gizmos.DrawWireSphere(AttackerTransform.position + getAttackDistance(), 1);
+        }
+
     }
 
 
