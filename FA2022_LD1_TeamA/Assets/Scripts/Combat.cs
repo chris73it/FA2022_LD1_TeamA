@@ -7,8 +7,10 @@ public class Combat : MonoBehaviour
     public Transform AttackerTransform;
     public CharacterController controller;
     public int Damage;
+    public float AttackCooldown = 0f;
     public float Invulnerability { get; set; }
-    public bool IsAttacking = false;
+    public float IsAttacking = 0f;
+    public float IsStunned = 0f;
 
     // Check if overriden by derived classes, needs Invulnerability section    
     private void Update()

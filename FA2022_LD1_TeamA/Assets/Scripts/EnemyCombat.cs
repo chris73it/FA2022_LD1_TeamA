@@ -4,17 +4,41 @@ using UnityEngine;
 
 public class EnemyCombat : Combat
 {
-    public float AttackRange;
+    public float AttackRange = -1f;
+    public static GameObject Player;
+    public List<GameObject> Bullets;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Initialize()
     {
-        
+        if (Player == null)
+        {
+            Player = GameManager.ChosenPlayerCharacter;
+        }
+    }
+    public bool IsPlayerInRange(float range)
+    {
+        if (Player != null)
+        {
+            return Vector3.Distance(transform.position, Player.transform.position) <= range;
+        }
+
+        Debug.Log("Player is null");
+        return false;
+    }
+
+    public Vector3 GetPlayerLocation()
+    {
+        if (Player != null)
+        {
+            return Player.transform.position;
+        }
+
+        Debug.Log("Player is null");
+        return new Vector3(-10f, -10f, -10f);
     }
 }

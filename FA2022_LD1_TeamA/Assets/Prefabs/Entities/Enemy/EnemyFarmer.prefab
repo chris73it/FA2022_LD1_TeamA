@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 1031468843654836924}
     - target: {fileID: 910744723162056978, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Name
-      value: EnemyLumberJack
+      value: EnemyFarmer
       objectReference: {fileID: 0}
     - target: {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: TopSpeed
@@ -88,7 +88,8 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.11669347
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
 --- !u!1 &6335926599683978631 stripped
@@ -96,6 +97,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 910744723162056978, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
   m_PrefabInstance: {fileID: 6579238077133126805}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8679464711577154944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335926599683978631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41c569eb5760ae499684adde3ba6fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TopSpeed: 5
+  Acceleration: 1
+  Decceleration: 1
+  CurrentSpeed: 0
+  NavMeshAgent: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  StateTimer: 0
+  State: 0
+  WanderRange: 2
+  Wandering: 0
+  Combat: {fileID: 1031468843654836924}
 --- !u!114 &1031468843654836924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,9 +133,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackerTransform: {fileID: 7415641927435860033}
+  controller: {fileID: 0}
   Damage: 1
+  AttackCooldown: 0
   IsAttacking: 0
+  IsStunned: 0
   AttackRange: 0
+  Bullets:
+  - {fileID: 4462732106462573415, guid: b18b2c36053741e49a0cd2c29a6b9323, type: 3}
+  Movement: {fileID: -8679464711577154944}
 --- !u!4 &7415641927435860033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
