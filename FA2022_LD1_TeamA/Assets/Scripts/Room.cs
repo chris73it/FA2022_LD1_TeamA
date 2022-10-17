@@ -97,7 +97,7 @@ public class Room
             ConnectedRooms.Add(b);
             b.GenerateRooms(++depth);
 
-        } else if (depth < Height)
+        } else if (depth < Height) // change to else statement
         {
             for (int i = 0; i < Choices; i++)
             {
