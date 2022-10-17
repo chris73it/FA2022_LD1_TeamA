@@ -49,11 +49,11 @@ public class Health : MonoBehaviour
   
             Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
 
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 1)
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 1) // The enemy is counted in the array before its destroyed so the length <= 1
             {
                 FloorManager.CurrentRoom.IsCleared = true;
             }
-            Destroy(gameObject);
+            Destroy(gameObject); 
         }
     }
 }
