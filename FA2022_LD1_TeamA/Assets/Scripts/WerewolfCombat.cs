@@ -104,7 +104,7 @@ public class WerewolfCombat : Combat
             }
         }
         AttackCooldown = 0.3f;
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
     }
     public override void ChargeAttack()
     {

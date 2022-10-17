@@ -39,6 +39,9 @@ public class FloorManager : MonoBehaviour
         }
     }
 
+    public static Room BossRoom;
+    public static Room ShopRoom;
+
     // Init:
     // Check if instance exists already, if not set instance = this;
     // Determine Floor Type, FloorSize
@@ -53,7 +56,7 @@ public class FloorManager : MonoBehaviour
             Instance = this;
         }
 
-        Debug.Log(Instance);
+        //Debug.Log(Instance);
 
         SceneManager.sceneLoaded += this.onLoadCallback;
         //SceneManager.SetActiveScene()
@@ -82,8 +85,11 @@ public class FloorManager : MonoBehaviour
         // Switch to next Floor Type
         Type++; // This is not necessarily true for every ResetFloor() call, i.e. a game over should send the player to the first floor type
 
-        // Generate Starting Room
+        // Generate Static Rooms
         StartingFloor = new Room(Room.RoomTypes.EmptyRoom);
+        BossRoom = new Room(Room.RoomTypes.BossRoom);
+        ShopRoom = new Room(Room.RoomTypes.ShopRoom);
+
         Room.Height = RoomTreeHeight;
 
         // Generate All Rooms

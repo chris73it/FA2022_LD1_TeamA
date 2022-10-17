@@ -63,7 +63,7 @@ public class Health : MonoBehaviour
             // Drop pickup chance
             // if no more enemies in room, set room to is cleared
   
-            Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
+            //Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
 
             if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 1) // The enemy is counted in the array before its destroyed so the length <= 1
             {

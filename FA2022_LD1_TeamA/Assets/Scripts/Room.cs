@@ -88,22 +88,23 @@ public class Room
     {
         Depth = depth;
         
-        // if depth == height, then use the else clause at the bottom
-
-        if (depth == Height - 1)
+        if (depth == Height)
         {
             Choices = 1;
-            Room b = new Room(RoomTypes.BossRoom);
+            ConnectedRooms.Add(FloorManager.ShopRoom);
+        }
+        else if (depth == Height - 1)
+        {
+            Choices = 1;
+            Room b = FloorManager.BossRoom;
             ConnectedRooms.Add(b);
             b.GenerateRooms(++depth);
-
-        } else if (depth < Height) // change to else statement
+        } else 
         {
+            depth++;
             for (int i = 0; i < Choices; i++)
             {
-                //Room r = new Room(0, 2);
-
-                Room r = new Room(0,2);
+                Room r = new Room(0, 2);
 
                 if (r.Type == RoomTypes.EmptyRoom)
                 {
@@ -112,14 +113,11 @@ public class Room
 
                 // Rooms are emtpy
                 ConnectedRooms.Add(r);
-                //Debug.Log("Count: " + ConnectedRooms.Count);
 
-                r.GenerateRooms(++depth);
+                //Debug.Log("Count: " + ConnectedRooms.Count);
+                
+                r.GenerateRooms(depth);
             }
-        } else
-        {
-            Choices = 1;
-            ConnectedRooms.Add(new Room(RoomTypes.ShopRoom));
         }
     }
 
