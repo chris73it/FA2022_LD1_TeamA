@@ -75,7 +75,7 @@ public class Room
         return (RoomTypes)Random.Range(0, roomTypesLength); // might have to cast to int first?
     }
 
-    private static RoomTypes getRandomType(int start = 0, int end = 2) // end is not inclusive
+    private static RoomTypes getRandomType(int start = 0, int end = 2) // end is exclusive
     {
         return (RoomTypes)Random.Range(start, end); // might have to cast to int first?
     }
@@ -87,6 +87,8 @@ public class Room
     public void GenerateRooms(int depth)
     {
         Depth = depth;
+        
+        // if depth == height, then use the else clause at the bottom
 
         if (depth == Height - 1)
         {
@@ -101,7 +103,12 @@ public class Room
             {
                 //Room r = new Room(0, 2);
 
-                Room r = new Room(RoomTypes.RegularRoom);
+                Room r = new Room(0,2);
+
+                if (r.Type == RoomTypes.EmptyRoom)
+                {
+                    r.IsCleared = true;
+                }
 
                 // Rooms are emtpy
                 ConnectedRooms.Add(r);

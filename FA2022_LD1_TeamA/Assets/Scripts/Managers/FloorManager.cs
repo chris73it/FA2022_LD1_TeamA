@@ -76,8 +76,11 @@ public class FloorManager : MonoBehaviour
     // Methods
     public void ResetFloor()
     {
+        // Reset Room Entered Count
+        RoomsEntered = 0;
+
         // Switch to next Floor Type
-        Type++; // ?
+        Type++; // This is not necessarily true for every ResetFloor() call, i.e. a game over should send the player to the first floor type
 
         // Generate Starting Room
         StartingFloor = new Room(Room.RoomTypes.EmptyRoom);

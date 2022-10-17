@@ -8,10 +8,26 @@ public class Health : MonoBehaviour
     public int CurrentHealth = 1;
     public Combat EntityCombat;
     public float HitInvulnerability = 1.5f;
+    public GameObject Pickup;
     public bool IsDead = false;
+
+    private void Update() //Debug
+    {
+        if (Input.GetKeyDown("k") && gameObject.tag == "Player")
+        {
+            Die();
+        }
+    }
     public int Heal(int amount)
     {
-        CurrentHealth += amount;
+        if (CurrentHealth + amount > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        } else
+        {
+            CurrentHealth += amount;
+        }
+
         return CurrentHealth;
     }
     public int TakeDamage(int amount)
@@ -53,6 +69,8 @@ public class Health : MonoBehaviour
             {
                 FloorManager.CurrentRoom.IsCleared = true;
             }
+
+            Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);
             Destroy(gameObject); 
         }
     }

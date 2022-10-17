@@ -17,6 +17,11 @@ public class Spawner : MonoBehaviour
 
     public GameObject InstantiateObject()
     {
-        return Instantiate(ToSpawn, gameObject.transform.position, gameObject.transform.rotation);
+        if (Type != SpawnerTypes.Player)
+        {
+            return Instantiate(ToSpawn, gameObject.transform.position, gameObject.transform.rotation);
+        }
+
+        return null;
     }
 }

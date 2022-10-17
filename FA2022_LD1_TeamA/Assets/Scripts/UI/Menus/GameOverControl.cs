@@ -37,7 +37,7 @@ public class GameOverControl : MonoBehaviour
     }
     private void QuitPressed()
     {
-        //Debug.Log(GameManager.Instance);
-        GameManager.Instance.GameState = GameManager.GameStates.Loading;
+        //Debug.Log(GameManager.Instance)
+        Application.Quit(); // Only works in a build
     }
 }

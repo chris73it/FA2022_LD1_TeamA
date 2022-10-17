@@ -57,6 +57,10 @@ public class GameManager : MonoBehaviour
                         GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                         DontDestroyOnLoad(FloorManagerObject);
                     }
+                    else
+                    {
+                        FloorManager.Instance.ResetFloor();
+                    }
                     
                     //Generate Floor
                     FloorManager.Instance.ResetFloor();

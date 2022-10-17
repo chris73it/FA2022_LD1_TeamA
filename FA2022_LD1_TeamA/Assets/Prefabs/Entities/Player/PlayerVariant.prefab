@@ -162,3 +162,17 @@ MonoBehaviour:
   CursorTexture: {fileID: 2800000, guid: 388102c8a52ebdd4e9c54a3667c7f1c6, type: 3}
   Mode: 0
   HotSpot: {x: 64, y: 64}
+--- !u!114 &6652235157748067417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747497439447639912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27709a107c13aaa47adde85cd6debfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Money: 0
+  TotalMoney: 99
