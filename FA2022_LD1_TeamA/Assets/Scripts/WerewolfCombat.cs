@@ -29,14 +29,19 @@ public class WerewolfCombat : Combat
             //Debug.Log("Invulnerability: " + Invulnerability);
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (AttackCooldown <= 0)
         {
-            Attack();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Attack();
+            }
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                ChargeAttack();
+            }
         }
-        if (Input.GetButtonDown("Fire2"))
-        {
-            ChargeAttack();
-        }
+        
         if (ChargeCooldown > 0)
         {
             ChargeCooldown -= Time.deltaTime;
@@ -58,6 +63,11 @@ public class WerewolfCombat : Combat
                     }
                 }
             }
+        }
+
+        if (AttackCooldown > 0)
+        {
+            AttackCooldown -= Time.deltaTime;
         }
     }
     private Vector3 getAttackDistance()
@@ -93,6 +103,8 @@ public class WerewolfCombat : Combat
                 }
             }
         }
+        AttackCooldown = 0.3f;
+        Debug.Log("Attack");
     }
     public override void ChargeAttack()
     {
