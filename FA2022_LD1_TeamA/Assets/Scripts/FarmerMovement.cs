@@ -53,4 +53,14 @@ public class FarmerMovement : EnemyMovement
         //Debug.Log(transform.position);
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (State == FarmerStates.Wander)
+            {
+                Wander(); // maybe there should be a better failsafe for this or change NavMeshAgent.remainingDistance <= 0 to something else
+            }
+        }
+    }
 }

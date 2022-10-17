@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFarmer
       objectReference: {fileID: 0}
+    - target: {fileID: 1380071801218216239, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: TopSpeed
       value: 5

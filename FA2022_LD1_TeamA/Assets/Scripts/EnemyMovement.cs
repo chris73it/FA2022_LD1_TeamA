@@ -29,6 +29,6 @@ public class EnemyMovement : Movement
         if (Player == null)
         {
             Player = GameManager.ChosenPlayerCharacter;
-        }
+        }        
     }
 }

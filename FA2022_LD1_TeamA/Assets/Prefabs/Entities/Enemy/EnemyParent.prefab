@@ -100,19 +100,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9032837629737148738, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
   m_PrefabInstance: {fileID: 8212463966323042384}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-7579679627875825088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910744723162056978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dacffd25d4a7dc843ae34255edb45852, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyCombat: {fileID: 0}
 --- !u!114 &2973753499104015004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,10 +116,9 @@ MonoBehaviour:
   Acceleration: 1
   Decceleration: 1
   CurrentSpeed: 0
-  Body: {fileID: 8135406838244075927}
-  Type: 0
+  NavMeshAgent: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
   StateTimer: 1.5
-  SightRange: 30
 --- !u!195 &3710650054616785790
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -155,8 +141,3 @@ NavMeshAgent:
   m_BaseOffset: 0.15
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &8135406838244075927 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 80586633706144199, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
-  m_PrefabInstance: {fileID: 8212463966323042384}
-  m_PrefabAsset: {fileID: 0}

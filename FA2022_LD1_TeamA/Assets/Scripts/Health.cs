@@ -46,7 +46,8 @@ public class Health : MonoBehaviour
         {
             // Drop pickup chance
             // if no more enemies in room, set room to is cleared
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            if (enemies.Length > 0)
             {
                 FloorManager.CurrentRoom.IsCleared = true;
             }

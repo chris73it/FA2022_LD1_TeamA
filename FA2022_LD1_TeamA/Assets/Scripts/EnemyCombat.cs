@@ -41,4 +41,12 @@ public class EnemyCombat : Combat
         Debug.Log("Player is null");
         return new Vector3(-10f, -10f, -10f);
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Health>().TakeDamage(Damage);
+        }
+    }
 }
