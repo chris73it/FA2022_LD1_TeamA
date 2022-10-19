@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
     {
         if (Input.GetKeyDown("k") && gameObject.tag == "Player")
         {
-            Heal(1);
+            Die();
         }
     }
     public int Heal(int amount)

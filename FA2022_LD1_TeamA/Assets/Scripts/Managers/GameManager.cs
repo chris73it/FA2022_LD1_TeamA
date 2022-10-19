@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
             {
                 case GameStates.Menu:
                     Time.timeScale = 0;
+                    SceneManager.LoadScene("MainMenu");
 
                     break;
 

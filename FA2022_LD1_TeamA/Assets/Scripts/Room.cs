@@ -129,7 +129,6 @@ public class Room
 
         //Debug.Log(IsCleared);
         
-
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(RoomName));
         //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
 

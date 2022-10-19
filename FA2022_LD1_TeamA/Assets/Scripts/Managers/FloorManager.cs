@@ -98,9 +98,15 @@ public class FloorManager : MonoBehaviour
 
     private void onLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
-        CurrentRoom.OnRoomEnter();
-        Debug.Log(RoomsEntered + ": " + CurrentRoom.RoomName);
-        RoomsEntered++;
+        if (scene.name != "MainMenu")
+        {
+            CurrentRoom.OnRoomEnter();
+            Debug.Log(RoomsEntered + ": " + CurrentRoom.RoomName);
+            RoomsEntered++;
+        } else
+        {
+            Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
+        } 
     }
       // generate starting room
       // generate its connections
