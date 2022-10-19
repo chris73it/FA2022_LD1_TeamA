@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             {
                 case GameStates.Menu:
                     Time.timeScale = 0;
-                    Destroy(PlayerUIControl.Instance.gameObject);
+                    Destroy(PlayerUIControl.Instance.gameObject); // Destroying all of these should be in a separate method
                     Destroy(FloorManager.Instance.gameObject);
                     Destroy(gameObject);
                     SceneManager.LoadScene("MainMenu");
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
                     // Load Floor
                     //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), FloorManager.StartingFloor.Type);
                     //SceneManager.LoadScene(roomName, LoadSceneMode.Single);
-                    FloorManager.StartingFloor.IsCleared = true;
+                    FloorManager.StartingFloor.IsCleared = true; // Redundant
                     FloorManager.CurrentRoom = FloorManager.StartingFloor;
                     //Debug.Log("CurrentRoom assigned");
 
