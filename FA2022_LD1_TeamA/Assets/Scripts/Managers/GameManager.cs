@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
             {
                 case GameStates.Menu:
                     Time.timeScale = 0;
+                    Destroy(PlayerUIControl.Instance.gameObject);
+                    Destroy(FloorManager.Instance.gameObject);
+                    Destroy(gameObject);
                     SceneManager.LoadScene("MainMenu");
 
                     break;
