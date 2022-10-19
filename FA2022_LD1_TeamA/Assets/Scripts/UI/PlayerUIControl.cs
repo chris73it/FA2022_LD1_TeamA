@@ -19,12 +19,10 @@ public class PlayerUIControl : MonoBehaviour
 
         Root = GetComponent<UIDocument>().rootVisualElement;
         HealthGroup = Root.Q<VisualElement>("HealthGroup");
-
-        InitializeHealth();
     }
 
     // method to intialize basic heart count
-    private void InitializeHealth()
+    public void InitializeHealth()
     {
         int currentHealth = GameManager.ChosenPlayerCharacter.GetComponent<Health>().CurrentHealth;
         //Debug.Log("Current Health: " + currentHealth);
@@ -34,7 +32,17 @@ public class PlayerUIControl : MonoBehaviour
     // method to take away haert
     public void RemoveHeart(int amount)
     {
-       
+        for (int i = 0; i < amount; i++)
+        {
+            if (HealthGroup.Q<VisualElement>("HealthRowTwo").childCount >= 1)
+            {
+                HealthGroup.Q<VisualElement>("HealthRowTwo").RemoveAt(HealthGroup.Q<VisualElement>("HealthRowTwo").childCount - 1);
+            }
+            else if (HealthGroup.Q<VisualElement>("HealthRowOne").childCount >= 1)
+            {
+                HealthGroup.Q<VisualElement>("HealthRowOne").RemoveAt(HealthGroup.Q<VisualElement>("HealthRowOne").childCount - 1);
+            }
+        }
     }
     // method to add a heart
     public void AddHeart(int amount)
@@ -49,7 +57,6 @@ public class PlayerUIControl : MonoBehaviour
             }
             else if (HealthGroup.Q<VisualElement>("HealthRowTwo").childCount < 5)
             {
-
                 HealthGroup.Q<VisualElement>("HealthRowTwo").Add(Health);
             }
             //Debug.Log("Index: " + i);

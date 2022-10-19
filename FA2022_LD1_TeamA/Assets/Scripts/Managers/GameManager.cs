@@ -31,19 +31,19 @@ public class GameManager : MonoBehaviour
     private GameStates gameState = GameStates.Menu;
     public GameStates GameState
     {
-        get 
-        { 
-            return gameState; 
+        get
+        {
+            return gameState;
         }
-        set 
+        set
         {
             gameState = value;
 
             switch (GameState)
             {
-                case GameStates.Menu: 
+                case GameStates.Menu:
                     Time.timeScale = 0;
-                   
+
                     break;
 
                 case GameStates.Game:
@@ -73,11 +73,15 @@ public class GameManager : MonoBehaviour
                     ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
                     DontDestroyOnLoad(ChosenPlayerCharacter);
 
+
+
                     if (PlayerUIControl.Instance == null)
                     {
                         GameObject PlayerUIObject = Instantiate(PlayerUIPrefab);
                         DontDestroyOnLoad(PlayerUIObject);
                     }
+
+                    PlayerUIControl.Instance.InitializeHealth();
 
                     GameState = GameStates.Game;
                     break;
@@ -110,12 +114,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -23,7 +23,8 @@ public class Health : MonoBehaviour
         if (CurrentHealth + amount >= MaxHealth)
         {
             CurrentHealth = MaxHealth;
-        } else
+        }
+        else
         {
             CurrentHealth += amount;
         }
@@ -37,9 +38,11 @@ public class Health : MonoBehaviour
         if (EntityCombat.Invulnerability <= 0 || IsDead)
         {
             CurrentHealth -= amount;
+
             if (gameObject.tag == "Player")
             {
                 EntityCombat.SetGeneralInvulnerability(HitInvulnerability);
+                PlayerUIControl.Instance.RemoveHeart(amount);
             }
 
             if (CurrentHealth <= 0)
@@ -51,7 +54,7 @@ public class Health : MonoBehaviour
         }
         return CurrentHealth;
     }
-    
+
     public void Die()
     {
         IsDead = true;
@@ -60,11 +63,12 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
             GameManager.Instance.GameState = GameManager.GameStates.GameOver;
 
-        } else if (gameObject.tag == "Enemy")
+        }
+        else if (gameObject.tag == "Enemy")
         {
             // Drop pickup chance
             // if no more enemies in room, set room to is cleared
-  
+
             //Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
 
             if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 1) // The enemy is counted in the array before its destroyed so the length <= 1
@@ -73,7 +77,7 @@ public class Health : MonoBehaviour
             }
 
             Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 }
