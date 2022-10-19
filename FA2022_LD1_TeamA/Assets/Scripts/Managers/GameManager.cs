@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject FloorManagerPrefab;
+    public GameObject PlayerUIPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
     public List<GameObject> Menus;
     public static GameObject ChosenPlayerCharacter;
@@ -57,11 +58,7 @@ public class GameManager : MonoBehaviour
                         GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                         DontDestroyOnLoad(FloorManagerObject);
                     }
-                    else
-                    {
-                        FloorManager.Instance.ResetFloor();
-                    }
-                    
+
                     //Generate Floor
                     FloorManager.Instance.ResetFloor();
 
@@ -75,6 +72,12 @@ public class GameManager : MonoBehaviour
                     // Spawn Player
                     ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
                     DontDestroyOnLoad(ChosenPlayerCharacter);
+
+                    if (PlayerUIControl.Instance == null)
+                    {
+                        GameObject PlayerUIObject = Instantiate(PlayerUIPrefab);
+                        DontDestroyOnLoad(PlayerUIObject);
+                    }
 
                     GameState = GameStates.Game;
                     break;

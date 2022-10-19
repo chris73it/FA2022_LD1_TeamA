@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FloorManagerPrefab: {fileID: 8000454916787698360, guid: d37f71fdc40921344b3b04db5c3e5a51, type: 3}
+  PlayerUIPrefab: {fileID: 6744462993505331309, guid: 2005b6c8e826c0340b345e0e0c06fe6c, type: 3}
   PlayerCharactersPrefab:
   - {fileID: 7756589616967218836, guid: aaf506e1d797af2489ba8e2d1386297b, type: 3}
   Menus:
   - {fileID: 8592773869946118184, guid: 13653b1ba1f306c4880911784607c190, type: 3}
   - {fileID: 9005734555440551025, guid: 42d5486fd2eed5a42a9ac6e16479b431, type: 3}
+  MenuState: 1

@@ -61,9 +61,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: MaxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: EntityCombat
       value: 
       objectReference: {fileID: 7463001885408780828}
+    - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: CurrentHealth
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -117,7 +125,9 @@ MonoBehaviour:
   AttackerTransform: {fileID: 6530480655313304402}
   controller: {fileID: 7376580826939607394}
   Damage: 1
+  AttackCooldown: 0
   IsAttacking: 0
+  IsStunned: 0
   AttackDistance: 64
   AttackRadius: 1
   offsetScaleX: 0
