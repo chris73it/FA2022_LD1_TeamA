@@ -1,6 +1,6 @@
 .HealthSprite {
-    width: 64px;
-    height: 64px;
+    width: 32px;
+    height: 32px;
     background-image: url('project://database/Assets/Sprite/Spr_Heart.png?fileID=2800000&guid=2e9b4c3762889844f934c8a1059c5f53&type=3#Spr_Heart');
     margin-right: 3px;
 }
