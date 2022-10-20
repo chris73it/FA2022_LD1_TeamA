@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: MaxHealth
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: EntityCombat

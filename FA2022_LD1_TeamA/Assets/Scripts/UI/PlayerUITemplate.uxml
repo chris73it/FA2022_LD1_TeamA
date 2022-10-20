@@ -1,12 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/UI/PlayerUIStyle.uss?fileID=7433441132597879392&amp;guid=498bee6a9e279274880b92916dbe7168&amp;type=3#PlayerUIStyle" />
     <ui:VisualElement style="height: auto;">
-        <ui:VisualElement name="HealthGroup" style="height: auto; width: auto; align-items: stretch; justify-content: space-between; background-image: none; flex-direction: column; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <ui:VisualElement name="HealthGroup" style="height: 80px; width: auto; align-items: stretch; justify-content: space-between; background-image: none; flex-direction: column; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
             <ui:VisualElement name="HealthRowOne" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; align-items: flex-start; flex-direction: row; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
             <ui:VisualElement name="HealthRowTwo" style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px; flex-direction: row; align-items: flex-start;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="StaminaGroup" style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px;">
+            <ui:VisualElement name="Stamina" style="background-color: rgba(0, 255, 29, 255); width: 150px; height: 20px;" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="Sprites" style="opacity: 0;">
         <ui:VisualElement name="Health" style="background-image: url(&apos;project://database/Assets/Sprite/Spr_Heart.png?fileID=2800000&amp;guid=2e9b4c3762889844f934c8a1059c5f53&amp;type=3#Spr_Heart&apos;); -unity-background-scale-mode: stretch-to-fill; height: 32px; width: 32px; flex-direction: column; margin-right: 3px; display: flex; visibility: visible; overflow: visible;" />
+        <ui:VisualElement name="Coin" style="background-image: url(&apos;project://database/Assets/Sprite/Spr_Coin.png?fileID=2800000&amp;guid=404f760c4b487ed46947514c512e1c53&amp;type=3#Spr_Coin&apos;); -unity-background-scale-mode: stretch-to-fill; height: 32px; width: 32px; flex-direction: column; margin-right: 3px; display: flex; visibility: visible; overflow: visible;" />
     </ui:VisualElement>
 </ui:UXML>

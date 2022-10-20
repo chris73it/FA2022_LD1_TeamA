@@ -5,12 +5,16 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int MaxHealth = 1;
-    public int CurrentHealth = 1;
+    public int CurrentHealth;
     public Combat EntityCombat;
     public float HitInvulnerability = 1.5f;
     public GameObject Pickup;
     public bool IsDead = false;
 
+    private void Awake()
+    {
+        CurrentHealth = MaxHealth;
+    }
     private void Update() //Debug
     {
         if (Input.GetKeyDown("k") && gameObject.tag == "Player")
