@@ -76,7 +76,10 @@ public class Health : MonoBehaviour
                 FloorManager.CurrentRoom.IsCleared = true;
             }
 
-            Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);
+            if (Random.Range(0f, 1f) >= 0.25f)
+            {
+                Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);
+            }
             Destroy(gameObject);
         }
     }
