@@ -82,6 +82,9 @@ public class GameManager : MonoBehaviour
                         GameObject PlayerUIObject = Instantiate(PlayerUIPrefab);
                         DontDestroyOnLoad(PlayerUIObject);
                         PlayerUIControl.Instance.InitializeHealth();
+                        PlayerUIControl.Instance.UpdateStamina(ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina, 
+                            ChosenPlayerCharacter.GetComponent<PlayerMovement>().MaxStamina);
+
                     }
 
 

@@ -5,8 +5,15 @@
     margin-right: 3px;
 }
 
-.StaminaBar {
+.StaminaBar .unity-progress-bar__background {
     width: 150px;
     height: 20px;
-    background-color: #00FF1D;
+    background-color: rgb(8, 53, 13);
+    margin: 0;
+    -unity-background-image-tint-color: rgba(2, 255, 0, 255);
+}
+
+.unity-progress-bar__progress {
+    -unity-background-image-tint-color: rgba(0, 255, 25, 255);
+    background-color: rgba(32, 255, 0, 255);
 }

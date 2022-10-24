@@ -8,8 +8,7 @@ public class PlayerUIControl : MonoBehaviour
     public static PlayerUIControl Instance;
     public VisualElement Root;
     public VisualElement HealthGroup;
-    public StyleLength StaminaBar;
-    public float StaminaBarWidth;
+    public ProgressBar StaminaBar;
 
     // Start is called before the first frame update
     void Awake()
@@ -21,8 +20,7 @@ public class PlayerUIControl : MonoBehaviour
 
         Root = GetComponent<UIDocument>().rootVisualElement;
         HealthGroup = Root.Q<VisualElement>("HealthGroup");
-        StaminaBar = Root.Q<VisualElement>("StaminaBar").style.width;
-        StaminaBarWidth = StaminaBar.value.value;
+        StaminaBar = Root.Q<ProgressBar>("StaminaBar");
     }
 
     // method to intialize basic heart count
@@ -71,7 +69,7 @@ public class PlayerUIControl : MonoBehaviour
 
     public void UpdateStamina(float currentStamina, float maxStamina)
     {
-        StaminaBar = StaminaBarWidth * (currentStamina / maxStamina);
+        StaminaBar.value = currentStamina / maxStamina;
     }
 }
 
