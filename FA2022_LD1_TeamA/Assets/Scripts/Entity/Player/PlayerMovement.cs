@@ -46,6 +46,8 @@ public class PlayerMovement : Movement
         {
             CurrentStamina += StaminaRegenRate;
         }
+
+        PlayerUIControl.Instance.UpdateStamina(CurrentStamina, MaxStamina);
     }
 
     public void RestoreStamina(float amount)
@@ -58,6 +60,8 @@ public class PlayerMovement : Movement
         {
             CurrentStamina += amount;
         }
+
+        PlayerUIControl.Instance.UpdateStamina(CurrentStamina, MaxStamina);
     }
 
     public void UseStamina(float amount)
@@ -70,5 +74,7 @@ public class PlayerMovement : Movement
         {
             CurrentStamina -= amount;
         }
+
+        PlayerUIControl.Instance.UpdateStamina(CurrentStamina, MaxStamina);
     }
 }

@@ -5,5 +5,8 @@
     margin-right: 3px;
 }
 
-.unity-progress-bar {
+.StaminaBar {
+    width: 150px;
+    height: 20px;
+    background-color: #00FF1D;
 }
