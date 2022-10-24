@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
                 case GameStates.Menu:
                     Time.timeScale = 0;
                     Destroy(PlayerUIControl.Instance.gameObject); // Destroying all of these should be in a separate method
-                    Destroy(FloorManager.Instance.gameObject);
                     Destroy(gameObject);
                     SceneManager.LoadScene("MainMenu");
 
@@ -61,6 +60,7 @@ public class GameManager : MonoBehaviour
                     {
                         GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                         DontDestroyOnLoad(FloorManagerObject);
+                        Debug.Log("Check");
                     }
 
                     //Generate Floor
@@ -77,15 +77,13 @@ public class GameManager : MonoBehaviour
                     ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
                     DontDestroyOnLoad(ChosenPlayerCharacter);
 
-
-
                     if (PlayerUIControl.Instance == null)
                     {
                         GameObject PlayerUIObject = Instantiate(PlayerUIPrefab);
                         DontDestroyOnLoad(PlayerUIObject);
+                        PlayerUIControl.Instance.InitializeHealth();
                     }
 
-                    PlayerUIControl.Instance.InitializeHealth();
 
                     GameState = GameStates.Game;
                     break;

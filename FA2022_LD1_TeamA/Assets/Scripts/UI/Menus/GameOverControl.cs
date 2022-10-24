@@ -32,8 +32,7 @@ public class GameOverControl : MonoBehaviour
     private void MainMenuPressed()
     {
         //Debug.Log(GameManager.Instance);
-        GameManager.Instance.GameState = GameManager.GameStates.Menu;
-        
+        GameManager.Instance.GameState = GameManager.GameStates.Menu;  
         Destroy(gameObject);
     }
     private void QuitPressed()

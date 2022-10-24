@@ -19,21 +19,21 @@ public class Health : MonoBehaviour
     {
         if (Input.GetKeyDown("k") && gameObject.tag == "Player")
         {
-            Heal(1);
+            Die();
         }
     }
     public int Heal(int amount)
     {
         if (CurrentHealth + amount >= MaxHealth)
         {
+            PlayerUIControl.Instance.AddHeart(MaxHealth - CurrentHealth);
             CurrentHealth = MaxHealth;
         }
         else
         {
+            PlayerUIControl.Instance.AddHeart(amount);
             CurrentHealth += amount;
         }
-
-        PlayerUIControl.Instance.AddHeart(amount);
 
         return CurrentHealth;
     }

@@ -50,7 +50,7 @@ public class PickupLogic : MonoBehaviour
                         break;
                 }
 
-                //Debug.Log("You got " + Value + " " + PickupTypes.GetName(typeof(PickupTypes), Type));
+                Debug.Log("You got " + Value + " " + PickupTypes.GetName(typeof(PickupTypes), Type));
                 Destroy(gameObject);
             }
         }
