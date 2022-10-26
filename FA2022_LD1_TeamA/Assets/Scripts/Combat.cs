@@ -12,6 +12,16 @@ public class Combat : MonoBehaviour
     public float IsAttacking = 0f;
     public float IsStunned = 0f;
 
+    public struct DamageOverTime
+    {
+        public int Damage;
+        public float TotalDuration;
+        public float TimeToDamage;
+        public float Timer;
+    }
+
+    public DamageOverTime DoT;
+
     // Check if overriden by derived classes, needs Invulnerability section    
     private void Update()
     {

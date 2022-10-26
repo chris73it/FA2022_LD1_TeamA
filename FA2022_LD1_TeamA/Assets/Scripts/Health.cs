@@ -11,17 +11,39 @@ public class Health : MonoBehaviour
     public GameObject Pickup;
     public bool IsDead = false;
 
+    public bool IsDoT = false;
+    public Combat.DamageOverTime DoT;
+
     private void Awake()
     {
         CurrentHealth = MaxHealth;
     }
-    private void Update() //Debug
+    private void Update() 
     {
-        if (Input.GetKeyDown("k") && gameObject.tag == "Player")
-        {
+        if (Input.GetKeyDown("k") && gameObject.tag == "Player") //Debug
+        { 
             Die();
         }
+
+        if (IsDoT)
+        {
+            if (DoT.TotalDuration > 0)
+            {
+                DoT.Timer += Time.deltaTime;
+
+                if (DoT.Timer >= DoT.TimeToDamage)
+                {
+                    TakeDamage(DoT.Damage);
+                    DoT.TotalDuration -= DoT.Timer;
+                    DoT.Timer = 0f;
+                }
+            } else
+            {
+                IsDoT = false;
+            }
+        }
     }
+
     public int Heal(int amount)
     {
         if (CurrentHealth + amount >= MaxHealth)

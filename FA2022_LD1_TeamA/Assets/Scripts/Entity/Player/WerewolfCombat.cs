@@ -55,13 +55,7 @@ public class WerewolfCombat : Combat
                 Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
                 if (Damaged.Length > 0)
                 {
-                    for (int i = 0; i < Damaged.Length; i++)
-                    {
-                        if (Damaged[i].gameObject.tag == "Enemy")
-                        {
-                            Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                        }
-                    }
+                    DoAllDamage(Damaged);
                 }
             }
         }
@@ -96,13 +90,7 @@ public class WerewolfCombat : Combat
         Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius, AttackRadius, AttackRadius));
         if (Damaged.Length > 0)
         {
-            for (int i = 0; i < Damaged.Length; i++)
-            {
-                if (Damaged[i].gameObject.tag == "Enemy")
-                {
-                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                }
-            }
+            DoAllDamage(Damaged);
         }
         AttackCooldown = 0.3f;
         //Debug.Log("Attack");
@@ -130,6 +118,16 @@ public class WerewolfCombat : Combat
         }
 
     }
-
-
+    public void DoAllDamage(Collider[] Damaged)
+    {
+        for (int i = 0; i < Damaged.Length; i++)
+        {
+            if (Damaged[i].gameObject.tag == "Enemy")
+            {
+                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                Damaged[i].gameObject.GetComponent<Health>().DoT = DoT;
+                Damaged[i].gameObject.GetComponent<Health>().IsDoT = true;
+            }
+        }
+    }
 }
