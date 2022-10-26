@@ -17,9 +17,9 @@ public class FloorManager : MonoBehaviour
 
     public FloorTypes Type = FloorTypes.Base;
 
-    //public static List<Powerups> PowerupsList;
-    //public static List<Pickups> PickupsList;
-    //public static List<Enemies> EnemiesList;
+    public List<GameObject> ForestPowerupsList;
+    //public static List<GameObject> PickupsList;
+    //public static List<GameObject> EnemiesList;
 
     public static int RoomsEntered = 0;
     public static int RoomTreeHeight = 5;
