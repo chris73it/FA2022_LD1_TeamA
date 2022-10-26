@@ -77,13 +77,19 @@ public class FloorManager : MonoBehaviour
         */
     }
     // Methods
-    public void ResetFloor()
+    public void ResetFloor(bool newFloor)
     {
         // Reset Room Entered Count
         RoomsEntered = 0;
 
         // Switch to next Floor Type
-        Type++; // This is not necessarily true for every ResetFloor() call, i.e. a game over should send the player to the first floor type
+        if (newFloor)
+        {
+            Type++; // This is not necessarily true for every ResetFloor() call, i.e. a game over should send the player to the first floor type
+        } else
+        {
+            Type = FloorTypes.Forest;
+        }
 
         // Generate Static Rooms
         StartingFloor = new Room(Room.RoomTypes.EmptyRoom);

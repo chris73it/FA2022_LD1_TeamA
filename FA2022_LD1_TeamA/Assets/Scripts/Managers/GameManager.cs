@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
                     }
 
                     //Generate Floor
-                    FloorManager.Instance.ResetFloor();
+                    FloorManager.Instance.ResetFloor(false); // false should be replaced by a variable that is properly set after death or clearing a floor
 
                     // Load Floor
                     //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), FloorManager.StartingFloor.Type);
