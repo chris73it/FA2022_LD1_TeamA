@@ -19,8 +19,7 @@ public class PickupLogic : MonoBehaviour
     {
 
         var pickupTypesLength = PickupTypes.GetNames(typeof(PickupTypes)).Length;
-        //Type = (PickupTypes)Random.Range(0, pickupTypesLength); // Stamina has no use yet
-        Type = (PickupTypes)Random.Range(0, pickupTypesLength - 1);
+        Type = (PickupTypes)Random.Range(0, pickupTypesLength);
 
         Value = Random.Range(1, 3);
 
@@ -44,6 +43,7 @@ public class PickupLogic : MonoBehaviour
                         break;
 
                     case PickupTypes.Stamina:
+                        collision.gameObject.GetComponent<PlayerMovement>().RestoreStamina(1f);
                         break;
 
                     default:
