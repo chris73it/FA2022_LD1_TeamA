@@ -43,6 +43,8 @@ public class Room
         }
     }
 
+    public GameObject Reward = null;
+
     //private bool _loadingRoom = false;
 
     // Constructors
@@ -87,7 +89,7 @@ public class Room
     public void GenerateRooms(int depth)
     {
         Depth = depth;
-        
+
         if (depth == Height)
         {
             Choices = 1;
@@ -136,7 +138,7 @@ public class Room
 
         spawnRoomItems();
 
-        GameObject player = GameObject.FindWithTag("Player");
+        GameObject player = GameObject.FindWithTag("Player"); // can be repalced with instance
         GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
 
         foreach (GameObject element in o)
@@ -154,9 +156,7 @@ public class Room
 
     private void spawnRoomItems()
     {
-        //Debug.Log(GameObject.FindGameObjectsWithTag("Spawner").Length);
-
-        
+        //Debug.Log(GameObject.FindGameObjectsWithTag("Spawner").Length);   
         // Always spawn pickups
         // Only spawn enemies if not cleared
         // only spawn doors if cleared
@@ -183,11 +183,24 @@ public class Room
             } else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Enemy && !IsCleared)
             {
                 o[i].GetComponent<Spawner>().InstantiateObject();
-            } else if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Enemy)
+            }
+            else if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Enemy)
             {
                 o[i].GetComponent<Spawner>().InstantiateObject();
-            }
-
+            } 
         }          
+    }
+
+    private void setReward()
+    {
+        if (Type != RoomTypes.EmptyRoom || Type != RoomTypes.ShopRoom)
+        {
+            if (FloorManager.Instance.ForestPowerupsList.Count > 0)
+            {
+                int rewardIndex = Random.Range(0, FloorManager.Instance.ForestPowerupsList.Count);
+                Reward = FloorManager.Instance.ForestPowerupsList[rewardIndex];
+                FloorManager.Instance.ForestPowerupsList.RemoveAt(rewardIndex);
+            }           
+        }
     }
 }
