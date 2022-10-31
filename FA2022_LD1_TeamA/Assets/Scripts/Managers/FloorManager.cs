@@ -17,7 +17,7 @@ public class FloorManager : MonoBehaviour
 
     public FloorTypes Type = FloorTypes.Base;
 
-    public List<GameObject> ForestPowerupsList;
+    public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
     //public static List<GameObject> PickupsList;
     //public static List<GameObject> EnemiesList;
 

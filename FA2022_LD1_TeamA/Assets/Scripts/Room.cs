@@ -90,6 +90,8 @@ public class Room
     {
         Depth = depth;
 
+        setReward();
+
         if (depth == Height)
         {
             Choices = 1;
@@ -166,6 +168,7 @@ public class Room
 
         for (int i = 0; i < o.Length; i++)
         {
+
             if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Door) // maybe turn this all into a switch later
             {
                 if (IsCleared)
@@ -183,11 +186,20 @@ public class Room
             } else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Enemy && !IsCleared)
             {
                 o[i].GetComponent<Spawner>().InstantiateObject();
+            } else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Powerup && IsCleared)
+            {
+                if (Reward != null)
+                {
+                    o[i].GetComponent<Spawner>().ToSpawn = Reward;
+                    o[i].GetComponent<Spawner>().InstantiateObject();
+                }
             }
-            else if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Enemy)
+            else if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Enemy && o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Powerup) // && not Reward? then u can deal with the reward stuff in another if
             {
                 o[i].GetComponent<Spawner>().InstantiateObject();
             } 
+            // else if reward and is cleared
+            // set to spawn to reward then instantiate
         }          
     }
 
@@ -200,6 +212,7 @@ public class Room
                 int rewardIndex = Random.Range(0, FloorManager.Instance.ForestPowerupsList.Count);
                 Reward = FloorManager.Instance.ForestPowerupsList[rewardIndex];
                 FloorManager.Instance.ForestPowerupsList.RemoveAt(rewardIndex);
+                Debug.Log("Powerup Count: " + FloorManager.Instance.ForestPowerupsList.Count);
             }           
         }
     }
