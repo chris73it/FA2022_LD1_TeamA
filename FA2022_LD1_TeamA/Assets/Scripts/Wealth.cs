@@ -16,6 +16,7 @@ public class Wealth : MonoBehaviour
         {
             Money += amount;
         }
+        PlayerUIControl.Instance.UpdateCoin(Money);
         return Money;
     }
 
@@ -28,6 +29,8 @@ public class Wealth : MonoBehaviour
         {
             Money -= amount;
         }
+
+        PlayerUIControl.Instance.UpdateCoin(Money);
         return Money;
     }
 }

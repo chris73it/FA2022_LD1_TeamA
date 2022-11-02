@@ -1,12 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/UI/PlayerUIStyle.uss?fileID=7433441132597879392&amp;guid=498bee6a9e279274880b92916dbe7168&amp;type=3#PlayerUIStyle" />
     <ui:VisualElement style="height: auto;">
-        <ui:VisualElement name="HealthGroup" style="height: 80px; width: auto; align-items: stretch; justify-content: space-between; background-image: none; flex-direction: column; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <ui:VisualElement name="HealthGroup" style="height: 80px; width: auto; align-items: stretch; justify-content: space-between; background-image: none; flex-direction: column; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-wrap: nowrap;">
             <ui:VisualElement name="HealthRowOne" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; align-items: flex-start; flex-direction: row; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
             <ui:VisualElement name="HealthRowTwo" style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px; flex-direction: row; align-items: flex-start;" />
         </ui:VisualElement>
-        <ui:VisualElement name="StaminaGroup" style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 10px;">
+        <ui:VisualElement name="StaminaGroup" style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 0;">
             <ui:ProgressBar name="StaminaBar" high-value="1" class="StaminaBar" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-background-image-tint-color: rgb(7, 255, 0);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="CoinGroup" style="flex-direction: row; justify-content: flex-start; flex-wrap: nowrap; align-items: stretch; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+            <ui:VisualElement name="Coin" class="CoinSprite" style="align-items: center; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 32px; height: 32px;" />
+            <ui:Label tabindex="-1" text="0" display-tooltip-when-elided="true" name="CoinAmount" style="-unity-text-align: middle-left; font-size: 20px; margin-left: 2.5px; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-font-style: bold; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement name="Sprites" style="opacity: 0;">
             <ui:VisualElement name="Health" style="background-image: url(&apos;project://database/Assets/Sprite/Spr_Heart.png?fileID=2800000&amp;guid=2e9b4c3762889844f934c8a1059c5f53&amp;type=3#Spr_Heart&apos;); -unity-background-scale-mode: stretch-to-fill; height: 32px; width: 32px; flex-direction: column; margin-right: 3px; display: flex; visibility: visible; overflow: visible;" />
