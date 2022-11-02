@@ -154,6 +154,11 @@ public class Room
 
             }
         }
+
+        foreach (Room r in ConnectedRooms)
+        {
+            Debug.Log(r.RoomName);
+        }
     }
 
     private void spawnRoomItems()

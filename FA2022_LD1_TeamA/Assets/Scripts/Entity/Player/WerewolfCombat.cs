@@ -10,16 +10,22 @@ public class WerewolfCombat : Combat
     public float offsetScaleZ;
     public float ChargeCooldown;
     public Vector3 ChargeDirection;
+    public bool Charging;
     public bool Charged;
     public float ChargeAttackTime;
+    public int Combo;
+    public float ComboCooldown;
 
     void Start()
     {
         offsetScaleX = 8.4f;
         offsetScaleZ = 8.4f;
         ChargeCooldown = 0f;
+        Charging = false;
         Charged = false;
         ChargeAttackTime = 0f;
+        Combo = 0;
+        ComboCooldown = 0f;
     }
     void Update()
     {
@@ -33,7 +39,18 @@ public class WerewolfCombat : Combat
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                Attack();
+                if (Combo == 0)
+                {
+                    Attack();
+                }
+                else if (Combo == 1)
+                {
+                    Attack2();
+                }
+                else if (Combo == 2)
+                {
+                    Attack3();
+                }
             }
 
             if (Input.GetButtonDown("Fire2") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
@@ -42,7 +59,7 @@ public class WerewolfCombat : Combat
                 ChargeAttack();
             }
         }
-        
+
         if (ChargeCooldown > 0)
         {
             ChargeCooldown -= Time.deltaTime;
@@ -55,14 +72,48 @@ public class WerewolfCombat : Combat
                 Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
                 if (Damaged.Length > 0)
                 {
-                    DoAllDamage(Damaged);
+                    for (int i = 0; i < Damaged.Length; i++)
+                    {
+                        if (Damaged[i].gameObject.tag == "Enemy")
+                        {
+                            Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                        }
+                    }
                 }
             }
         }
 
-        if (AttackCooldown > 0)
+        if (ComboCooldown > 0)
         {
-            AttackCooldown -= Time.deltaTime;
+            ComboCooldown -= Time.deltaTime;
+        }
+        if (ComboCooldown <= 0)
+        {
+            Combo = 0;
+        }
+
+        if (ChargeCooldown > 0)
+        {
+            ChargeCooldown -= Time.deltaTime;
+            controller.Move(ChargeDirection * Time.deltaTime * 10);
+        }
+        if (ChargeCooldown <= 0 && Charging == true)
+        {
+            AttackRadius = 3;
+            Charging = false;
+            Charged = true;
+            ChargeAttackTime = 0.2f;
+            Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
+            if (Damaged.Length > 0)
+            {
+                for (int i = 0; i < Damaged.Length; i++)
+                {
+                    if (Damaged[i].gameObject.tag == "Enemy")
+                    {
+                        Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                    }
+                }
+            }
         }
     }
     private Vector3 getAttackDistance()
@@ -84,25 +135,91 @@ public class WerewolfCombat : Combat
         Vector3 distance = mousePos;
         return distance;
     }
+    private Vector3 getEnemyDirection(Vector3 enemyDistance)
+    {
+        enemyDistance.z -= AttackerTransform.position.z;
+        enemyDistance.x -= AttackerTransform.position.x;
+        float radius = Mathf.Sqrt(Mathf.Pow(enemyDistance.z, 2) + Mathf.Pow(enemyDistance.x, 2));
+        enemyDistance.z = enemyDistance.z / radius * 2;
+        enemyDistance.x = enemyDistance.x / radius * 2;
+        return enemyDistance;
+    }
     public override void Attack()
     {
-        AttackRadius = 1;
+        AttackRadius = 1f;
+        Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + getAttackDistance(), AttackRadius);
+        if (Damaged.Length > 0)
+        {
+            for (int i = 0; i < Damaged.Length; i++)
+            {
+                if (Damaged[i].gameObject.tag == "Enemy")
+                {
+                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                }
+            }
+        }
+        Combo = 1;
+        ComboCooldown = 2f;
+    }
+    public void Attack2()
+    {
+        AttackRadius = 2f;
         Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius, AttackRadius, AttackRadius));
         if (Damaged.Length > 0)
         {
-            DoAllDamage(Damaged);
+            for (int i = 0; i < Damaged.Length; i++)
+            {
+                if (Damaged[i].gameObject.tag == "Enemy")
+                {
+                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                }
+            }
         }
-        AttackCooldown = 0.3f;
-        //Debug.Log("Attack");
+        Combo = 2;
+        ComboCooldown = 2f;
+    }
+    public void Attack3()
+    {
+        AttackRadius = 2f;
+        Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + (getAttackDistance() * 1.5f), AttackRadius);
+        if (Damaged.Length > 0)
+        {
+            for (int i = 0; i < Damaged.Length; i++)
+            {
+                if (Damaged[i].gameObject.tag == "Enemy")
+                {
+                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage * 3);
+                }
+            }
+        }
+        Combo = 3;
+        ComboCooldown = 1f;
     }
     public override void ChargeAttack()
     {
         ChargeDirection = getAttackDistance();
         ChargeCooldown = 0.4f;
+        Charging = true;
     }
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        if (Combo == 3)
+        {
+            Gizmos.color = Color.blue;
+        }
+        else if (ComboCooldown <= 0)
+        {
+            Gizmos.color = Color.red;
+        }
+        else if (ComboCooldown <= 1)
+        {
+            Gizmos.color = Color.yellow;
+        }
+        else
+        {
+            Gizmos.color = Color.green;
+        }
+
         if (Charged == true)
         {
             Gizmos.DrawWireSphere(AttackerTransform.position, 3);
@@ -112,22 +229,21 @@ public class WerewolfCombat : Combat
                 Charged = false;
             }
         }
-        else
+        else if (Combo == 0)
         {
             Gizmos.DrawWireSphere(AttackerTransform.position + getAttackDistance(), 1);
         }
-
-    }
-    public void DoAllDamage(Collider[] Damaged)
-    {
-        for (int i = 0; i < Damaged.Length; i++)
+        else if (Combo == 1)
         {
-            if (Damaged[i].gameObject.tag == "Enemy")
-            {
-                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                Damaged[i].gameObject.GetComponent<Health>().DoT = DoT;
-                Damaged[i].gameObject.GetComponent<Health>().IsDoT = true;
-            }
+            Gizmos.DrawWireCube(AttackerTransform.position + getAttackDistance(), new Vector3(2, 2, 2));
+        }
+        else if (Combo == 2 || Combo == 3)
+        {
+            Gizmos.DrawWireSphere(AttackerTransform.position + (getAttackDistance() * 1.5f), 2);
         }
     }
+
 }
+
+
+
