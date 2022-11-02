@@ -30,6 +30,7 @@ public class PlayerUIControl : MonoBehaviour
     {
         int currentHealth = GameManager.ChosenPlayerCharacter.GetComponent<Health>().CurrentHealth;
         //Debug.Log("Current Health: " + currentHealth);
+        RemoveHeart(20);
         AddHeart(currentHealth);
     }
 
