@@ -26,7 +26,44 @@ public class GameManager : MonoBehaviour
         GameOver,
         Pause
     }
-    public MenuStates MenuState = MenuStates.Main;
+    private MenuStates menuState = MenuStates.Main;
+    public MenuStates MenuState
+    {
+        get
+        {
+            return menuState;
+        }
+
+        set
+        {
+            var previousState = menuState;
+            menuState = value;
+            switch (menuState)
+            {
+                case (MenuStates.None):
+                    Time.timeScale = 1;
+                    break;
+
+                case (MenuStates.Main):
+                    Instantiate(Menus[0]);
+                    Time.timeScale = 0;
+                    break;
+
+                case (MenuStates.GameOver):
+                    Instantiate(Menus[1]);
+                    Time.timeScale = 0;
+                    break;
+
+                case (MenuStates.Pause):
+                    Instantiate(Menus[2]);
+                    Time.timeScale = 0;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 
     private GameStates gameState = GameStates.Menu;
     public GameStates GameState
@@ -41,17 +78,14 @@ public class GameManager : MonoBehaviour
 
             switch (GameState)
             {
-                case GameStates.Menu:
-                    Time.timeScale = 0;
+                case GameStates.Menu:              
                     Destroy(PlayerUIControl.Instance.gameObject); // Destroying all of these should be in a separate method
                     Destroy(gameObject);
                     SceneManager.LoadScene("MainMenu");
-
                     break;
 
                 case GameStates.Game:
                     MenuState = MenuStates.None;
-                    Time.timeScale = 1;
                     break;
 
                 case GameStates.Loading:
@@ -87,14 +121,11 @@ public class GameManager : MonoBehaviour
                     PlayerUIControl.Instance.UpdateStamina(ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina,
                         ChosenPlayerCharacter.GetComponent<PlayerMovement>().MaxStamina);
 
-
                     GameState = GameStates.Game;
                     break;
 
                 case GameStates.GameOver:
-                    Instantiate(Menus[1]); // maybe move menu instantiating to switch menustate case
                     MenuState = MenuStates.GameOver;
-                    Time.timeScale = 0;
                     break;
 
                 default:
@@ -119,12 +150,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        MenuState = MenuStates.Main;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (GameState == GameStates.Game && MenuState == MenuStates.None)
+            {
+                MenuState = MenuStates.Pause;
+            }
+        }
     }
 }

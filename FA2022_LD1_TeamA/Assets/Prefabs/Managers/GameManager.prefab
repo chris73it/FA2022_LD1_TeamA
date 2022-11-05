@@ -51,4 +51,4 @@ MonoBehaviour:
   Menus:
   - {fileID: 8592773869946118184, guid: 13653b1ba1f306c4880911784607c190, type: 3}
   - {fileID: 9005734555440551025, guid: 42d5486fd2eed5a42a9ac6e16479b431, type: 3}
-  MenuState: 1
+  - {fileID: 1279421267554172417, guid: 3419d3287e7c5fb4d91a2e79bee4a43e, type: 3}
