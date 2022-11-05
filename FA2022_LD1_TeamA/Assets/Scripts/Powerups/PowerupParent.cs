@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class PowerupParent : MonoBehaviour
 {
+    public Price ShopCost;
+
+    private void Awake()
+    {
+        ShopCost.Cost = 0;
+    }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && ShopCost.CanPlayerAfford())
         {
             Debug.Log("PowerupParent onTriggerEnter");
             ActivatePowerup(collision);

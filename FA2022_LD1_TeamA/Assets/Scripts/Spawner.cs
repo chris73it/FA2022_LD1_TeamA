@@ -19,7 +19,28 @@ public class Spawner : MonoBehaviour
     {
         if (Type != SpawnerTypes.Player)
         {
-            return Instantiate(ToSpawn, gameObject.transform.position, gameObject.transform.rotation);
+            GameObject o = Instantiate(ToSpawn, gameObject.transform.position, gameObject.transform.rotation);
+            
+            if (FloorManager.CurrentRoom.Type == Room.RoomTypes.ShopRoom)
+            {
+                if (Type == SpawnerTypes.Powerup)
+                {
+                    o.GetComponent<PowerupParent>().ShopCost.Cost = 15;
+                    Debug.Log(o.GetComponent<PowerupParent>().ShopCost.Cost);
+                } else if (Type == SpawnerTypes.Pickup)
+                {
+                    o.GetComponent<PickupLogic>().ShopCost.Cost = 3;
+
+                    if (o.GetComponent<PickupLogic>().Type == PickupLogic.PickupTypes.Coin)
+                    {
+                        o.GetComponent<PickupLogic>().RandomizeType(1,2);
+                    }
+
+                    Debug.Log(o.GetComponent<PickupLogic>().ShopCost.Cost);
+                }
+            }
+
+            return o;
         }
 
         return null;

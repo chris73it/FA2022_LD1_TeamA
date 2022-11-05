@@ -7,6 +7,7 @@ public class BulletCollision : MonoBehaviour
     public GameObject Owner;
     public float Lifetime; // maybe should based on distance the bullet went instead
     public Vector3 Direction;
+    public int Damage;
     public bool Active = false;
     public float Speed;
 
@@ -31,7 +32,7 @@ public class BulletCollision : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-                other.gameObject.GetComponent<Health>().TakeDamage(Owner.GetComponent<Combat>().Damage);
+                other.gameObject.GetComponent<Health>().TakeDamage(Damage);
                 Destroy(this.gameObject);
             }
 

@@ -12,25 +12,42 @@ public class PickupLogic : MonoBehaviour
     }
     public PickupTypes Type;
     public int Value = 0;
+    public Price ShopCost;
     public bool Active = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        RandomizeType();
 
-        var pickupTypesLength = PickupTypes.GetNames(typeof(PickupTypes)).Length;
-        Type = (PickupTypes)Random.Range(0, pickupTypesLength);
+        ShopCost.Cost = 0;
 
         Value = Random.Range(1, 3);
 
         Active = true;
+    }
+    public void RandomizeType()
+    {
+        var pickupTypesLength = PickupTypes.GetNames(typeof(PickupTypes)).Length;
+        Type = (PickupTypes)Random.Range(0, pickupTypesLength);
+    }
+
+    public void RandomizeType(int start)
+    {
+        var pickupTypesLength = PickupTypes.GetNames(typeof(PickupTypes)).Length;
+        Type = (PickupTypes)Random.Range(start, pickupTypesLength);
+    }
+
+    public void RandomizeType(int start, int end)
+    {
+        var pickupTypesLength = PickupTypes.GetNames(typeof(PickupTypes)).Length;
+        Type = (PickupTypes)Random.Range(start, end);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (Active)
         {
-            if (collision.gameObject.tag == "Player")
+            if (collision.gameObject.tag == "Player" && ShopCost.CanPlayerAfford())
             {
                 switch (Type)
                 {
