@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ToSpawn: {fileID: 0}
+  ShopUI: {fileID: 9130294906397873746, guid: cb365f7642e360145894813163ebf83f, type: 3}
   Type: 0
