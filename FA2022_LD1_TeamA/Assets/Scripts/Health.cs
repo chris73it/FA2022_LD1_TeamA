@@ -61,7 +61,7 @@ public class Health : MonoBehaviour
     }
     public int TakeDamage(int amount)
     {
-        if (EntityCombat.Invulnerability <= 0 || IsDead)
+        if (EntityCombat.Invulnerability <= 0 || IsDead) // Obstacle doesn't need a Combat
         {
             CurrentHealth -= amount;
 
@@ -102,6 +102,13 @@ public class Health : MonoBehaviour
                 FloorManager.CurrentRoom.IsCleared = true;
             }
 
+            if (Random.Range(0f, 1f) >= 0.75f)
+            {
+                Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);
+            }
+            Destroy(gameObject);
+        } else
+        {
             if (Random.Range(0f, 1f) >= 0.25f)
             {
                 Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);

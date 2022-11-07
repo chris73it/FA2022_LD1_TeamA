@@ -108,7 +108,7 @@ public class WerewolfCombat : Combat
             {
                 for (int i = 0; i < Damaged.Length; i++)
                 {
-                    if (Damaged[i].gameObject.tag == "Enemy")
+                    if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
                     {
                         Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
                     }
@@ -152,7 +152,7 @@ public class WerewolfCombat : Combat
         {
             for (int i = 0; i < Damaged.Length; i++)
             {
-                if (Damaged[i].gameObject.tag == "Enemy")
+                if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
                 {
                     Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
                 }
@@ -169,7 +169,7 @@ public class WerewolfCombat : Combat
         {
             for (int i = 0; i < Damaged.Length; i++)
             {
-                if (Damaged[i].gameObject.tag == "Enemy")
+                if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
                 {
                     Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
                 }
@@ -186,7 +186,7 @@ public class WerewolfCombat : Combat
         {
             for (int i = 0; i < Damaged.Length; i++)
             {
-                if (Damaged[i].gameObject.tag == "Enemy")
+                if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
                 {
                     Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage * 3);
                 }
