@@ -1,5 +1,5 @@
 using UnityEngine;
-public struct Price
+public struct Price // switch this to deriving from MonoBehaviour, and then have Powerup and Pickup derive from this
 {
     public int Cost;
 
@@ -14,4 +14,12 @@ public struct Price
         Debug.Log("Cost: " + Cost);
         return false;
     }
+
+    /*
+     public void CreatePriceTag(int amount)
+    {
+        GameObject p = Instantiate(GameManager.Instance.TextObject, this.gameObject.transform, this.gameObject.rotation);
+        p.getComponent<TextMesh>.text = "" + amount + "¢";
+    }
+     */
 }

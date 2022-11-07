@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerUIPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
     public List<GameObject> Menus;
+    public GameObject TextObject;
     public static GameObject ChosenPlayerCharacter;
     public enum GameStates
     {
