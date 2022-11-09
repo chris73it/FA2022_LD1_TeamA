@@ -29,22 +29,26 @@ public class FarmerCombat : EnemyCombat
 
     private void Update()
     {
-        if (IsPlayerInRange(AttackRange))
+        if (IsStunned <= 0f)
         {
-            if (Movement.State != FarmerMovement.FarmerStates.Attacking)
+            if (IsPlayerInRange(AttackRange))
             {
-                Movement.State = FarmerMovement.FarmerStates.Attacking;
-            }
+                if (Movement.State != FarmerMovement.FarmerStates.Attacking)
+                {
+                    Movement.State = FarmerMovement.FarmerStates.Attacking;
+                }
 
-            if (AttackCooldown <= 0)
-            {
-                Attack();
+                if (AttackCooldown <= 0)
+                {
+                    Attack();
+                }
             }
-        } else
-        {
-            if (Movement.State != FarmerMovement.FarmerStates.Wander)
+            else
             {
-                Movement.State = FarmerMovement.FarmerStates.Wander;
+                if (Movement.State != FarmerMovement.FarmerStates.Wander)
+                {
+                    Movement.State = FarmerMovement.FarmerStates.Wander;
+                }
             }
         }
 
@@ -52,5 +56,7 @@ public class FarmerCombat : EnemyCombat
         {
             AttackCooldown -= Time.deltaTime;
         }
+
+        BaseTimers();
     }
 }
