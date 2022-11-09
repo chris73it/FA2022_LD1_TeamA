@@ -20,16 +20,19 @@ public class Spawner : MonoBehaviour
         if (Type != SpawnerTypes.Player)
         {
             GameObject o = Instantiate(ToSpawn, gameObject.transform.position, gameObject.transform.rotation);
-            
+            int price = 0;
+
             if (FloorManager.CurrentRoom.Type == Room.RoomTypes.ShopRoom)
             {
                 if (Type == SpawnerTypes.Powerup)
                 {
-                    o.GetComponent<PowerupParent>().ShopCost.Cost = 15;
+                    price = 15;
+                    o.GetComponent<PowerupParent>().ShopCost.Cost = price;
                     Debug.Log(o.GetComponent<PowerupParent>().ShopCost.Cost);
                 } else if (Type == SpawnerTypes.Pickup)
                 {
-                    o.GetComponent<PickupLogic>().ShopCost.Cost = 3;
+                    price = 3;
+                    o.GetComponent<PickupLogic>().ShopCost.Cost = price;
 
                     if (o.GetComponent<PickupLogic>().Type == PickupLogic.PickupTypes.Coin)
                     {
@@ -38,6 +41,12 @@ public class Spawner : MonoBehaviour
 
                     Debug.Log(o.GetComponent<PickupLogic>().ShopCost.Cost);
                 }
+
+                GameObject t = Instantiate(GameManager.Instance.TextObject, 
+                    o.transform.position + GameManager.Instance.TextObject.transform.position, GameManager.Instance.TextObject.transform.rotation);
+
+                t.transform.parent = o.transform;
+                t.GetComponent<TextMesh>().text = "" + price + "¢";
             }
 
             return o;
