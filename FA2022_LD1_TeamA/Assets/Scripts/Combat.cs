@@ -25,19 +25,33 @@ public class Combat : MonoBehaviour
     // Check if overriden by derived classes, needs Invulnerability section    
     private void Update()
     {
-        if (Invulnerability > 0)
-        {
-            Invulnerability -= Time.deltaTime;
-            Debug.Log("Invulnerability: " + Invulnerability);
-        }
+        BaseTimers();
     }
 
+    public void BaseTimers()
+    {
+        if (Invulnerability > 0f)
+        {
+            Invulnerability -= Time.deltaTime;
+            //Debug.Log("Invulnerability: " + Invulnerability);
+        }
+
+        if (IsStunned > 0f)
+        {
+            IsStunned -= Time.deltaTime;
+        }
+    }
     // Used for damage and etc.
-    public void SetGeneralInvulnerability(float seconds)
+    public void SetGeneralInvulnerability(float seconds) // can be changed to a property
     {
         Invulnerability = seconds;
 
         // do animations.
+    }
+
+    public void SetStun(float seconds)
+    {
+        IsStunned = seconds;
     }
 
     public virtual void Attack()

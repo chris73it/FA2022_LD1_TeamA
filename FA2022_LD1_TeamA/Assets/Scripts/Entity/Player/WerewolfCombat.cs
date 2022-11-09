@@ -29,37 +29,36 @@ public class WerewolfCombat : Combat
     }
     void Update()
     {
-        if (Invulnerability > 0)
-        {
-            Invulnerability -= Time.deltaTime;
-            //Debug.Log("Invulnerability: " + Invulnerability);
-        }
+        BaseTimers();
 
-        if (AttackCooldown <= 0)
+        if (IsStunned <= 0f)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (AttackCooldown <= 0)
             {
-                if (Combo == 0)
+                if (Input.GetButtonDown("Fire1"))
                 {
-                    Attack();
+                    if (Combo == 0)
+                    {
+                        Attack();
+                    }
+                    else if (Combo == 1)
+                    {
+                        Attack2();
+                    }
+                    else if (Combo == 2)
+                    {
+                        Attack3();
+                    }
                 }
-                else if (Combo == 1)
+
+                if (Input.GetButtonDown("Fire2") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
                 {
-                    Attack2();
-                }
-                else if (Combo == 2)
-                {
-                    Attack3();
+                    GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().UseStamina(0.25f);
+                    ChargeAttack();
                 }
             }
-
-            if (Input.GetButtonDown("Fire2") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
-            {
-                GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().UseStamina(0.25f);
-                ChargeAttack();
-            }
         }
-
+        
         if (ChargeCooldown > 0)
         {
             ChargeCooldown -= Time.deltaTime;
