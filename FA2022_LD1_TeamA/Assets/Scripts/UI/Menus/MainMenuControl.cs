@@ -20,6 +20,9 @@ public class MainMenuControl : MonoBehaviour
     private void StartGamePressed()
     {
         //Debug.Log(GameManager.Instance);
-        GameManager.Instance.GameState = GameManager.GameStates.Loading;
+        if (GameManager.Instance.MenuState == GameManager.MenuStates.Main)
+        {
+            GameManager.Instance.GameState = GameManager.GameStates.Loading;
+        }
     }
 }

@@ -79,6 +79,7 @@ public class FloorManager : MonoBehaviour
     // Methods
     public void ResetFloor(bool newFloor)
     {
+        Debug.Log("Resetting...");
         // Reset Room Entered Count
         RoomsEntered = 0;
 

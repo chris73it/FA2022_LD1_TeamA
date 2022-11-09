@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
 
                 case GameStates.Loading:
                     // Create Floor Manager
+                    Debug.Log("Loading");
                     if (FloorManager.Instance == null)
                     {
                         GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
