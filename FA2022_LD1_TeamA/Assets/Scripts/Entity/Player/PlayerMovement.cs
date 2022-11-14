@@ -29,7 +29,22 @@ public class PlayerMovement : Movement
         Horizontal = Input.GetAxis("Horizontal");
         Vertical = Input.GetAxis("Vertical");
         UpdateSpeed();
-        Move(); 
+        Move();
+
+        //Animation
+        if (Horizontal > 0)
+        {
+            GetComponent<WerewolfAnimation>().AnimationState = WerewolfAnimation.AnimationStates.WalkRight;
+        }
+        else if (Horizontal < 0)
+        {
+            GetComponent<WerewolfAnimation>().AnimationState = WerewolfAnimation.AnimationStates.WalkLeft;
+        } else if (Horizontal == 0 && Vertical == 0)
+        {
+            GetComponent<WerewolfAnimation>().AnimationState = WerewolfAnimation.AnimationStates.Idle;
+        }
+
+
     }
 
     public override void Move() {

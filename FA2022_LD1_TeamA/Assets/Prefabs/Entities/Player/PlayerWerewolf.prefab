@@ -74,16 +74,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_FlipY
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_Size.x
-      value: 1.28
+      value: 10.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Size.y
+      value: 10.24
       objectReference: {fileID: 0}
     - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 77ee4f368c57dbd429f72eea2a39ec99, type: 3}
+      objectReference: {fileID: 21300000, guid: 0e7973d8dac42b84b99342b4f4bce3fa, type: 3}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -134,5 +182,20 @@ MonoBehaviour:
   offsetScaleZ: 0
   ChargeCooldown: 0
   ChargeDirection: {x: 0, y: 0, z: 0}
+  Charging: 0
   Charged: 0
   ChargeAttackTime: 0
+  Combo: 0
+  ComboCooldown: 0
+--- !u!114 &-1376198975903400779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756589616967218836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d34cfc837635e2458c1666426089847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
