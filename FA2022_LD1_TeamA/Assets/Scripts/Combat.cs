@@ -10,7 +10,10 @@ public class Combat : MonoBehaviour
     public float AttackCooldown = 0f;
     public float Invulnerability { get; set; }
     public float IsAttacking = 0f;
-    public float IsStunned = 0f;
+
+    public float IsStunned = 0f; // Determines how long a person is stunned for
+    public float StunTimer = 0f; // Determines how long the attacker's stunning lasts for
+    public float StunChance = 0f; // Determines how often a stun attack lands
 
     public struct DamageOverTime
     {
