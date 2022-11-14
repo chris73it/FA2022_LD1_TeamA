@@ -110,6 +110,11 @@ public class GameManager : MonoBehaviour
                     //Debug.Log("CurrentRoom assigned");
 
                     // Spawn Player
+                    if (ChosenPlayerCharacter != null)
+                    {
+                        Destroy(ChosenPlayerCharacter);
+                    }
+
                     ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
                     DontDestroyOnLoad(ChosenPlayerCharacter);
 
