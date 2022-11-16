@@ -11,7 +11,16 @@ public class Combat : MonoBehaviour
     public float Invulnerability { get; set; }
     public float IsAttacking = 0f;
 
-    public float IsStunned = 0f; // Determines how long a person is stunned for
+    private float isStunned = 0f;
+    public float IsStunned
+    {
+        get { return isStunned; }
+        set 
+        { 
+            isStunned = value;
+            // do animations
+        }
+    } // Determines how long a person is stunned for
     public float StunTimer = 0f; // Determines how long the attacker's stunning lasts for
     public float StunChance = 0f; // Determines how often a stun attack lands
 
@@ -52,11 +61,6 @@ public class Combat : MonoBehaviour
         // do animations.
     }
 
-    public void SetStun(float seconds)
-    {
-        IsStunned = seconds;
-    }
-
     public virtual void Attack()
     {
         Debug.Log("Using Base Combat");
@@ -66,5 +70,30 @@ public class Combat : MonoBehaviour
     public virtual void ChargeAttack()
     {
         Debug.Log("Using Base Combat");
+    }
+
+    public void OnDamage(Collider[] Damaged)
+    {
+        for (int i = 0; i < Damaged.Length; i++)
+        {
+            if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
+            {
+                // Damage
+                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+
+                // Stun
+                if (StunTimer > 0f)
+                {
+                    if (StunChance > 0f)
+                    {
+                        if (Random.Range(0f, 1f) >= StunChance)
+                        {
+                            Damaged[i].gameObject.GetComponent<Combat>().IsStunned = StunTimer;
+                            Debug.Log("Stunned!");
+                        }
+                    }
+                }
+            }
+        }
     }
 }

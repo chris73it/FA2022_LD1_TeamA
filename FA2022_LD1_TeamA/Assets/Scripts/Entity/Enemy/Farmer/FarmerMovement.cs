@@ -24,21 +24,24 @@ public class FarmerMovement : EnemyMovement
 
     private void Update()
     {
-        if (State == FarmerStates.Wander)
+        if (Combat.IsStunned >= 0f)
         {
-            if (!Wandering)
+            if (State == FarmerStates.Wander)
             {
-                Wander();
+                if (!Wandering)
+                {
+                    Wander();
 
+                }
+
+                if (NavMeshAgent.remainingDistance <= 0)
+                {
+                    Wandering = false;
+                }
+
+                Move();
             }
-
-            if (NavMeshAgent.remainingDistance <= 0)
-            {
-                Wandering = false;
-            }
-
-            Move();
-        } 
+        }
     }
 
     public void Wander()

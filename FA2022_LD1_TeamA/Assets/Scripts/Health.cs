@@ -25,21 +25,26 @@ public class Health : MonoBehaviour
             Die();
         }
 
-        if (IsDoT)
-        {
-            if (DoT.TotalDuration > 0)
-            {
-                DoT.Timer += Time.deltaTime;
 
-                if (DoT.Timer >= DoT.TimeToDamage)
-                {
-                    TakeDamage(DoT.Damage);
-                    DoT.TotalDuration -= DoT.Timer;
-                    DoT.Timer = 0f;
-                }
-            } else
+        if (!IsDead)
+        {
+            if (IsDoT)
             {
-                IsDoT = false;
+                if (DoT.TotalDuration > 0)
+                {
+                    DoT.Timer += Time.deltaTime;
+
+                    if (DoT.Timer >= DoT.TimeToDamage)
+                    {
+                        TakeDamage(DoT.Damage);
+                        DoT.TotalDuration -= DoT.Timer;
+                        DoT.Timer = 0f;
+                    }
+                }
+                else
+                {
+                    IsDoT = false;
+                }
             }
         }
     }

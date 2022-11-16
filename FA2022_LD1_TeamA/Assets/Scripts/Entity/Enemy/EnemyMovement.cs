@@ -31,4 +31,19 @@ public class EnemyMovement : Movement
             Player = GameManager.ChosenPlayerCharacter;
         }        
     }
+
+    /*
+    public virtual void TakeAction()
+    {
+        Enemy AI code...
+    }
+
+    private void Update() {
+        if (Combat.IsStunned >= 0f) {
+            TakeAction()
+        } else {
+            Destination = hit.position; //? makes them stay in place
+        }
+    }
+    */
 }

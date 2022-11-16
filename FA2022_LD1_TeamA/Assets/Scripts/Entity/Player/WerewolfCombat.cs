@@ -71,13 +71,7 @@ public class WerewolfCombat : Combat
                 Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
                 if (Damaged.Length > 0)
                 {
-                    for (int i = 0; i < Damaged.Length; i++)
-                    {
-                        if (Damaged[i].gameObject.tag == "Enemy")
-                        {
-                            Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                        }
-                    }
+                    OnDamage(Damaged);
                 }
             }
         }
@@ -105,13 +99,7 @@ public class WerewolfCombat : Combat
             Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
             if (Damaged.Length > 0)
             {
-                for (int i = 0; i < Damaged.Length; i++)
-                {
-                    if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
-                    {
-                        Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                    }
-                }
+                OnDamage(Damaged);
             }
         }
     }
@@ -149,13 +137,7 @@ public class WerewolfCombat : Combat
         Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + getAttackDistance(), AttackRadius);
         if (Damaged.Length > 0)
         {
-            for (int i = 0; i < Damaged.Length; i++)
-            {
-                if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
-                {
-                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                }
-            }
+            OnDamage(Damaged);
         }
         Combo = 1;
         ComboCooldown = 2f;
@@ -166,13 +148,7 @@ public class WerewolfCombat : Combat
         Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius, AttackRadius, AttackRadius));
         if (Damaged.Length > 0)
         {
-            for (int i = 0; i < Damaged.Length; i++)
-            {
-                if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
-                {
-                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                }
-            }
+            OnDamage(Damaged);
         }
         Combo = 2;
         ComboCooldown = 2f;
@@ -183,13 +159,7 @@ public class WerewolfCombat : Combat
         Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + (getAttackDistance() * 1.5f), AttackRadius);
         if (Damaged.Length > 0)
         {
-            for (int i = 0; i < Damaged.Length; i++)
-            {
-                if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
-                {
-                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage * 3);
-                }
-            }
+            OnDamage(Damaged);
         }
         Combo = 3;
         ComboCooldown = 1f;
@@ -241,7 +211,6 @@ public class WerewolfCombat : Combat
             Gizmos.DrawWireSphere(AttackerTransform.position + (getAttackDistance() * 1.5f), 2);
         }
     }
-
 }
 
 
