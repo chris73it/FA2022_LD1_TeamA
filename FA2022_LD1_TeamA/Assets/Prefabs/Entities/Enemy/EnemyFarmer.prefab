@@ -82,15 +82,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.b
-      value: 0.5754717
+      value: 0.15698113
       objectReference: {fileID: 0}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.24528301
       objectReference: {fileID: 0}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.r
-      value: 0.11669347
+      value: 0.061320752
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
@@ -141,7 +141,8 @@ MonoBehaviour:
   Damage: 1
   AttackCooldown: 0
   IsAttacking: 0
-  IsStunned: 0
+  StunTimer: 0
+  StunChance: 0
   AttackRange: 0
   Bullets:
   - {fileID: 4462732106462573415, guid: b18b2c36053741e49a0cd2c29a6b9323, type: 3}

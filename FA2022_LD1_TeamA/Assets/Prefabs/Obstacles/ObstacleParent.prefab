@@ -16,6 +16,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b9aae0da72ee3c4439c40894a3d292ab, type: 3}
+    - target: {fileID: 3501062157094269681, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3501062157094269681, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3501062157094269681, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5209217622297600127, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: EntityCombat
       value: 
@@ -105,4 +117,5 @@ MonoBehaviour:
   Damage: 0
   AttackCooldown: 0
   IsAttacking: 0
-  IsStunned: 0
+  StunTimer: 0
+  StunChance: 0

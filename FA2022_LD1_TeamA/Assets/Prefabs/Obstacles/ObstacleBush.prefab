@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2253245108604647693, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253245108604647693, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253245108604647693, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5947129683768060606, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
       propertyPath: m_Name
       value: ObstacleBush
