@@ -94,7 +94,7 @@ public class WizardCombat : EnemyCombat
             AttackResult -= Time.deltaTime;
         }
 
-
+        BaseTimers();
     }
     void OnDrawGizmos()
     {

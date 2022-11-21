@@ -14,7 +14,7 @@ public class Combat : MonoBehaviour
     public float AttackCooldown = 0f;
     public List<GameObject> Bullets;
     public List<GameObject> BulletsCreated;
-    public float Invulnerability { get; set; }
+    public float Invulnerability;
 
     private float isStunned = 0f;
     public float IsStunned
@@ -43,13 +43,12 @@ public class Combat : MonoBehaviour
     public SpriteRenderer Sprite;
     public float DamagedDuration;
     public float DamagedTimer;
-    public float InvulnerabilityDuration;
+    public float InvulnerabilityAlpha;
 
     // Check if overriden by derived classes, needs Invulnerability section    
     private void Awake()
     {
-        DamagedDuration = 0.25f;
-        DamagedTimer = 0f;
+        AnimationInitialization();
     }
     private void Update()
     {
@@ -62,6 +61,10 @@ public class Combat : MonoBehaviour
         {
             Invulnerability -= Time.deltaTime;
             //Debug.Log("Invulnerability: " + Invulnerability);
+            if (Invulnerability <= 0f)
+            {
+                InvulernabilityAnimation();
+            }
         }
 
         if (IsStunned > 0f)
@@ -72,17 +75,17 @@ public class Combat : MonoBehaviour
         if (DamagedTimer > 0f)
         {
             DamagedTimer -= Time.deltaTime;
-        } else
-        {
-            Sprite.color = Color.white;
-        }
+
+            if (DamagedTimer <= 0f)
+            {
+                Sprite.color = new Color(1,1,1, Sprite.color.a);
+            }
+        } 
     }
     // Used for damage and etc.
     public void SetGeneralInvulnerability(float seconds) // can be changed to a property
     {
         Invulnerability = seconds;
-
-        // do animations.
     }
 
     public virtual void Attack()
@@ -103,7 +106,31 @@ public class Combat : MonoBehaviour
 
     public void OnDamageAnimation()
     {
-        Sprite.color = Color.red;
+        Sprite.color = new Color(1, 0, 0, Sprite.color.a);
         DamagedTimer = DamagedDuration;
+    }
+
+    public void InvulernabilityAnimation()
+    {
+        Color c = Sprite.color;
+
+        if (Invulnerability > 0f)
+        {
+            c.a = InvulnerabilityAlpha;
+        } else
+        {
+            c.a = 1f;
+        }
+        
+        Sprite.color = c;
+    }
+
+
+    public void AnimationInitialization()
+    {
+        DamagedDuration = 0.25f;
+        DamagedTimer = 0f;
+        InvulnerabilityAlpha = 0.5f;
+        Sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 }

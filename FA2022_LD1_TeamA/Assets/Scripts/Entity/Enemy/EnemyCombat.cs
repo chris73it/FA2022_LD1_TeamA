@@ -21,6 +21,8 @@ public class EnemyCombat : Combat
         {
             Player = GameManager.ChosenPlayerCharacter;
         }
+
+        AnimationInitialization();
     }
     public bool IsPlayerInRange(float range)
     {

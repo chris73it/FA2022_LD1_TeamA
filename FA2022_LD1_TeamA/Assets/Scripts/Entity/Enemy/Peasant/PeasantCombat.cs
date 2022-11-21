@@ -86,7 +86,7 @@ public class PeasantCombat : EnemyCombat
             AttackResult -= Time.deltaTime;
         }
 
-
+        BaseTimers();
     }
     private Vector3 getEnemyDirection()
     {

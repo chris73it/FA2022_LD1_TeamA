@@ -76,6 +76,10 @@ public class Health : MonoBehaviour
                 PlayerUIControl.Instance.RemoveHeart(amount);
             }
 
+            EntityCombat.OnDamageAnimation();
+            EntityCombat.InvulernabilityAnimation();
+
+
             if (CurrentHealth <= 0)
             {
                 Die();

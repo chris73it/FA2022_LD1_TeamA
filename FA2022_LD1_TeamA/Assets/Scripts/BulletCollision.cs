@@ -30,10 +30,9 @@ public class BulletCollision : MonoBehaviour
     {
         if (Active)
         {
-            if (other.gameObject.tag != Owner.tag)
+            if ((other.CompareTag("Enemy") || other.CompareTag("Player")) && !other.CompareTag(Owner.tag))
             {
                 other.gameObject.GetComponent<Health>().TakeDamage(Damage);
-                other.gameObject.GetComponent<Combat>().OnDamageAnimation();
 
                 Destroy(this.gameObject);
             }
