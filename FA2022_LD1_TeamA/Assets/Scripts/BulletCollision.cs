@@ -30,13 +30,13 @@ public class BulletCollision : MonoBehaviour
     {
         if (Active)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.tag != Owner.tag)
             {
                 other.gameObject.GetComponent<Health>().TakeDamage(Damage);
+                other.gameObject.GetComponent<Combat>().OnDamageAnimation();
+
                 Destroy(this.gameObject);
             }
-
-            
         }
     }
 
@@ -44,5 +44,13 @@ public class BulletCollision : MonoBehaviour
     {
         Vector3 heading = position - gameObject.transform.position;
         Direction = heading / (heading.magnitude);
+    }
+
+    private void OnDestroy()
+    {
+        if (Owner != null)
+        {
+            Owner.GetComponent<Combat>().BulletsCreated.Remove(this.gameObject);
+        }
     }
 }

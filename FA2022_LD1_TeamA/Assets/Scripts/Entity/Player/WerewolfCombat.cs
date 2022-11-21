@@ -103,6 +103,32 @@ public class WerewolfCombat : Combat
             }
         }
     }
+
+    public override void OnDamage(Collider[] Damaged)
+    {
+        for (int i = 0; i < Damaged.Length; i++)
+        {
+            if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
+            {
+                // Damage
+                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                Damaged[i].gameObject.GetComponent<Combat>().OnDamageAnimation();
+
+                // Stun
+                if (StunTimer > 0f)
+                {
+                    if (StunChance > 0f)
+                    {
+                        if (Random.Range(0f, 1f) >= StunChance)
+                        {
+                            Damaged[i].gameObject.GetComponent<Combat>().IsStunned = StunTimer;
+                            Debug.Log("Stunned!");
+                        }
+                    }
+                }
+            }
+        }
+    }
     private Vector3 getAttackDistance()
     {
         Vector3 mousePos = Input.mousePosition;

@@ -7,9 +7,14 @@ public class Combat : MonoBehaviour
     public Transform AttackerTransform;
     public CharacterController controller;
     public int Damage;
+    public bool IsAttacking = false;
+    public Vector3 AttackDestination;
+    public Vector3 AttackDirection;
+    public float AttackDelay = 0f;
     public float AttackCooldown = 0f;
+    public List<GameObject> Bullets;
+    public List<GameObject> BulletsCreated;
     public float Invulnerability { get; set; }
-    public float IsAttacking = 0f;
 
     private float isStunned = 0f;
     public float IsStunned
@@ -34,7 +39,18 @@ public class Combat : MonoBehaviour
 
     public DamageOverTime DoT;
 
+    // Animation Info
+    public SpriteRenderer Sprite;
+    public float DamagedDuration;
+    public float DamagedTimer;
+    public float InvulnerabilityDuration;
+
     // Check if overriden by derived classes, needs Invulnerability section    
+    private void Awake()
+    {
+        DamagedDuration = 0.25f;
+        DamagedTimer = 0f;
+    }
     private void Update()
     {
         BaseTimers();
@@ -51,6 +67,14 @@ public class Combat : MonoBehaviour
         if (IsStunned > 0f)
         {
             IsStunned -= Time.deltaTime;
+        }
+
+        if (DamagedTimer > 0f)
+        {
+            DamagedTimer -= Time.deltaTime;
+        } else
+        {
+            Sprite.color = Color.white;
         }
     }
     // Used for damage and etc.
@@ -72,28 +96,14 @@ public class Combat : MonoBehaviour
         Debug.Log("Using Base Combat");
     }
 
-    public void OnDamage(Collider[] Damaged)
+    public virtual void OnDamage(Collider[] Damaged) // This should be used but gameObject always returns a null for some reason
     {
-        for (int i = 0; i < Damaged.Length; i++)
-        {
-            if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
-            {
-                // Damage
-                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+        Debug.Log("Using Base Combat");
+    }
 
-                // Stun
-                if (StunTimer > 0f)
-                {
-                    if (StunChance > 0f)
-                    {
-                        if (Random.Range(0f, 1f) >= StunChance)
-                        {
-                            Damaged[i].gameObject.GetComponent<Combat>().IsStunned = StunTimer;
-                            Debug.Log("Stunned!");
-                        }
-                    }
-                }
-            }
-        }
+    public void OnDamageAnimation()
+    {
+        Sprite.color = Color.red;
+        DamagedTimer = DamagedDuration;
     }
 }

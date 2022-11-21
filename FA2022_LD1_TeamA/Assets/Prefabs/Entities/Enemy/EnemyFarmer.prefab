@@ -96,6 +96,11 @@ PrefabInstance:
     - {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+--- !u!212 &4256427456155385748 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+  m_PrefabInstance: {fileID: 6579238077133126805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6335926599683978631 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 910744723162056978, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
@@ -139,13 +144,23 @@ MonoBehaviour:
   AttackerTransform: {fileID: 7415641927435860033}
   controller: {fileID: 0}
   Damage: 1
-  AttackCooldown: 0
   IsAttacking: 0
-  StunTimer: 0
-  StunChance: 0
-  AttackRange: 0
+  AttackDestination: {x: 0, y: 0, z: 0}
+  AttackDirection: {x: 0, y: 0, z: 0}
+  AttackDelay: 0
+  AttackCooldown: 0
   Bullets:
   - {fileID: 4462732106462573415, guid: b18b2c36053741e49a0cd2c29a6b9323, type: 3}
+  BulletsCreated: []
+  StunTimer: 0
+  StunChance: 0
+  Sprite: {fileID: 4256427456155385748}
+  DamagedDuration: 0
+  DamagedTimer: 0
+  InvulnerabilityDuration: 0
+  RetreatRange: -1
+  AttackRange: 0
+  SightRange: -1
   Movement: {fileID: -8679464711577154944}
 --- !u!4 &7415641927435860033 stripped
 Transform:

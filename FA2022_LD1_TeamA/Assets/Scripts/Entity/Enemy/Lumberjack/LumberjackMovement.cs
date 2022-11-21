@@ -4,60 +4,92 @@ using UnityEngine;
 
 public class LumberjackMovement : EnemyMovement
 {
-    public float MaxHeight;
-    public bool GoingUp;
-    public float CurrentJumpSpeed = 0f;
-    public Vector3 JumpTo;
-    // Start is called before the first frame update
-    void Start()
+    public enum LumberjackStates
     {
-        
+        Attacking,
+        Prepping,
+        Jumping,
+        Slamming
+    }
+    private LumberjackStates state = LumberjackStates.Attacking;
+    public LumberjackStates State
+    {
+        get { return state; } 
+        set
+        {
+            state = value;
+            switch (state)
+            {
+                case (LumberjackStates.Attacking):
+                    Combat.AttackCooldown = 5f;
+                    break;
+
+                case (LumberjackStates.Prepping):
+                    GetChargeLocation();
+                    State = LumberjackStates.Jumping;
+                    break;
+
+                case (LumberjackStates.Jumping):
+                    Debug.Log("Jumping...");
+                    break;
+
+                case (LumberjackStates.Slamming):
+                    Debug.Log("Slamming...");
+                    
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+    public LumberjackCombat Combat;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        StateTimer = Random.Range(10, 15);
+        TopSpeed = 8f;
+        Combat = GetComponent<LumberjackCombat>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void Jump()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y + CurrentJumpSpeed, transform.position.z);
-
-        if (transform.position.y >= MaxHeight)
+        if (Combat.IsStunned <= 0f)
         {
-            CurrentJumpSpeed = 0f;
-            GoingUp = false;
-        } else
+           if (State == LumberjackStates.Jumping) {
+
+                Move();
+
+                if (NavMeshAgent.remainingDistance <= 0)
+                {
+                    State = LumberjackStates.Slamming;
+                } 
+           } else
+           {
+                if (StateTimer <= 0)
+                {
+                    State = LumberjackStates.Prepping;
+                }
+           }
+        }
+
+        if (State == LumberjackStates.Slamming)
         {
-            GoingUp = true;
+            //Combat.SlamAttack(); 
+            StateTimer = Random.Range(20, 25);
+            State = LumberjackStates.Attacking;
+        }
+
+        if (StateTimer > 0)
+        {
+            StateTimer -= Time.deltaTime;
         }
     }
 
-    public float UpdateJumpSpeed()
+    public void GetChargeLocation()
     {
-        if (GoingUp)
-        {
-            if (CurrentJumpSpeed + Acceleration < TopSpeed)
-            {
-                CurrentJumpSpeed += Acceleration;
-            } else
-            {
-                CurrentJumpSpeed = TopSpeed;
-            }
-        } else
-        {
-            if (CurrentJumpSpeed - Decceleration >= -TopSpeed)
-            {
-                CurrentJumpSpeed -= Decceleration;
-            } else
-            {
-                CurrentJumpSpeed = -TopSpeed;
-            }
-        }
-
-        return CurrentSpeed;
+        Destination = GameManager.ChosenPlayerCharacter.transform.position; // if rushes into wall then it becomes glitch on the wall
     }
-
-    public float
 }

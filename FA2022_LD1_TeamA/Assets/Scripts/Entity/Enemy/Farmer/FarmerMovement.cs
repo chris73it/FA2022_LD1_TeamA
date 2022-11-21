@@ -16,9 +16,9 @@ public class FarmerMovement : EnemyMovement
     public bool Wandering = false;
     public FarmerCombat Combat;
 
-    public override void Intialize()
+    public override void Initialize()
     {
-        base.Intialize();
+        base.Initialize();
         Combat = GetComponent<FarmerCombat>();
     }
 

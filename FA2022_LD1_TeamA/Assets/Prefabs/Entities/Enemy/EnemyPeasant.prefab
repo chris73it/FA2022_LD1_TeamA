@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1009957021946255777
+--- !u!1001 &961144734357687244
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,27 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 910744723162056978, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Name
-      value: EnemyLumberjack
+      value: EnemyPeasant
       objectReference: {fileID: 0}
     - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: EntityCombat
       value: 
-      objectReference: {fileID: 6139439650748844700}
+      objectReference: {fileID: -1300784570613502938}
     - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,64 +60,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2353be83b501fff48948f10342958ba9, type: 3}
-    - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-      propertyPath: m_Color.b
-      value: 0.0767622
-      objectReference: {fileID: 0}
-    - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-      propertyPath: m_Color.g
-      value: 0.0767622
-      objectReference: {fileID: 0}
-    - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-      propertyPath: m_Color.r
-      value: 0.23584908
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
---- !u!1 &191274407382372531 stripped
+--- !u!1 &141073437409034974 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 910744723162056978, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-  m_PrefabInstance: {fileID: 1009957021946255777}
+  m_PrefabInstance: {fileID: 961144734357687244}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-9213045586820517278
+--- !u!114 &-1300784570613502938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191274407382372531}
+  m_GameObject: {fileID: 141073437409034974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124d3ce88f572dc459a975d989a2332c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f5f0966f5e68354ebf34ec13c022eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TopSpeed: 20
-  Acceleration: 1
-  Decceleration: 1
-  CurrentSpeed: 0
-  NavMeshAgent: {fileID: 0}
-  Destination: {x: 0, y: 0, z: 0}
-  StateTimer: 0
-  Combat: {fileID: 6139439650748844700}
---- !u!114 &6139439650748844700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191274407382372531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2969acf677933e642958be5cc6522a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackerTransform: {fileID: 3720984465652342133}
+  AttackerTransform: {fileID: 0}
   controller: {fileID: 0}
   Damage: 1
   IsAttacking: 0
@@ -137,28 +89,45 @@ MonoBehaviour:
   AttackDirection: {x: 0, y: 0, z: 0}
   AttackDelay: 0
   AttackCooldown: 0
-  Bullets:
-  - {fileID: 8910573441802229114, guid: 29e7e8ee0bba79d45857c09300796b36, type: 3}
+  Bullets: []
   BulletsCreated: []
   StunTimer: 0
   StunChance: 0
-  Sprite: {fileID: 7952211918484576928}
+  Sprite: {fileID: 7856903517804595405}
   DamagedDuration: 0
   DamagedTimer: 0
   InvulnerabilityDuration: 0
   RetreatRange: -1
-  AttackRange: 5
+  AttackRange: -1
   SightRange: -1
-  Movement: {fileID: -9213045586820517278}
-  SlamRadius: 4
-  AttackRadius: 3
---- !u!4 &3720984465652342133 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-  m_PrefabInstance: {fileID: 1009957021946255777}
+  Movement: {fileID: 513442888664946731}
+  AttackResult: 0
+--- !u!114 &513442888664946731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &7952211918484576928 stripped
+  m_GameObject: {fileID: 141073437409034974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e12d3c292d09b84388cf9dfb34cf729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TopSpeed: 1
+  Acceleration: 1
+  Decceleration: 1
+  CurrentSpeed: 0
+  NavMeshAgent: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  StateTimer: 0
+  State: 0
+  WanderRange: 2
+  Wandering: 0
+  Pursuing: 0
+  Combat: {fileID: -1300784570613502938}
+--- !u!212 &7856903517804595405 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
-  m_PrefabInstance: {fileID: 1009957021946255777}
+  m_PrefabInstance: {fileID: 961144734357687244}
   m_PrefabAsset: {fileID: 0}

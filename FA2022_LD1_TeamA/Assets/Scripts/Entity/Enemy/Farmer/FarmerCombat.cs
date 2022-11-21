@@ -16,13 +16,7 @@ public class FarmerCombat : EnemyCombat
 
     public override void Attack()
     {
-        GameObject bullet = Instantiate(Bullets[0] , gameObject.transform.position, gameObject.transform.rotation);
-        
-        bullet.GetComponent<BulletCollision>().Owner = gameObject;
-        bullet.GetComponent<BulletCollision>().Damage = Damage;
-        bullet.GetComponent<BulletCollision>().GetDirection(GetPlayerLocation());
-        bullet.GetComponent<BulletCollision>().Lifetime = 3.5f;
-        bullet.GetComponent<BulletCollision>().Active = true;
+        CreateBullet(Damage);
 
         AttackCooldown = 2f;
     }

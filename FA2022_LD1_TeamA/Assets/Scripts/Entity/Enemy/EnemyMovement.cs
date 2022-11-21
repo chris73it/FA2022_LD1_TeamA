@@ -12,7 +12,7 @@ public class EnemyMovement : Movement
 
     private void Awake()
     {
-        Intialize();
+        Initialize();
     }
 
     public override void Move()
@@ -21,7 +21,7 @@ public class EnemyMovement : Movement
         NavMeshAgent.destination = Destination;
     }
 
-    public virtual void Intialize()
+    public virtual void Initialize()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
         NavMeshAgent.speed = TopSpeed;

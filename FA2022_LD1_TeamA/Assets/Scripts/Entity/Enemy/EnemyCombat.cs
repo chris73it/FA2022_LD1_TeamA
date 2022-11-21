@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemyCombat : Combat
 {
+    public float RetreatRange = -1f;
     public float AttackRange = -1f;
+    public float SightRange = -1f;
     public static GameObject Player;
-    public List<GameObject> Bullets;
+    
 
     private void Awake()
     {
@@ -48,5 +50,18 @@ public class EnemyCombat : Combat
         {
             collision.gameObject.GetComponent<Health>().TakeDamage(Damage);
         }
+    }
+
+    public void CreateBullet(int damage, float lifeTime = 3.5f)
+    {
+        GameObject bullet = Instantiate(Bullets[0], gameObject.transform.position, gameObject.transform.rotation);
+
+        BulletsCreated.Add(bullet);
+
+        bullet.GetComponent<BulletCollision>().Owner = gameObject;
+        bullet.GetComponent<BulletCollision>().Damage = damage;
+        bullet.GetComponent<BulletCollision>().GetDirection(GetPlayerLocation());
+        bullet.GetComponent<BulletCollision>().Lifetime = lifeTime;
+        bullet.GetComponent<BulletCollision>().Active = true;
     }
 }
