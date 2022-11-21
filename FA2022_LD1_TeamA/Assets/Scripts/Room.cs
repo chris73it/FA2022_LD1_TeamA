@@ -212,12 +212,12 @@ public class Room
     {
         if (Type != RoomTypes.EmptyRoom)
         {
-            if (FloorManager.Instance.ForestPowerupsList.Count > 0)
+            if (FloorManager.Instance.ForestPowerupsPool.Count > 0)
             {
-                int rewardIndex = Random.Range(0, FloorManager.Instance.ForestPowerupsList.Count);
-                Reward = FloorManager.Instance.ForestPowerupsList[rewardIndex];
-                FloorManager.Instance.ForestPowerupsList.RemoveAt(rewardIndex);
-                Debug.Log("Powerup Count: " + FloorManager.Instance.ForestPowerupsList.Count);
+                int rewardIndex = Random.Range(0, FloorManager.Instance.ForestPowerupsPool.Count);
+                Reward = FloorManager.Instance.ForestPowerupsPool[rewardIndex];
+                FloorManager.Instance.ForestPowerupsPool.RemoveAt(rewardIndex);
+                Debug.Log("Powerup Count: " + FloorManager.Instance.ForestPowerupsPool.Count);
             }           
         }
     }

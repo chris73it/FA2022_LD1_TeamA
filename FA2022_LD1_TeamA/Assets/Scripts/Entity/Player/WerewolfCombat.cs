@@ -159,6 +159,8 @@ public class WerewolfCombat : Combat
     }
     public override void Attack()
     {
+        Debug.Log("Attack");
+
         AttackRadius = 1f;
         Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + getAttackDistance(), AttackRadius);
         if (Damaged.Length > 0)
@@ -170,6 +172,8 @@ public class WerewolfCombat : Combat
     }
     public void Attack2()
     {
+        Debug.Log("Attack");
+
         AttackRadius = 2f;
         Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius, AttackRadius, AttackRadius));
         if (Damaged.Length > 0)
@@ -181,6 +185,7 @@ public class WerewolfCombat : Combat
     }
     public void Attack3()
     {
+        Debug.Log("Attack");
         AttackRadius = 2f;
         Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + (getAttackDistance() * 1.5f), AttackRadius);
         if (Damaged.Length > 0)

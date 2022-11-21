@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class RoomTransport : MonoBehaviour
 {
     public Room NextRoom; // Should be set on creation of door which is after floor manager and its room have been created
+    public bool NextFloor;
 
     // Method: OnCollisionEnter, transports player to nextRoom
     private void OnCollisionEnter(Collision collision)
@@ -21,8 +22,14 @@ public class RoomTransport : MonoBehaviour
 
             //Debug.Log(NextRoom.RoomName);
            
-            FloorManager.CurrentRoom = NextRoom;
-            
+            if (NextFloor)
+            {
+                FloorManager.CurrentRoom = NextRoom;
+            } else
+            {
+                FloorManager.Instance.ResetFloor(false);
+            }
+
         }
     }
 }
