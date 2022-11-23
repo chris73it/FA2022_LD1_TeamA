@@ -17,7 +17,7 @@ public class FloorManager : MonoBehaviour
 
     public FloorTypes Type = FloorTypes.Base;
 
-    public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
+    public List<GameObject> ForestPowerupsList; 
     public List<GameObject> ForestPowerupsPool; // Does not reset on a game over restart
 
     //public static List<GameObject> PickupsList;
@@ -102,6 +102,8 @@ public class FloorManager : MonoBehaviour
         StartingFloor = new Room(Room.RoomTypes.EmptyRoom);
         BossRoom = new Room(Room.RoomTypes.BossRoom);
         ShopRoom = new Room(Room.RoomTypes.ShopRoom);
+        ShopRoom.IsCleared = true;
+        ShopRoom.ConnectedRooms.Add(new Room());
 
         Room.Height = RoomTreeHeight;
 

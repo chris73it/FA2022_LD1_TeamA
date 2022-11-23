@@ -24,29 +24,36 @@ public class Spawner : MonoBehaviour
 
             if (FloorManager.CurrentRoom.Type == Room.RoomTypes.ShopRoom)
             {
-                if (Type == SpawnerTypes.Powerup)
+                if (Type == SpawnerTypes.Powerup || Type == SpawnerTypes.Pickup)
                 {
-                    price = 15;
-                    o.GetComponent<PowerupParent>().ShopCost.Cost = price;
-                    Debug.Log(o.GetComponent<PowerupParent>().ShopCost.Cost);
-                } else if (Type == SpawnerTypes.Pickup)
-                {
-                    price = 3;
-                    o.GetComponent<PickupLogic>().ShopCost.Cost = price;
-
-                    if (o.GetComponent<PickupLogic>().Type == PickupLogic.PickupTypes.Coin)
+                    if (Type == SpawnerTypes.Powerup)
                     {
-                        o.GetComponent<PickupLogic>().RandomizeType(1,2);
+                        price = 15;
+                        o.GetComponent<PowerupParent>().ShopCost.Cost = price;
+                        Debug.Log(o.GetComponent<PowerupParent>().ShopCost.Cost);
+                    }
+                    else
+                    {
+                        price = 3;
+                        o.GetComponent<PickupLogic>().ShopCost.Cost = price;
+
+                        if (o.GetComponent<PickupLogic>().Type == PickupLogic.PickupTypes.Coin)
+                        {
+                            o.GetComponent<PickupLogic>().RandomizeType(1, 2);
+                        }
+
+                        Debug.Log(o.GetComponent<PickupLogic>().ShopCost.Cost);
                     }
 
-                    Debug.Log(o.GetComponent<PickupLogic>().ShopCost.Cost);
-                }
-
-                GameObject t = Instantiate(GameManager.Instance.TextObject, 
+                    GameObject t = Instantiate(GameManager.Instance.TextObject,
                     o.transform.position + GameManager.Instance.TextObject.transform.position, GameManager.Instance.TextObject.transform.rotation);
 
-                t.transform.parent = o.transform;
-                t.GetComponent<TextMesh>().text = "" + price + "¢";
+                    t.transform.parent = o.transform;
+                    t.GetComponent<TextMesh>().text = "" + price + "¢";
+                } else if (Type == SpawnerTypes.Door)
+                {
+                    o.GetComponent<RoomTransport>().NextFloor = true;
+                }
             }
 
             return o;

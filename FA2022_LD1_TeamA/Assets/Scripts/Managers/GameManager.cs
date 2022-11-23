@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool NextFloor = true;
+
     private GameStates gameState = GameStates.Menu;
     public GameStates GameState
     {
@@ -87,6 +89,7 @@ public class GameManager : MonoBehaviour
 
                 case GameStates.Game:
                     MenuState = MenuStates.None;
+                    NextFloor = true;
                     break;
 
                 case GameStates.Loading:
@@ -112,11 +115,16 @@ public class GameManager : MonoBehaviour
                     // Spawn Player
                     if (ChosenPlayerCharacter != null)
                     {
-                        Destroy(ChosenPlayerCharacter);
+                        if (!NextFloor)
+                        {
+                            Destroy(ChosenPlayerCharacter);
+                        }
+                    } else
+                    {
+                        ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
+                        DontDestroyOnLoad(ChosenPlayerCharacter);
                     }
 
-                    ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
-                    DontDestroyOnLoad(ChosenPlayerCharacter);
 
                     if (PlayerUIControl.Instance == null)
                     {
@@ -158,6 +166,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         MenuState = MenuStates.Main;
+    }
+
+    public static void RestartGame(bool check)
+    {
+        GameManager.Instance.NextFloor = check;
+        GameManager.Instance.GameState = GameManager.GameStates.Loading;
     }
 
     // Update is called once per frame

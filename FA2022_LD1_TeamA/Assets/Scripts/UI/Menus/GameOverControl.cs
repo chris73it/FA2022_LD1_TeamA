@@ -28,7 +28,7 @@ public class GameOverControl : MonoBehaviour
         //Debug.Log(GameManager.Instance);
         if (GameManager.Instance.MenuState == GameManager.MenuStates.GameOver)
         {
-            GameManager.Instance.GameState = GameManager.GameStates.Loading;
+            GameManager.RestartGame(false);
             Destroy(gameObject);
         } 
     }
