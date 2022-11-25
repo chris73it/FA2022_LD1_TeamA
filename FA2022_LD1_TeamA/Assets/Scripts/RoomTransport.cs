@@ -28,7 +28,6 @@ public class RoomTransport : MonoBehaviour
             } else
             {
                 GameManager.RestartGame(true);
-
             }
         }
     }

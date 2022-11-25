@@ -10,7 +10,12 @@ public class BulletCollision : MonoBehaviour
     public int Damage;
     public bool Active = false;
     public float Speed;
+    public string OwnerTag;
 
+    private void Awake()
+    {
+        OwnerTag = Owner.tag;
+    }
     private void Update()
     {
         if (Active)
@@ -30,10 +35,9 @@ public class BulletCollision : MonoBehaviour
     {
         if (Active)
         {
-            if ((other.CompareTag("Enemy") || other.CompareTag("Player")) && !other.CompareTag(Owner.tag))
+            if ((other.CompareTag("Enemy") || other.CompareTag("Player")) && !other.CompareTag(OwnerTag))
             {
                 other.gameObject.GetComponent<Health>().TakeDamage(Damage);
-
                 Destroy(this.gameObject);
             }
         }
