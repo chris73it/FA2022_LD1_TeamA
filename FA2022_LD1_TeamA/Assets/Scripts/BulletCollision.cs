@@ -12,10 +12,6 @@ public class BulletCollision : MonoBehaviour
     public float Speed;
     public string OwnerTag;
 
-    private void Awake()
-    {
-        OwnerTag = Owner.tag;
-    }
     private void Update()
     {
         if (Active)

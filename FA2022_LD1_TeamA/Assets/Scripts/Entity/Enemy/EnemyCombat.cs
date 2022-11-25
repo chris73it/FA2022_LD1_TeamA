@@ -61,6 +61,7 @@ public class EnemyCombat : Combat
         BulletsCreated.Add(bullet);
 
         bullet.GetComponent<BulletCollision>().Owner = gameObject;
+        bullet.GetComponent<BulletCollision>().OwnerTag = gameObject.tag;
         bullet.GetComponent<BulletCollision>().Damage = damage;
         bullet.GetComponent<BulletCollision>().GetDirection(GetPlayerLocation());
         bullet.GetComponent<BulletCollision>().Lifetime = lifeTime;

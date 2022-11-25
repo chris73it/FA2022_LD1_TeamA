@@ -105,8 +105,16 @@ public class Health : MonoBehaviour
             // if no more enemies in room, set room to is cleared
 
             //Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
+            for (int i = 0; i < FloorManager.CurrentRoom.EnemiesSpawned.Count; i++)
+            {
+                if (gameObject == FloorManager.CurrentRoom.EnemiesSpawned[i])
+                {
+                    FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject);
+                    break;
+                }
+            }
 
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 1) // The enemy is counted in the array before its destroyed so the length <= 1
+            if (FloorManager.CurrentRoom.EnemiesSpawned.Count <= 0) // The enemy is counted in the array before its destroyed so the length <= 1
             {
                 FloorManager.CurrentRoom.IsCleared = true;
             }
@@ -115,6 +123,7 @@ public class Health : MonoBehaviour
             {
                 Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);
             }
+
             Destroy(gameObject);
         } else
         {

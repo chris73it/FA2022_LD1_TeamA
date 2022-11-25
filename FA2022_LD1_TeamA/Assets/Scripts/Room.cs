@@ -19,7 +19,7 @@ public class Room
     public List<Room> ConnectedRooms = new List<Room>();
     public int Choices = 2; // might be random later?
     // Door
-    public List<GameObject> PickUps; // PickUps
+    public List<GameObject> EnemiesSpawned = new List<GameObject>();
     private bool _isCleared = false;
     public bool IsCleared 
     {
@@ -190,7 +190,8 @@ public class Room
                 }
             } else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Enemy && !IsCleared)
             {
-                o[i].GetComponent<Spawner>().InstantiateObject();
+                go = o[i].GetComponent<Spawner>().InstantiateObject();
+                EnemiesSpawned.Add(go);
             } else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Powerup && IsCleared)
             {
                 if (Reward != null)
