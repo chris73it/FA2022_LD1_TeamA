@@ -1,5 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Button tabindex="-1" text="Restart" display-tooltip-when-elided="true" name="Restart" />
-    <ui:Button tabindex="-1" text="Main Menu" display-tooltip-when-elided="true" name="MainMenu" />
-    <ui:Button tabindex="-1" text="Quit" display-tooltip-when-elided="true" name="Quit" />
+    <Style src="project://database/Assets/Scripts/UI/Menus/GameOverStyle.uss?fileID=7433441132597879392&amp;guid=9652b7a6e5833d4459620271c4132f15&amp;type=3#GameOverStyle" />
+    <ui:VisualElement name="Background" style="background-image: url(&apos;project://database/Assets/Sprite/UI/GameOver/Spr_GameOverBackground.png?fileID=2800000&amp;guid=e28c1df1fc020274696a8236c44fa196&amp;type=3#Spr_GameOverBackground&apos;); width: 100%; height: 100%; align-items: center; flex-direction: column; justify-content: center; max-width: none; max-height: none; min-width: 480px; min-height: 360px;">
+        <ui:VisualElement name="Banner" style="background-image: url(&apos;project://database/Assets/Sprite/UI/GameOver/Spr_GameOverBanner.png?fileID=2800000&amp;guid=b324f451ca7c85b4eba3e88262a4e6c7&amp;type=3#Spr_GameOverBanner&apos;); width: 100%; height: 100%; align-items: center; flex-direction: column; justify-content: flex-start;">
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="Restart" class="ButtonClass" style="background-image: url(&apos;project://database/Assets/Sprite/UI/GameOver/Spr_ReplayText.png?fileID=2800000&amp;guid=07efcd36eb081b140a4ab28d1eb26876&amp;type=3#Spr_ReplayText&apos;); margin-top: 7%;" />
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="MainMenu" class="ButtonClass" style="background-image: url(&apos;project://database/Assets/Sprite/UI/GameOver/Spr_MainMenuText.png?fileID=2800000&amp;guid=90fee92da506f814696895bf73119c24&amp;type=3#Spr_MainMenuText&apos;); margin-top: 6%;" />
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="Quit" class="ButtonClass" style="background-image: url(&apos;project://database/Assets/Sprite/UI/GameOver/Spr_ExitText.png?fileID=2800000&amp;guid=7147d52523850b543ba3ed512c332a56&amp;type=3#Spr_ExitText&apos;); margin-top: 5%; width: 30%; height: 5%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
