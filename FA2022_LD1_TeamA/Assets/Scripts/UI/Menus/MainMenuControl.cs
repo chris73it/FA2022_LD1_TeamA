@@ -14,6 +14,7 @@ public class MainMenuControl : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         StartGame = root.Q<Button>("StartGame");
+        ExitGame = root.Q<Button>("ExitGame");
 
         StartGame.clicked += StartGamePressed;
         ExitGame.clicked += QuitGamePressed;
