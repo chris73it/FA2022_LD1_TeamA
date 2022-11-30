@@ -24,7 +24,7 @@ public class FloorManager : MonoBehaviour
     //public static List<GameObject> EnemiesList;
 
     public static int RoomsEntered = 0;
-    public static int RoomTreeHeight = 5;
+    public static int RoomTreeHeight = 4;
     public static Room StartingFloor { get; set; }
     private static Room _currentRoom;
     public static Room CurrentRoom 
