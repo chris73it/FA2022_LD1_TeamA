@@ -99,7 +99,7 @@ public class FloorManager : MonoBehaviour
         Type = FloorTypes.Forest; // redundant ^
 
         // Generate Static Rooms
-        StartingFloor = new Room(Room.RoomTypes.EmptyRoom);
+        StartingFloor = new Room(Room.RoomTypes.StartingRoom);
         BossRoom = new Room(Room.RoomTypes.BossRoom);
         ShopRoom = new Room(Room.RoomTypes.ShopRoom);
         ShopRoom.IsCleared = true;

@@ -8,6 +8,7 @@ public class Room
     public Scene SceneRoom { get; set; } // Might just have to be a string
     public enum RoomTypes // Make sure names are same as Scene names
     {
+        StartingRoom,
         EmptyRoom,
         RegularRoom,
         BossRoom,
@@ -108,9 +109,9 @@ public class Room
             depth++;
             for (int i = 0; i < Choices; i++)
             {
-                Room r = new Room(0, 2);
+                Room r = new Room(1, 3);
 
-                if (r.Type == RoomTypes.EmptyRoom)
+                if (r.Type == RoomTypes.EmptyRoom || r.Type == RoomTypes.StartingRoom)
                 {
                     r.IsCleared = true;
                 }
