@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class MainMenuControl : MonoBehaviour
 {
     public Button StartGame;
+    public Button ExitGame;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,7 @@ public class MainMenuControl : MonoBehaviour
         StartGame = root.Q<Button>("StartGame");
 
         StartGame.clicked += StartGamePressed;
+        ExitGame.clicked += QuitGamePressed;
     }
 
     private void StartGamePressed()
@@ -24,5 +26,10 @@ public class MainMenuControl : MonoBehaviour
         {
             GameManager.Instance.GameState = GameManager.GameStates.Loading;
         }
+    }
+
+    private void QuitGamePressed()
+    {
+        Application.Quit();
     }
 }
