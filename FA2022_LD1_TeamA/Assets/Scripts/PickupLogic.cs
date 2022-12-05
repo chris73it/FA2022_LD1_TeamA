@@ -10,6 +10,8 @@ public class PickupLogic : MonoBehaviour
         Health,
         Stamina
     }
+    public Animator Animator;
+
     public PickupTypes Type;
     public int Value = 0;
     public Price ShopCost;
@@ -22,6 +24,10 @@ public class PickupLogic : MonoBehaviour
         ShopCost.Cost = 0;
 
         Value = Random.Range(1, 3);
+
+        Animator = GetComponentInChildren<Animator>();
+
+        Animator.SetInteger("ItemType", (int)Type);
 
         Active = true;
     }
