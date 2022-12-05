@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7124263097405299071, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Size.y
-      value: 0.3
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 9032837629737148738, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Name
@@ -147,6 +147,11 @@ MonoBehaviour:
   Decceleration: 1
   CurrentSpeed: 0
   Controller: {fileID: -8672326560223897442}
+  MaxStamina: 1
+  CurrentStamina: 0
+  StaminaRegenRate: 0.05
+  StaminaRegenTimer: 1
+  StaminaTimer: 0
 --- !u!114 &5321270852538148134
 MonoBehaviour:
   m_ObjectHideFlags: 0

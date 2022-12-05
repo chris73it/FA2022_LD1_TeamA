@@ -8,13 +8,13 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8672326560223897442, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
-      propertyPath: m_SlopeLimit
-      value: 180
-      objectReference: {fileID: 0}
     - target: {fileID: 747497439447639912, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_Name
       value: PlayerWerewolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574789307838603093, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4277214936659684014, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_RootOrder
@@ -134,6 +134,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7395967639279545723, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510391657642510317, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9119468024028264899, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}

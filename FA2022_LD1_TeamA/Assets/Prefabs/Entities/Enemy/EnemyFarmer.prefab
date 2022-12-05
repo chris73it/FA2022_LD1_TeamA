@@ -17,6 +17,10 @@ PrefabInstance:
       value: EnemyFarmer
       objectReference: {fileID: 0}
     - target: {fileID: 1380071801218216239, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380071801218216239, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -152,12 +156,13 @@ MonoBehaviour:
   Bullets:
   - {fileID: 4462732106462573415, guid: b18b2c36053741e49a0cd2c29a6b9323, type: 3}
   BulletsCreated: []
+  Invulnerability: 0
   StunTimer: 0
   StunChance: 0
   Sprite: {fileID: 4256427456155385748}
   DamagedDuration: 0
   DamagedTimer: 0
-  InvulnerabilityDuration: 0
+  InvulnerabilityAlpha: 0
   RetreatRange: -1
   AttackRange: 0
   SightRange: -1

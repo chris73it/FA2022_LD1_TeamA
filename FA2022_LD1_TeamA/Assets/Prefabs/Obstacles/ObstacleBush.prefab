@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5552112117540901507, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 5947129683768060606, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
       propertyPath: m_Name
       value: ObstacleBush

@@ -9,8 +9,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 80586633706144199, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
-      propertyPath: m_Mass
-      value: 5000
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 1272108991518042961, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Sprite
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7124263097405299071, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Size.y
-      value: 3
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7124263097405299071, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Center.y
@@ -115,7 +115,17 @@ MonoBehaviour:
   AttackerTransform: {fileID: 0}
   controller: {fileID: 0}
   Damage: 0
-  AttackCooldown: 0
   IsAttacking: 0
+  AttackDestination: {x: 0, y: 0, z: 0}
+  AttackDirection: {x: 0, y: 0, z: 0}
+  AttackDelay: 0
+  AttackCooldown: 0
+  Bullets: []
+  BulletsCreated: []
+  Invulnerability: 0
   StunTimer: 0
   StunChance: 0
+  Sprite: {fileID: 0}
+  DamagedDuration: 0
+  DamagedTimer: 0
+  InvulnerabilityAlpha: 0

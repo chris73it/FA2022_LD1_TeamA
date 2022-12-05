@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyLumberjack
       objectReference: {fileID: 0}
+    - target: {fileID: 1380071801218216239, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: EntityCombat
       value: 
@@ -140,12 +144,13 @@ MonoBehaviour:
   Bullets:
   - {fileID: 8910573441802229114, guid: 29e7e8ee0bba79d45857c09300796b36, type: 3}
   BulletsCreated: []
+  Invulnerability: 0
   StunTimer: 0
   StunChance: 0
   Sprite: {fileID: 7952211918484576928}
   DamagedDuration: 0
   DamagedTimer: 0
-  InvulnerabilityDuration: 0
+  InvulnerabilityAlpha: 0
   RetreatRange: -1
   AttackRange: 5
   SightRange: -1
