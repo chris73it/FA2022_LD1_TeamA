@@ -26,11 +26,11 @@ public class WerewolfAnimation : MonoBehaviour
                     break;
 
                 case (AnimationStates.WalkLeft):
-                    GameManager.ChosenPlayerCharacter.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+                    GameManager.ChosenPlayerCharacter.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
                     break;
 
                 case (AnimationStates.WalkRight):
-                    GameManager.ChosenPlayerCharacter.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+                    GameManager.ChosenPlayerCharacter.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
                     break;
                
                 default:
