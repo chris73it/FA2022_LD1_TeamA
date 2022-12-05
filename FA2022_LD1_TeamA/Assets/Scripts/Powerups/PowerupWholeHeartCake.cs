@@ -8,6 +8,14 @@ public class PowerupWholeHeartCake : PowerupParent
     {
         collision.gameObject.GetComponent<Health>().MaxHealth += 1;
         collision.gameObject.GetComponent<Health>().Heal(1);
-        Debug.Log("Your max health increased by 1");
+        //Debug.Log("Your max health increased by 1");
+    }
+
+    public override void Instantiate()
+    {
+        base.Instantiate();
+
+        ItemName = "Whole Heart Cake";
+        ItemDescription = "+1 to Max Health";
     }
 }

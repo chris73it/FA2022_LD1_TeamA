@@ -17,8 +17,8 @@ public class FloorManager : MonoBehaviour
 
     public FloorTypes Type = FloorTypes.Base;
 
-    public List<GameObject> ForestPowerupsList; 
-    public List<GameObject> ForestPowerupsPool; // Does not reset on a game over restart
+    public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
+    public List<GameObject> ForestPowerupsPool; 
 
     //public static List<GameObject> PickupsList;
     //public static List<GameObject> EnemiesList;
@@ -83,7 +83,7 @@ public class FloorManager : MonoBehaviour
         Debug.Log("Resetting...");
         // Reset Room Entered Count
         RoomsEntered = 0;
-        ForestPowerupsPool = ForestPowerupsList;
+        ForestPowerupsPool = new List<GameObject>(ForestPowerupsList);
 
         // Switch to next Floor Type
         /*

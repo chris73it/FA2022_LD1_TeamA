@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorManagerPrefab: {fileID: 8000454916787698360, guid: d37f71fdc40921344b3b04db5c3e5a51, type: 3}
   PlayerUIPrefab: {fileID: 6744462993505331309, guid: 2005b6c8e826c0340b345e0e0c06fe6c, type: 3}
+  PowerupUIPrefab: {fileID: 6490431705279465242, guid: 107e78165a210344b91fe7984efd19b1, type: 3}
   PlayerCharactersPrefab:
   - {fileID: 7756589616967218836, guid: aaf506e1d797af2489ba8e2d1386297b, type: 3}
   Menus:
@@ -53,3 +54,4 @@ MonoBehaviour:
   - {fileID: 9005734555440551025, guid: 42d5486fd2eed5a42a9ac6e16479b431, type: 3}
   - {fileID: 1279421267554172417, guid: 3419d3287e7c5fb4d91a2e79bee4a43e, type: 3}
   TextObject: {fileID: 1500405195388231537, guid: 5f9730c4a68fed845beb18e7c3add1a9, type: 3}
+  NextFloor: 1

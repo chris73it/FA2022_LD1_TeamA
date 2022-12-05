@@ -7,7 +7,15 @@ public class PowerupMetalClaws : PowerupParent
     public override void ActivatePowerup(Collision collision)
     {
         collision.gameObject.GetComponent<Combat>().Damage += 1;
-        Debug.Log("Damage is now " + collision.gameObject.GetComponent<Combat>().Damage);
+        //Debug.Log("Damage is now " + collision.gameObject.GetComponent<Combat>().Damage);
+    }
+
+    public override void Instantiate()
+    {
+        base.Instantiate();
+
+        ItemName = "Metal Claws";
+        ItemDescription = "+1 to Damage";
     }
 }
 

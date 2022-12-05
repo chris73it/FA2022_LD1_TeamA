@@ -9,8 +9,16 @@ public class PowerupElectricClaws : PowerupParent
         collision.gameObject.GetComponent<Combat>().StunChance = 0.9f;
         collision.gameObject.GetComponent<Combat>().StunTimer = 1f;
 
-        Debug.Log("You now have a stun!");
+        //Debug.Log("You now have a stun!");
         /// deal with attackers using stun
         /// deal with stun effects
+    }
+
+    public override void Instantiate()
+    {
+        base.Instantiate();
+
+        ItemName = "Electric Claws";
+        ItemDescription = "Attacks may stun enemies";
     }
 }

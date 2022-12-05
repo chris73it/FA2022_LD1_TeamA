@@ -12,6 +12,14 @@ public override void ActivatePowerup(Collision collision)
         collision.gameObject.GetComponent<Combat>().DoT.TotalDuration = 3f;
         collision.gameObject.GetComponent<Combat>().DoT.Timer = 0f;
 
-        Debug.Log("You now have Poison DoT");
+        //Debug.Log("You now have Poison DoT");
+    }
+
+    public override void Instantiate()
+    {
+        base.Instantiate();
+
+        ItemName = "Poison Claws";
+        ItemDescription = "Attacks deal damage over time!";
     }
 }

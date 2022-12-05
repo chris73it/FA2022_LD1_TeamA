@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject FloorManagerPrefab;
     public GameObject PlayerUIPrefab;
+    public GameObject PowerupUIPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
     public List<GameObject> Menus;
     public GameObject TextObject;
