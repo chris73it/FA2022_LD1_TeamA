@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Menus/Main%20Menu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=920da793f27f1d24f9eb30a8a24c20ae&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Background" style="width: 100%; height: 100%; background-color: rgba(58, 32, 11, 0); flex-direction: column; align-items: center; justify-content: center;">
+        <ui:VisualElement name="MenuBackdrop" style="background-image: url(&apos;project://database/Assets/Sprite/UI/MainMenu/Spr_MainMenuBase.png?fileID=2800000&amp;guid=1f8f8ea98d1bfe3469a9681e9137bd2b&amp;type=3#Spr_MainMenuBase&apos;); width: 80%; height: 80%; align-items: center; flex-direction: column; justify-content: center; margin-right: 0; margin-left: 2%;">
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="StartGame" enable-rich-text="false" class="Buttons" style="margin-top: 0; margin-bottom: 1%; width: 10%; height: 10%;" />
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="Settings" enable-rich-text="false" class="Buttons" style="margin-top: 0; margin-bottom: 1%; background-image: url(&apos;project://database/Assets/Sprite/UI/MainMenu/Spr_MainMenuSettings.png?fileID=2800000&amp;guid=3ff54cb6e635001478443527fde3e1a9&amp;type=3#Spr_MainMenuSettings&apos;); width: 10%; height: 10%;" />
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="ExitGame" class="Buttons" style="background-image: url(&apos;project://database/Assets/Sprite/UI/MainMenu/Spr_ExitGameButton.png?fileID=2800000&amp;guid=a0c5a584293dd1d48b22a00502aa1163&amp;type=3#Spr_ExitGameButton&apos;); width: 10%; height: 11%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

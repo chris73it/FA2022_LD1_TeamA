@@ -37,7 +37,7 @@ public class PauseMenuControl : MonoBehaviour
         if (GameManager.Instance.MenuState == GameManager.MenuStates.Pause)
         {
             unpause();
-            GameManager.Instance.GameState = GameManager.GameStates.Loading;
+            GameManager.RestartGame(false);
         }
     }
 
@@ -45,8 +45,9 @@ public class PauseMenuControl : MonoBehaviour
     {
         if (GameManager.Instance.MenuState == GameManager.MenuStates.Pause)
         {
-       
+            GameManager.Instance.MenuState = GameManager.MenuStates.Settings;
         }
+        Destroy(gameObject);
     }
 
     private void quitButtonPressed()

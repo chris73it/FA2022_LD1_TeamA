@@ -53,5 +53,7 @@ MonoBehaviour:
   - {fileID: 8592773869946118184, guid: 13653b1ba1f306c4880911784607c190, type: 3}
   - {fileID: 9005734555440551025, guid: 42d5486fd2eed5a42a9ac6e16479b431, type: 3}
   - {fileID: 1279421267554172417, guid: 3419d3287e7c5fb4d91a2e79bee4a43e, type: 3}
+  - {fileID: 1650061152194165250, guid: 3554b4cae1ac1e74d856d48979110b11, type: 3}
   TextObject: {fileID: 1500405195388231537, guid: 5f9730c4a68fed845beb18e7c3add1a9, type: 3}
-  NextFloor: 1
+  MusicVolume: 8
+  SoundVolume: 8

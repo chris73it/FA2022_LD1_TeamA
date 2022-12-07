@@ -26,8 +26,10 @@ public class GameManager : MonoBehaviour
         None,
         Main,
         GameOver,
-        Pause
+        Pause,
+        Settings
     }
+    public MenuStates PreivousMenuState;
     private MenuStates menuState = MenuStates.Main;
     public MenuStates MenuState
     {
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         set
         {
-            var previousState = menuState;
+            PreivousMenuState = menuState;
             menuState = value;
             switch (menuState)
             {
@@ -58,6 +60,12 @@ public class GameManager : MonoBehaviour
 
                 case (MenuStates.Pause):
                     Instantiate(Menus[2]);
+                    Time.timeScale = 0;
+                    break;
+
+                case (MenuStates.Settings):
+                    GameObject o = Instantiate(Menus[3]);
+                    o.GetComponent<SettingsMenuControl>().PreviousMenu = (int)PreivousMenuState;
                     Time.timeScale = 0;
                     break;
 
@@ -118,6 +126,8 @@ public class GameManager : MonoBehaviour
                         if (!FloorManager.Instance.NextFloor)
                         {
                             Destroy(ChosenPlayerCharacter);
+                            ChosenPlayerCharacter = Instantiate(PlayerCharactersPrefab[0], new Vector3(0, 0, 0), Quaternion.identity);
+                            DontDestroyOnLoad(ChosenPlayerCharacter);
                         }
                     } else
                     {
@@ -150,6 +160,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int MusicVolume = 8;
+    public int SoundVolume = 8;
     private void Awake()
     {
         // Intialize instance if null
