@@ -1,7 +1,7 @@
 .HealthSprite {
     width: 32px;
     height: 32px;
-    background-image: url('project://database/Assets/Sprite/Spr_Heart.png?fileID=2800000&guid=2e9b4c3762889844f934c8a1059c5f53&type=3#Spr_Heart');
+    background-image: url('project://database/Assets/Sprite/Spr_Heart.png?fileID=21300000&guid=8947ba6ad0bbc6745b956d55f9c15c4c&type=3#Spr_Heart');
     margin-right: 3px;
 }
 
@@ -17,6 +17,11 @@
     background-color: rgb(8, 53, 13);
     margin: 0;
     -unity-background-image-tint-color: rgb(2, 255, 0);
+    margin-left: 12px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
 }
 
 .unity-progress-bar__progress {
