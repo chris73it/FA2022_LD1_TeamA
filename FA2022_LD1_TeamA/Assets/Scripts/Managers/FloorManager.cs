@@ -16,6 +16,7 @@ public class FloorManager : MonoBehaviour
     }
 
     public FloorTypes Type = FloorTypes.Base;
+    public bool NextFloor = false;
 
     public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
     public List<GameObject> ForestPowerupsPool; 
@@ -24,7 +25,8 @@ public class FloorManager : MonoBehaviour
     //public static List<GameObject> EnemiesList;
 
     public static int RoomsEntered = 0;
-    public static int RoomTreeHeight = 4;
+    public static int BaseRoomTreeHeight = 4;
+    public static int RoomTreeHeight = BaseRoomTreeHeight;
     public static Room StartingFloor { get; set; }
     private static Room _currentRoom;
     public static Room CurrentRoom 
@@ -78,7 +80,7 @@ public class FloorManager : MonoBehaviour
         */
     }
     // Methods
-    public void ResetFloor(bool newFloor)
+    public void ResetFloor()
     {
         Debug.Log("Resetting...");
         // Reset Room Entered Count
@@ -97,6 +99,14 @@ public class FloorManager : MonoBehaviour
         */
 
         Type = FloorTypes.Forest; // redundant ^
+        if (NextFloor)
+        {
+            Debug.Log("RoomTreeHeight++");
+            RoomTreeHeight++;
+        } else
+        {
+            RoomTreeHeight = BaseRoomTreeHeight;
+        }
 
         // Generate Static Rooms
         StartingFloor = new Room(Room.RoomTypes.StartingRoom);

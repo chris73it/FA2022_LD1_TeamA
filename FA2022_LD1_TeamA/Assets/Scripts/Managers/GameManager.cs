@@ -67,8 +67,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool NextFloor = true;
-
     private GameStates gameState = GameStates.Menu;
     public GameStates GameState
     {
@@ -85,12 +83,13 @@ public class GameManager : MonoBehaviour
                 case GameStates.Menu:              
                     Destroy(PlayerUIControl.Instance.gameObject); // Destroying all of these should be in a separate method
                     Destroy(gameObject);
+                    FloorManager.Instance.NextFloor = false;
                     SceneManager.LoadScene("MainMenu");
                     break;
 
                 case GameStates.Game:
                     MenuState = MenuStates.None;
-                    NextFloor = true;
+                    Debug.Log("Height: " + FloorManager.RoomTreeHeight);
                     break;
 
                 case GameStates.Loading:
@@ -104,7 +103,7 @@ public class GameManager : MonoBehaviour
                     }
 
                     //Generate Floor
-                    FloorManager.Instance.ResetFloor(false); // false should be replaced by a variable that is properly set after death or clearing a floor
+                    FloorManager.Instance.ResetFloor(); // false should be replaced by a variable that is properly set after death or clearing a floor
 
                     // Load Floor
                     //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), FloorManager.StartingFloor.Type);
@@ -116,7 +115,7 @@ public class GameManager : MonoBehaviour
                     // Spawn Player
                     if (ChosenPlayerCharacter != null)
                     {
-                        if (!NextFloor)
+                        if (!FloorManager.Instance.NextFloor)
                         {
                             Destroy(ChosenPlayerCharacter);
                         }
@@ -171,7 +170,7 @@ public class GameManager : MonoBehaviour
 
     public static void RestartGame(bool check)
     {
-        GameManager.Instance.NextFloor = check;
+        FloorManager.Instance.NextFloor = check;
         GameManager.Instance.GameState = GameManager.GameStates.Loading;
     }
 
