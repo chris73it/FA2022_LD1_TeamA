@@ -212,7 +212,7 @@ public class Room
 
     private void setReward()
     {
-        if (Type != RoomTypes.EmptyRoom)
+        if (Type != RoomTypes.EmptyRoom || Type != RoomTypes.StartingRoom)
         {
             if (FloorManager.Instance.ForestPowerupsPool.Count > 0)
             {
