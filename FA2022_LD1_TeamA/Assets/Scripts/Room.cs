@@ -132,8 +132,6 @@ public class Room
         //_loadingRoom = true;
         //SceneManager.LoadScene(RoomName, LoadSceneMode.Single);
 
-        //Debug.Log(IsCleared);
-        
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(RoomName));
         //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
 
@@ -156,10 +154,14 @@ public class Room
             }
         }
 
+        Debug.Log("IsCleared: " + IsCleared);
+
+        /*
         foreach (Room r in ConnectedRooms)
         {
             Debug.Log(r.RoomName);
         }
+        */
     }
 
     private void spawnRoomItems()
