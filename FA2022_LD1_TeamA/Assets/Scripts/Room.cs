@@ -97,6 +97,7 @@ public class Room
         {
             Choices = 1;
             ConnectedRooms.Add(FloorManager.ShopRoom);
+            // setReward is never called for ShopRoom
         }
         else if (depth == Height - 1)
         {
@@ -154,7 +155,7 @@ public class Room
             }
         }
 
-        Debug.Log("IsCleared: " + IsCleared);
+        //Debug.Log("IsCleared: " + IsCleared);
 
         /*
         foreach (Room r in ConnectedRooms)
@@ -201,6 +202,9 @@ public class Room
                 {
                     o[i].GetComponent<Spawner>().ToSpawn = Reward;
                     o[i].GetComponent<Spawner>().InstantiateObject();
+                } else
+                {
+                    Debug.Log("No reward");
                 }
             }
             else if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Enemy && o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Powerup) // && not Reward? then u can deal with the reward stuff in another if
@@ -221,7 +225,7 @@ public class Room
                 int rewardIndex = Random.Range(0, FloorManager.Instance.ForestPowerupsPool.Count);
                 Reward = FloorManager.Instance.ForestPowerupsPool[rewardIndex];
                 FloorManager.Instance.ForestPowerupsPool.RemoveAt(rewardIndex);
-                Debug.Log("Powerup Count: " + FloorManager.Instance.ForestPowerupsPool.Count);
+                //Debug.Log("Powerup Count: " + FloorManager.Instance.ForestPowerupsPool.Count);
             }           
         }
     }

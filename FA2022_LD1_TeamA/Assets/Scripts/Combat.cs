@@ -35,6 +35,16 @@ public class Combat : MonoBehaviour
         public float TotalDuration;
         public float TimeToDamage;
         public float Timer;
+        public bool Intialized;
+
+        public DamageOverTime(int d, float td, float ttd, float t)
+        {
+            Damage = d;
+            TotalDuration = td;
+            TimeToDamage = ttd;
+            Timer = t;
+            Intialized = true;
+        }
     }
 
     public DamageOverTime DoT;
@@ -106,7 +116,13 @@ public class Combat : MonoBehaviour
 
     public void OnDamageAnimation()
     {
-        Sprite.color = new Color(1, 0, 0, Sprite.color.a);
+        if (GetComponent<Health>().IsDoT)
+        {
+            Sprite.color = new Color(0, 1, 0, Sprite.color.a);
+        } else
+        {
+            Sprite.color = new Color(1, 0, 0, Sprite.color.a);
+        }
         DamagedTimer = DamagedDuration;
     }
 
