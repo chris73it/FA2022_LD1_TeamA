@@ -128,7 +128,7 @@ public class WerewolfCombat : Combat
                         if (Random.Range(0f, 1f) >= StunChance)
                         {
                             Damaged[i].gameObject.GetComponent<Combat>().IsStunned = StunTimer;
-                            Debug.Log("Stunned!");
+                            //Debug.Log("Stunned!");
                         }
                     }
                 }

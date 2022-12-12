@@ -17,6 +17,7 @@ public class FloorManager : MonoBehaviour
 
     public FloorTypes Type = FloorTypes.Base;
     public bool NextFloor = false;
+    public static int FloorsCompleted = 0;
 
     public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
     public List<GameObject> ForestPowerupsPool; 
@@ -103,8 +104,10 @@ public class FloorManager : MonoBehaviour
         {
             Debug.Log("RoomTreeHeight++");
             RoomTreeHeight++;
+            FloorsCompleted++;
         } else
         {
+            FloorsCompleted = 0;
             RoomTreeHeight = BaseRoomTreeHeight;
         }
 
