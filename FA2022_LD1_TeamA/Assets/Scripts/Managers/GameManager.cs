@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Menus;
     public GameObject TextObject;
     public static GameObject ChosenPlayerCharacter;
+    public GameObject GameWonText;
+    public static int GameWinCondition = 0;
     public enum GameStates
     {
         Menu,
@@ -107,7 +109,7 @@ public class GameManager : MonoBehaviour
                     {
                         GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                         DontDestroyOnLoad(FloorManagerObject);
-                        Debug.Log("Check");
+                        //Debug.Log("Check");
                     }
 
                     //Generate Floor
@@ -184,6 +186,19 @@ public class GameManager : MonoBehaviour
     {
         FloorManager.Instance.NextFloor = check;
         GameManager.Instance.GameState = GameManager.GameStates.Loading;
+    }
+
+    public void WinGame()
+    {
+        if (FloorManager.FloorsCompleted >= GameWinCondition)
+        {
+            //Debug.Log(GameManager.Instance);
+            
+            if (GameObject.Find("GameWonText") == null) {
+                GameObject o = Instantiate(GameWonText);
+                o.transform.position = new Vector3(0f, 6f, 0f);
+            }
+        }
     }
 
     // Update is called once per frame

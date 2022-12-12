@@ -27,7 +27,13 @@ public class RoomTransport : MonoBehaviour
                 FloorManager.CurrentRoom = NextRoom;
             } else
             {
-                GameManager.RestartGame(true);
+                if (FloorManager.FloorsCompleted >= GameManager.GameWinCondition)
+                {
+                    GameManager.Instance.WinGame();
+                } else
+                {
+                    GameManager.RestartGame(true);
+                }
             }
         }
     }

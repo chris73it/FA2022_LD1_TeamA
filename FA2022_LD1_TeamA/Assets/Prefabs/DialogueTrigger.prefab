@@ -61,3 +61,5 @@ MonoBehaviour:
   dialogue:
     name: 
     sentences: []
+  DialogBox: {fileID: 7499943407131428199, guid: f5066688aca6c794898a5c40de5e29ce, type: 3}
+  Manager: {fileID: 5005511831211116163, guid: d2d939eceb8b7bf4c96d8ebc83b81a07, type: 3}

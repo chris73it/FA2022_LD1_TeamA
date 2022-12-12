@@ -12,7 +12,7 @@ public class Room
         EmptyRoom,
         RegularRoom,
         BossRoom,
-        ShopRoom, 
+        ShopRoom,
     }
     public RoomTypes Type { get; set; }
     public int Depth;
