@@ -20,11 +20,12 @@ public class Health : MonoBehaviour
     }
     private void Update() 
     {
+        /*
         if (Input.GetKeyDown("k") && gameObject.tag == "Player") //Debug
         { 
             Die();
         }
-
+        */
 
         if (!IsDead)
         {
