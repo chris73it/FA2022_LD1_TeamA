@@ -11,6 +11,9 @@ public class Room
         StartingRoom,
         EmptyRoom,
         RegularRoom,
+        RegularRoom1,
+        RegularRoom2,
+        RegularRoom3,
         BossRoom,
         ShopRoom,
     }
@@ -97,6 +100,7 @@ public class Room
         {
             Choices = 1;
             ConnectedRooms.Add(FloorManager.ShopRoom);
+            FloorManager.ShopRoom.setReward();
             // setReward is never called for ShopRoom
         }
         else if (depth == Height - 1)
@@ -110,7 +114,7 @@ public class Room
             depth++;
             for (int i = 0; i < Choices; i++)
             {
-                Room r = new Room(1, 3);
+                Room r = new Room(1, 6);
 
                 if (r.Type == RoomTypes.EmptyRoom || r.Type == RoomTypes.StartingRoom)
                 {
