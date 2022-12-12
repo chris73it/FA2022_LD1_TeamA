@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject TextObject;
     public static GameObject ChosenPlayerCharacter;
     public GameObject GameWonText;
-    public static int GameWinCondition = 0;
+    public bool GameWon = false;
+    public static int GameWinCondition = 3;
     public enum GameStates
     {
         Menu,
@@ -194,7 +195,8 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log(GameManager.Instance);
             
-            if (GameObject.Find("GameWonText") == null) {
+            if (!GameWon) {
+                GameWon = true;
                 GameObject o = Instantiate(GameWonText);
                 o.transform.position = new Vector3(0f, 6f, 0f);
             }

@@ -54,6 +54,7 @@ public class WerewolfCombat : Combat
                 if (Input.GetButtonDown("Fire2") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
                 {
                     GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().UseStamina(0.25f);
+                    SetGeneralInvulnerability(GetComponent<Health>().HitInvulnerability);
                     ChargeAttack();
                 }
             }

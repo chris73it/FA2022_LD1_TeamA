@@ -17,9 +17,17 @@ PrefabInstance:
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: MaxHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: EntityCombat
       value: 
       objectReference: {fileID: 6139439650748844700}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: CurrentHealth
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_RootOrder
       value: 0

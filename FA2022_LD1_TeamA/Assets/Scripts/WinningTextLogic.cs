@@ -20,6 +20,7 @@ public class WinningTextLogic : MonoBehaviour
         {
             Destroy(gameObject);
             GameManager.Instance.GameState = GameManager.GameStates.Menu;
+            GameManager.Instance.GameWon = false;
         }
     }
 }

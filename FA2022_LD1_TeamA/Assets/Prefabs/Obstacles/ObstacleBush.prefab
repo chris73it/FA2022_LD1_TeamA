@@ -20,6 +20,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4500247646911193261, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 44b507c036a1e8f40b8b53ba499c9b3d, type: 3}
+    - target: {fileID: 4500247646911193261, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500247646911193261, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500247646911193261, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5552112117540901507, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
       propertyPath: m_Size.y
       value: 5
