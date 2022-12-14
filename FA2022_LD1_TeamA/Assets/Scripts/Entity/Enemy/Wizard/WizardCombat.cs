@@ -22,6 +22,7 @@ public class WizardCombat : EnemyCombat
         AttackDestination = Player.transform.position;
         AttackDelay = 0.5f;
         IsAttacking = true;
+        SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
     }
 
     private void Update()

@@ -17,6 +17,8 @@ public class EnemyCombat : Combat
 
     public virtual void Initialize()
     {
+        SoundSource = GetComponent<AudioSource>();
+
         if (Player == null)
         {
             Player = GameManager.ChosenPlayerCharacter;

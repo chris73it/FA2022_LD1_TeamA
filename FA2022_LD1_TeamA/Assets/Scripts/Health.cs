@@ -14,8 +14,13 @@ public class Health : MonoBehaviour
     public bool IsDoT = false;
     public Combat.DamageOverTime DoT;
 
+    // Audio
+    public AudioSource SoundSource;
+    public List<AudioClip> SoundClips;
+
     private void Awake()
     {
+        SoundSource = GetComponent<AudioSource>();
         CurrentHealth = MaxHealth;
     }
     private void Update() 
@@ -70,11 +75,18 @@ public class Health : MonoBehaviour
         if (EntityCombat.Invulnerability <= 0 || IsDead) // Obstacle doesn't need a Combat
         {
             CurrentHealth -= amount;
+            
 
             if (gameObject.tag == "Player")
             {
+                SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
                 EntityCombat.SetGeneralInvulnerability(HitInvulnerability);
                 PlayerUIControl.Instance.RemoveHeart(amount);
+            }
+
+            if (gameObject.tag == "Enemy")
+            {
+                SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
             }
 
             EntityCombat.OnDamageAnimation();
@@ -94,11 +106,12 @@ public class Health : MonoBehaviour
     public void Die()
     {
         IsDead = true;
+        
         if (gameObject.tag == "Player")
         {
+            AudioSource.PlayClipAtPoint(SoundClips[1], transform.position, GameManager.Instance.SoundVolume / 10f);
             Destroy(gameObject);
             GameManager.Instance.GameState = GameManager.GameStates.GameOver;
-
         }
         else if (gameObject.tag == "Enemy")
         {
@@ -111,6 +124,8 @@ public class Health : MonoBehaviour
                 if (gameObject == FloorManager.CurrentRoom.EnemiesSpawned[i])
                 {
                     FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject);
+                    Debug.Log("Enemies Spawned:" + FloorManager.CurrentRoom.EnemiesSpawned.Count);
+
                     break;
                 }
             }
@@ -132,6 +147,7 @@ public class Health : MonoBehaviour
             {
                 Instantiate(Pickup, gameObject.transform.position, gameObject.transform.rotation);
             }
+            AudioSource.PlayClipAtPoint(SoundClips[0], transform.position, GameManager.Instance.SoundVolume / 10f);
             Destroy(gameObject);
         }
     }

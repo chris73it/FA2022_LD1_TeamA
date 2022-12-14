@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: CurrentHealth
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: SoundClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: SoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 93e21c4f8a952664c925aca865b1c430, type: 3}
+    - target: {fileID: 4561700919532136021, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
+      propertyPath: SoundClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 259b0e417d550bf4390ae6a232d5b19f, type: 3}
     - target: {fileID: 5157453324569769179, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -225,6 +237,10 @@ MonoBehaviour:
   DamagedDuration: 0
   DamagedTimer: 0
   InvulnerabilityAlpha: 0
+  SoundSource: {fileID: 0}
+  SoundClips:
+  - {fileID: 8300000, guid: adf17681b9d46f64094d473e82c56857, type: 3}
+  - {fileID: 8300000, guid: c65162623b655884b80af2e8d058ee22, type: 3}
   AttackDistance: 64
   AttackRadius: 1
   offsetScaleX: 0

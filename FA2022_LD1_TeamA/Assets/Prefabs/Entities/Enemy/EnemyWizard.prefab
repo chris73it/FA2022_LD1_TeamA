@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: EntityCombat
       value: 
       objectReference: {fileID: -7299276855815621208}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: SoundClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: SoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b6795289adffda46834e6a99846684f, type: 3}
     - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -97,12 +105,16 @@ MonoBehaviour:
   Bullets:
   - {fileID: 4462732106462573415, guid: b18b2c36053741e49a0cd2c29a6b9323, type: 3}
   BulletsCreated: []
+  Invulnerability: 0
   StunTimer: 0
   StunChance: 0
   Sprite: {fileID: 2608409963749955617}
   DamagedDuration: 0
   DamagedTimer: 0
-  InvulnerabilityDuration: 0
+  InvulnerabilityAlpha: 0
+  SoundSource: {fileID: 0}
+  SoundClips:
+  - {fileID: 8300000, guid: d691c73d1aaa7214eae2362683739bf4, type: 3}
   RetreatRange: -1
   AttackRange: -1
   SightRange: -1

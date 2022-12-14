@@ -56,8 +56,16 @@ public class Combat : MonoBehaviour
     public float InvulnerabilityAlpha;
 
     // Check if overriden by derived classes, needs Invulnerability section    
+
+    // Audio
+    public AudioSource SoundSource;
+    public List<AudioClip> SoundClips;
+
     private void Awake()
     {
+        SoundSource = GetComponent<AudioSource>();
+       
+
         AnimationInitialization();
     }
     private void Update()

@@ -141,6 +141,7 @@ public class Room
         //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
 
         //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
+        EnemiesSpawned.Clear();
 
         spawnRoomItems();
 

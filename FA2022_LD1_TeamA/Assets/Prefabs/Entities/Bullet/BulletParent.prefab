@@ -108,6 +108,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8057640166218668748, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9032837629737148738, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Name
       value: BulletParent
@@ -140,6 +144,9 @@ MonoBehaviour:
   Active: 0
   Speed: 4
   OwnerTag: 
+  SoundSource: {fileID: 0}
+  SoundClips:
+  - {fileID: 8300000, guid: 85af28b2770cd714fb3a02c722b69386, type: 3}
 --- !u!1 &7454687755454763756 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2864717930958471369, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}

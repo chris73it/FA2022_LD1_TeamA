@@ -19,6 +19,9 @@ public class SettingsMenuControl : MonoBehaviour
         Sound = root.Q<SliderInt>("Sound");
         Exit = root.Q<Button>("ExitGame");
 
+        Music.value = GameManager.Instance.MusicVolume;
+        Sound.value = GameManager.Instance.SoundVolume;
+
         Music.RegisterValueChangedCallback(v =>
         {
             GameManager.Instance.MusicVolume = v.newValue;

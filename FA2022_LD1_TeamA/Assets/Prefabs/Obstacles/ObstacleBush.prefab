@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4340493412907074773, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: SoundClips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4340493412907074773, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: SoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8177f60a586ec5d4da4d89491efc5498, type: 3}
     - target: {fileID: 2253245108604647693, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -37,8 +45,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5552112117540901507, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1073364
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552112117540901507, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
       propertyPath: m_Size.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552112117540901507, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Size.z
+      value: 1.132382
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552112117540901507, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Center.x
+      value: 0.043472707
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552112117540901507, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: m_Center.z
+      value: -0.010342419
       objectReference: {fileID: 0}
     - target: {fileID: 5947129683768060606, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
       propertyPath: m_Name
@@ -92,6 +116,14 @@ PrefabInstance:
       propertyPath: EntityCombat
       value: 
       objectReference: {fileID: 4415738883772359442}
+    - target: {fileID: 7465205478724627331, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: SoundClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465205478724627331, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}
+      propertyPath: SoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8177f60a586ec5d4da4d89491efc5498, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c62a5f02d91fae5479926968ccdb84f4, type: 3}

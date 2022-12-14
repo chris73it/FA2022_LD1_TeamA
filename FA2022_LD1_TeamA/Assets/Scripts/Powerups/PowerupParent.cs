@@ -8,8 +8,14 @@ public class PowerupParent : MonoBehaviour
     public string ItemName;
     public string ItemDescription;
 
+    // Audio
+    public AudioSource SoundSource;
+    public List<AudioClip> SoundClips;
+
     private void Awake()
     {
+        SoundSource = GetComponent<AudioSource>();
+
         Instantiate();
     }
 
@@ -21,6 +27,7 @@ public class PowerupParent : MonoBehaviour
             ActivatePowerup(collision);
             GameObject g = Instantiate(GameManager.Instance.PowerupUIPrefab);
             g.GetComponent<PowerupUIControl>().Activate(ItemName, ItemDescription);
+            AudioSource.PlayClipAtPoint(SoundClips[0], transform.position, GameManager.Instance.SoundVolume / 10f);
             Destroy(gameObject);
         }   
     }

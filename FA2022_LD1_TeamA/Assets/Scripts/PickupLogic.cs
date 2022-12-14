@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PickupLogic : MonoBehaviour
 {
+    // Audio
+    public AudioSource SoundSource;
+    public List<AudioClip> SoundClips;
+
     public enum PickupTypes
     {
         Coin,
@@ -19,10 +23,19 @@ public class PickupLogic : MonoBehaviour
 
     private void Awake()
     {
-        RandomizeType();
+        if (FloorManager.CurrentRoom.Type == Room.RoomTypes.ShopRoom)
+        {
+            RandomizeType(1);
+        }
+        else
+        {
+            RandomizeType();
+        }
+
+        SoundSource = GetComponent<AudioSource>();
 
         ShopCost.Cost = 0;
-
+        
         Value = Random.Range(1, 3);
 
         Animator = GetComponentInChildren<Animator>();
@@ -58,14 +71,17 @@ public class PickupLogic : MonoBehaviour
                 switch (Type)
                 {
                     case PickupTypes.Coin:
+                        AudioSource.PlayClipAtPoint(SoundClips[0], transform.position, GameManager.Instance.SoundVolume / 10f);
                         collision.gameObject.GetComponent<Wealth>().Deposit(Value);
                         break;
 
                     case PickupTypes.Health:
+                        AudioSource.PlayClipAtPoint(SoundClips[1], transform.position, GameManager.Instance.SoundVolume / 10f);
                         collision.gameObject.GetComponent<Health>().Heal(Value);
                         break;
 
                     case PickupTypes.Stamina:
+                        AudioSource.PlayClipAtPoint(SoundClips[2], transform.position, GameManager.Instance.SoundVolume / 10f);
                         collision.gameObject.GetComponent<PlayerMovement>().RestoreStamina(1f);
                         break;
 

@@ -167,7 +167,7 @@ public class WerewolfCombat : Combat
     public override void Attack()
     {
         Debug.Log("Attack");
-
+        SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
         AttackRadius = 1f;
         Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + getAttackDistance(), AttackRadius);
         if (Damaged.Length > 0)
@@ -180,6 +180,7 @@ public class WerewolfCombat : Combat
     public void Attack2()
     {
         Debug.Log("Attack");
+        SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
 
         AttackRadius = 2f;
         Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position + getAttackDistance(), new Vector3(AttackRadius, AttackRadius, AttackRadius));
@@ -193,6 +194,8 @@ public class WerewolfCombat : Combat
     public void Attack3()
     {
         Debug.Log("Attack");
+        SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
+
         AttackRadius = 2f;
         Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + (getAttackDistance() * 1.5f), AttackRadius);
         if (Damaged.Length > 0)
@@ -205,6 +208,8 @@ public class WerewolfCombat : Combat
     public override void ChargeAttack()
     {
         ChargeDirection = getAttackDistance();
+        SoundSource.PlayOneShot(SoundClips[1], GameManager.Instance.SoundVolume / 10f);
+
         ChargeCooldown = 0.4f;
         Charging = true;
     }

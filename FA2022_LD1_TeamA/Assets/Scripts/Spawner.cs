@@ -37,11 +37,6 @@ public class Spawner : MonoBehaviour
                         price = 3;
                         o.GetComponent<PickupLogic>().ShopCost.Cost = price;
 
-                        if (o.GetComponent<PickupLogic>().Type == PickupLogic.PickupTypes.Coin)
-                        {
-                            o.GetComponent<PickupLogic>().RandomizeType(1, 2);
-                        }
-
                         Debug.Log(o.GetComponent<PickupLogic>().ShopCost.Cost);
                     }
 

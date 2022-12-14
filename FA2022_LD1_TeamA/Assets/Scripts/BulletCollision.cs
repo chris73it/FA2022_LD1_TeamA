@@ -12,6 +12,20 @@ public class BulletCollision : MonoBehaviour
     public float Speed;
     public string OwnerTag;
 
+    // Audio
+    public AudioSource SoundSource;
+    public List<AudioClip> SoundClips;
+
+    private void Awake()
+    {
+        SoundSource = GetComponent<AudioSource>();
+
+
+        SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
+
+        //AudioSource.PlayClipAtPoint(SoundClips[0], transform.position, GameManager.Instance.SoundVolume / 10f);
+    }
+
     private void Update()
     {
         if (Active)

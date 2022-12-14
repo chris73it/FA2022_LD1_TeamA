@@ -21,6 +21,7 @@ public class PeasantCombat : EnemyCombat
         AttackDirection = getEnemyDirection();
         AttackDelay = 0.3f;
         IsAttacking = true;
+        SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
     }
 
     private void Update()

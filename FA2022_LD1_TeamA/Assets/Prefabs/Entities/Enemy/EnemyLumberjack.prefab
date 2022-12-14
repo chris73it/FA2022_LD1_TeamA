@@ -28,6 +28,14 @@ PrefabInstance:
       propertyPath: CurrentHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: SoundClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157477372769175599, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: SoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b6795289adffda46834e6a99846684f, type: 3}
     - target: {fileID: 4442661563311113428, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -159,6 +167,8 @@ MonoBehaviour:
   DamagedDuration: 0
   DamagedTimer: 0
   InvulnerabilityAlpha: 0
+  SoundSource: {fileID: 0}
+  SoundClips: []
   RetreatRange: -1
   AttackRange: 5
   SightRange: -1
