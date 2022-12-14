@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1272108991518042961, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1542042237, guid: 8f0ac4ab5f1d85d48a59736b847bc2a4, type: 3}
+      objectReference: {fileID: 21300000, guid: 2f7f811999e332a4e8df0841f0ae563b, type: 3}
     - target: {fileID: 1272108991518042961, guid: 069a676fe32d2c84cb8c8a26ca1ed3fb, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -162,7 +162,7 @@ Animator:
   m_GameObject: {fileID: 7454687755454763756}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4f37675d73d0b5d49872f8107b491cfb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3cf15939ab8457748a3cc016824e17ee, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

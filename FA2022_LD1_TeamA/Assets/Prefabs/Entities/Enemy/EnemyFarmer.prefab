@@ -92,6 +92,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4714931314569763489, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714931314569763489, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714931314569763489, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 786521ddf95ffc34ea9633875ef24227, type: 3}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -104,6 +120,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9172432471197294736, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c900f4c5286ec3d449ecad6220f18f46, type: 2}
     m_RemovedComponents:
     - {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
     m_AddedGameObjects: []
@@ -167,6 +187,7 @@ MonoBehaviour:
   Invulnerability: 0
   StunTimer: 0
   StunChance: 0
+  Animator: {fileID: 0}
   Sprite: {fileID: 4256427456155385748}
   DamagedDuration: 0
   DamagedTimer: 0

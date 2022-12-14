@@ -57,6 +57,9 @@ public class BulletCollision : MonoBehaviour
     {
         Vector3 heading = position - gameObject.transform.position;
         Direction = heading / (heading.magnitude);
+        float angle = Mathf.Atan2(Direction.z, Direction.x) * Mathf.Rad2Deg;
+        transform.GetChild(0).rotation = Quaternion.Euler(-270,
+            -angle + 180f, 0);
     }
 
     private void OnDestroy()
