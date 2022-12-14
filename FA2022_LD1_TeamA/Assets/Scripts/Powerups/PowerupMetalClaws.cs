@@ -7,6 +7,7 @@ public class PowerupMetalClaws : PowerupParent
     public override void ActivatePowerup(Collision collision)
     {
         collision.gameObject.GetComponent<Combat>().Damage += 1;
+        collision.gameObject.GetComponent<Combat>().Animator.SetInteger("AttackType", 3);
         //Debug.Log("Damage is now " + collision.gameObject.GetComponent<Combat>().Damage);
     }
 

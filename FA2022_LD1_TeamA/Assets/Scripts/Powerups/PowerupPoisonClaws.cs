@@ -7,7 +7,7 @@ public class PowerupPoisonClaws : PowerupParent
 public override void ActivatePowerup(Collision collision)
     {
         collision.gameObject.GetComponent<Combat>().DoT = new Combat.DamageOverTime(1, 1f, 3f, 0f);
-
+        collision.gameObject.GetComponent<Combat>().Animator.SetInteger("AttackType", 1);
         //Debug.Log("You now have Poison DoT");
     }
 

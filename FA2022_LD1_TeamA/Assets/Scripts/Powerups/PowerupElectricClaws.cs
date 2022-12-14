@@ -8,6 +8,7 @@ public class PowerupElectricClaws : PowerupParent
     {
         collision.gameObject.GetComponent<Combat>().StunChance = 0.9f;
         collision.gameObject.GetComponent<Combat>().StunTimer = 1f;
+        collision.gameObject.GetComponent<Combat>().Animator.SetInteger("AttackType", 2);
 
         //Debug.Log("You now have a stun!");
         /// deal with attackers using stun

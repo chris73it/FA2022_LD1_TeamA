@@ -50,6 +50,7 @@ public class Combat : MonoBehaviour
     public DamageOverTime DoT;
 
     // Animation Info
+    public Animator Animator;
     public SpriteRenderer Sprite;
     public float DamagedDuration;
     public float DamagedTimer;
@@ -156,5 +157,7 @@ public class Combat : MonoBehaviour
         DamagedTimer = 0f;
         InvulnerabilityAlpha = 0.5f;
         Sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        Animator = GetComponentInChildren<Animator>();
     }
 }

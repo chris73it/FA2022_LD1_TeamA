@@ -37,6 +37,7 @@ public class WerewolfCombat : Combat
             {
                 if (Input.GetButtonDown("Fire1"))
                 {
+                    Animator.SetTrigger("Attacking");
                     if (Combo == 0)
                     {
                         Attack();
@@ -53,6 +54,7 @@ public class WerewolfCombat : Combat
 
                 if (Input.GetButtonDown("Fire2") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
                 {
+                    Animator.SetTrigger("Attacking");
                     GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().UseStamina(0.25f);
                     SetGeneralInvulnerability(GetComponent<Health>().HitInvulnerability);
                     ChargeAttack();
@@ -167,7 +169,9 @@ public class WerewolfCombat : Combat
     public override void Attack()
     {
         Debug.Log("Attack");
+
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
+
         AttackRadius = 1f;
         Collider[] Damaged = Physics.OverlapSphere(AttackerTransform.position + getAttackDistance(), AttackRadius);
         if (Damaged.Length > 0)
