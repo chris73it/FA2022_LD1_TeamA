@@ -21,6 +21,7 @@ public class PeasantCombat : EnemyCombat
         AttackDirection = getEnemyDirection();
         AttackDelay = 0.3f;
         IsAttacking = true;
+        Animator.SetTrigger("Attacking");
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
     }
 
@@ -92,11 +93,16 @@ public class PeasantCombat : EnemyCombat
     private Vector3 getEnemyDirection()
     {
         Vector3 playerDistance;
-        playerDistance = (Player.transform.position - transform.position);
-        float radius = Mathf.Sqrt(Mathf.Pow(playerDistance.z, 2) + Mathf.Pow(playerDistance.x, 2));
-        playerDistance.z = playerDistance.z / radius * 2;
-        playerDistance.x = playerDistance.x / radius * 2;
-        return playerDistance;
+        if (GameManager.ChosenPlayerCharacter != null)
+        {
+            playerDistance = (Player.transform.position - transform.position);
+            float radius = Mathf.Sqrt(Mathf.Pow(playerDistance.z, 2) + Mathf.Pow(playerDistance.x, 2));
+            playerDistance.z = playerDistance.z / radius * 2;
+            playerDistance.x = playerDistance.x / radius * 2;
+            return playerDistance;
+        }
+
+        return new Vector3(-10, -10, -10);
     }
     void OnDrawGizmos()
     {

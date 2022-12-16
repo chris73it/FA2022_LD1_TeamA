@@ -7,6 +7,7 @@ public class WizardCombat : EnemyCombat
 {
     public WizardMovement Movement;
     public float AttackResult = 0f;
+    public GameObject LightningBolt;
 
     public override void Initialize()
     {
@@ -22,6 +23,8 @@ public class WizardCombat : EnemyCombat
         AttackDestination = Player.transform.position;
         AttackDelay = 0.5f;
         IsAttacking = true;
+        Animator.SetTrigger("Attacking");
+        Instantiate(LightningBolt, Player.transform.position, Player.transform.rotation);
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
     }
 

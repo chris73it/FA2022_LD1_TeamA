@@ -68,6 +68,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4714931314569763489, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714931314569763489, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714931314569763489, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b6bf8d1f3a19d2f408cc8a82a82381b5, type: 3}
+    - target: {fileID: 9172432471197294736, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 87afede396bdbe549ae2ad5e64abe298, type: 2}
     m_RemovedComponents:
     - {fileID: 2973753499104015004, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
     m_AddedGameObjects: []
@@ -108,6 +128,7 @@ MonoBehaviour:
   Invulnerability: 0
   StunTimer: 0
   StunChance: 0
+  Animator: {fileID: 0}
   Sprite: {fileID: 2608409963749955617}
   DamagedDuration: 0
   DamagedTimer: 0
@@ -120,6 +141,7 @@ MonoBehaviour:
   SightRange: -1
   Movement: {fileID: 8005910990707301431}
   AttackResult: 0
+  LightningBolt: {fileID: 4734995370162817774, guid: 6eb4b2df4214f5e458a9ca0f57fda060, type: 3}
 --- !u!114 &8005910990707301431
 MonoBehaviour:
   m_ObjectHideFlags: 0
