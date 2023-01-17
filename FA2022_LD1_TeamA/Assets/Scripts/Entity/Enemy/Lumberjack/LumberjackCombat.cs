@@ -42,7 +42,7 @@ public class LumberjackCombat : EnemyCombat
 
     public override void Attack()
     {
-        CreateBullet(Damage, 2.5f);
+        CreateBullet(Damage, 2.5f, true);
     }
 
     /*

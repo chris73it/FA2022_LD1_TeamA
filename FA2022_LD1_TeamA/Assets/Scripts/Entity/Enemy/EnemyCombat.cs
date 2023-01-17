@@ -56,7 +56,7 @@ public class EnemyCombat : Combat
         }
     }
 
-    public void CreateBullet(int damage, float lifeTime = 3.5f)
+    public GameObject CreateBullet(int damage, float lifeTime = 3.5f, bool rotation = true)
     {
         GameObject bullet = Instantiate(Bullets[0], gameObject.transform.position, gameObject.transform.rotation);
 
@@ -65,9 +65,15 @@ public class EnemyCombat : Combat
         bullet.GetComponent<BulletCollision>().Owner = gameObject;
         bullet.GetComponent<BulletCollision>().OwnerTag = gameObject.tag;
         bullet.GetComponent<BulletCollision>().Damage = damage;
-        bullet.GetComponent<BulletCollision>().GetDirection(GetPlayerLocation());
-        
+
+        if (rotation)
+        {
+            bullet.GetComponent<BulletCollision>().GetDirection(GetPlayerLocation());
+        }
+
         bullet.GetComponent<BulletCollision>().Lifetime = lifeTime;
         bullet.GetComponent<BulletCollision>().Active = true;
+
+        return bullet;
     }
 }

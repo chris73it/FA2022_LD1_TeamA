@@ -17,7 +17,7 @@ public class FarmerCombat : EnemyCombat
     public override void Attack()
     {
         Animator.SetTrigger("Attacking");
-        CreateBullet(Damage);
+        CreateBullet(Damage, 3.5f, true);
 
         AttackCooldown = 2f;
     }

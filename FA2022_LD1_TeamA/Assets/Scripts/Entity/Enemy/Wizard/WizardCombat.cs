@@ -18,13 +18,17 @@ public class WizardCombat : EnemyCombat
         Movement = GetComponent<WizardMovement>();
     }
 
-    public override void Attack()
+    private void setupAttack()
     {
         AttackDestination = Player.transform.position;
         AttackDelay = 0.5f;
         IsAttacking = true;
+    }
+    public override void Attack()
+    {
         Animator.SetTrigger("Attacking");
-        Instantiate(LightningBolt, Player.transform.position, Player.transform.rotation);
+        GameObject o = CreateBullet(1, 0.5f, false);
+        o.transform.position = AttackDestination;
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
     }
 
@@ -47,11 +51,12 @@ public class WizardCombat : EnemyCombat
 
             if (AttackCooldown <= 0 && !IsAttacking)
             {
-                Attack();
+                setupAttack();
             }
 
             if (AttackDelay <= 0 && IsAttacking)
             {
+                /*
                 Damage = 1;
                 Collider[] Damaged = Physics.OverlapSphere(AttackDestination, 0.5f);
                 if (Damaged.Length > 0)
@@ -65,6 +70,8 @@ public class WizardCombat : EnemyCombat
                         }
                     }
                 }
+                */
+                Attack();
                 IsAttacking = false;
                 AttackCooldown = 2f;
                 AttackResult = 1f;

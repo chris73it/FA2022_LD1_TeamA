@@ -123,7 +123,7 @@ MonoBehaviour:
   AttackDelay: 0
   AttackCooldown: 0
   Bullets:
-  - {fileID: 4462732106462573415, guid: b18b2c36053741e49a0cd2c29a6b9323, type: 3}
+  - {fileID: 5713738617082783938, guid: c2ba338bcdd88534cbc186781a744e1a, type: 3}
   BulletsCreated: []
   Invulnerability: 0
   StunTimer: 0
