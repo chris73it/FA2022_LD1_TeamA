@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
         Player
     }
     public SpawnerTypes Type;
+    public int Direction = -1; 
 
     public GameObject InstantiateObject()
     {
@@ -44,7 +45,7 @@ public class Spawner : MonoBehaviour
                     o.transform.position + GameManager.Instance.TextObject.transform.position, GameManager.Instance.TextObject.transform.rotation);
 
                     t.transform.parent = o.transform;
-                    t.GetComponent<TextMesh>().text = "" + price + "¢";
+                    t.GetComponent<TextMesh>().text = "" + price + "ï¿½";
                 } else if (Type == SpawnerTypes.Door)
                 {
                     o.GetComponent<RoomTransport>().NextFloor = true;

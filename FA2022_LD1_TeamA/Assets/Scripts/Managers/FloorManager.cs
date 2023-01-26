@@ -5,8 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class FloorManager : MonoBehaviour
 {
+    // Properties
+
     // Instance
     public static FloorManager Instance = null;
+
+    // Floor Map
+    public static int Height = 3;
+    public static int Width = 3;
+    public Room[,] Floor = new Room[Height, Width];
 
     // Floor Attributes
     public enum FloorTypes
@@ -14,21 +21,23 @@ public class FloorManager : MonoBehaviour
         Base,
         Forest
     }
-
     public FloorTypes Type = FloorTypes.Base;
-    public bool NextFloor = false;
-    public static int FloorsCompleted = 0;
 
+    public bool NextFloor = false;
+    public static int RoomsEntered = 0;
+    public static int FloorsCompleted = 0;
+    public static int RoomsToGenerate = 10;
+    public static int BaseRoomTreeHeight = 4; // deprecated 
+    public static int RoomTreeHeight = BaseRoomTreeHeight; // deprecated 
+
+    // Powerup List
     public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
     public List<GameObject> ForestPowerupsPool; 
 
     //public static List<GameObject> PickupsList;
     //public static List<GameObject> EnemiesList;
 
-    public static int RoomsEntered = 0;
-    public static int BaseRoomTreeHeight = 4;
-    public static int RoomTreeHeight = BaseRoomTreeHeight;
-    public static Room StartingFloor { get; set; }
+    // Room Switching
     private static Room _currentRoom;
     public static Room CurrentRoom 
     {
@@ -44,6 +53,8 @@ public class FloorManager : MonoBehaviour
         }
     }
 
+    // Static Rooms
+    public static Room StartingFloor { get; set; }
     public static Room BossRoom;
     public static Room ShopRoom;
 
@@ -111,6 +122,7 @@ public class FloorManager : MonoBehaviour
             RoomTreeHeight = BaseRoomTreeHeight;
         }
 
+        /*
         // Generate Static Rooms
         StartingFloor = new Room(Room.RoomTypes.StartingRoom);
         BossRoom = new Room(Room.RoomTypes.BossRoom);
@@ -122,6 +134,7 @@ public class FloorManager : MonoBehaviour
 
         // Generate All Rooms
         StartingFloor.GenerateRooms(0);
+        */
     }
 
     private void onLoadCallback(Scene scene, LoadSceneMode sceneMode)
