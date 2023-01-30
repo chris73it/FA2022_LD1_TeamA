@@ -11,9 +11,9 @@ public class FloorManager : MonoBehaviour
     public static FloorManager Instance = null;
 
     // Floor Map
-    public static int Height = 3;
-    public static int Width = 3;
-    public Room[,] Floor = new Room[Height, Width];
+    public static int MapRows = 10;
+    public static int MapColumns = 10;
+    public Room[,] Floor = new Room[MapRows, MapColumns];
 
     // Floor Attributes
     public enum FloorTypes
@@ -27,8 +27,8 @@ public class FloorManager : MonoBehaviour
     public static int RoomsEntered = 0;
     public static int FloorsCompleted = 0;
     public static int RoomsToGenerate = 10;
-    public static int BaseRoomTreeHeight = 4; // deprecated 
-    public static int RoomTreeHeight = BaseRoomTreeHeight; // deprecated 
+    // public static int BaseRoomTreeHeight = 4; // deprecated 
+    // public static int RoomTreeHeight = BaseRoomTreeHeight; // deprecated 
 
     // Powerup List
     public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
@@ -54,16 +54,10 @@ public class FloorManager : MonoBehaviour
     }
 
     // Static Rooms
-    public static Room StartingFloor { get; set; }
+    public static Room StartingRoom { get; set; }
     public static Room BossRoom;
     public static Room ShopRoom;
 
-    // Init:
-    // Check if instance exists already, if not set instance = this;
-    // Determine Floor Type, FloorSize
-    // Flood Floor with Rooms with Type == RoomsType.Nothing
-    // Choose one random room (as a start, make sure it is an empty default room)
-    // Generate other rooms based off that
     private void Awake()
     {
         // Intialize instance if null
@@ -91,13 +85,23 @@ public class FloorManager : MonoBehaviour
         }
         */
     }
-    // Methods
+
+    /// Methods
+
+    // Room Generating Related
     public void ResetFloor()
     {
         Debug.Log("Resetting...");
         // Reset Room Entered Count
         RoomsEntered = 0;
         ForestPowerupsPool = new List<GameObject>(ForestPowerupsList);
+
+
+        /// Create starting room
+        StartingRoom = createStartingRoom();
+
+        /// Add Starting Room
+        Floor[StartingRoom.Row, StartingRoom.Column] = StartingRoom;
 
         // Switch to next Floor Type
         /*
@@ -111,15 +115,17 @@ public class FloorManager : MonoBehaviour
         */
 
         Type = FloorTypes.Forest; // redundant ^
+
+        // Next Floor Rules
         if (NextFloor)
         {
-            Debug.Log("RoomTreeHeight++");
-            RoomTreeHeight++;
+            // Debug.Log("RoomTreeHeight++");
+            // RoomTreeHeight++;
             FloorsCompleted++;
         } else
         {
             FloorsCompleted = 0;
-            RoomTreeHeight = BaseRoomTreeHeight;
+            //RoomTreeHeight = BaseRoomTreeHeight;
         }
 
         /*
@@ -135,8 +141,144 @@ public class FloorManager : MonoBehaviour
         // Generate All Rooms
         StartingFloor.GenerateRooms(0);
         */
+
+        GenerateRoom(RoomsToGenerate);
+
+        //Debug.Log(Floor);
     }
 
+    private Room createStartingRoom()
+    {
+        return new Room(Room.RoomTypes.StartingRoom, Random.Range(1, MapRows - 2), Random.Range(1, MapColumns - 2), 2, 2, true);
+    }
+
+    public void GenerateRoom(int roomsToGenerate)
+    {
+        // Room info
+        int width = 2; // change sizes later
+        int height = 2;
+
+        // Filled Rooms
+        List<(int, int)> filledRooms = new List<(int, int)>();
+
+        // Valid Room Positions
+        List<(int, int)> validPositions = new List<(int, int)>();
+
+        // Room to check Valid Positions
+        (int, int) check = (-1, -1);
+
+        // Valid Position
+        (int, int) validPosition = (-1, -1);
+
+        // Adjacent Room
+        //Room adjacentRoom;
+
+        // variables needed:
+        // amount of rooms to generate
+
+        // Spawner can have position variable to determine which door connects to what
+
+        // place starting room if first floor
+        // check if rooms to generate has been reached
+        // choose any random room
+        // choose random direction of room
+        // make sure direction does not already have a room
+        // add new room to current room's connected room
+        // set room's index
+        // set room's size
+        // set prize of current room if applicable
+        // if rooms to generate has been reached
+        // choose random room location
+        // add boss room and shop room to a valid location
+
+        /// Get StartingRoom's position and add to filledRooms
+        filledRooms.Add((StartingRoom.Row, StartingRoom.Column));
+        
+        /// Room Generation
+        for (int i = 0; i < roomsToGenerate; i++)
+        {
+            /// Check latest room added
+            check = filledRooms[filledRooms.Count - 1];
+
+            /// Add valid positions
+            validPositions = addValidRooms(validPositions, filledRooms, check);
+
+            /// Choose random valid position
+            validPosition = validPositions[Random.Range(0, validPositions.Count)];
+            Debug.Log("Position Chosen: " + validPosition);
+
+            /// Create new room at valid position   
+            if (i == roomsToGenerate - 1)
+            {
+                // Place Shop Room
+                Debug.Log("Adding Shop Room");
+                Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.ShopRoom, validPosition.Item1, validPosition.Item2, width, height, false); // rooms should be 1,6 but is 1,2 for testing
+            }
+            else if (i == roomsToGenerate - 2)
+            {
+                // Place Boss Room
+                Debug.Log("Adding Boss Room");
+                Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.BossRoom, validPosition.Item1, validPosition.Item2, width, height, false); // rooms should be 1,6 but is 1,2 for testing
+                validPositions.Clear();
+            }
+            else
+            {
+                Floor[validPosition.Item1, validPosition.Item2] = new Room(validPosition.Item1, validPosition.Item2, 1, 6, width, height, false); // rooms should be 1,6 but is 1,2 for testing
+            }
+
+            /// Set Room Prizes
+            Floor[validPosition.Item1, validPosition.Item2].SetReward();
+
+            // Add to filled rooms
+            filledRooms.Add(validPosition);
+
+            /// Remove validPosition from validPositions
+            if (validPositions.Contains(validPosition))
+            {
+                validPositions.Remove(validPosition);
+            }
+
+            Debug.Log("(" + validPosition.Item1 + ", " + validPosition.Item2 + ") " + " removed");
+        }
+    }
+
+    private static List<(int, int)> addValidRooms(List<(int, int)> validPositions, List<(int, int)> filledRooms, (int, int) currentRoomPosition)
+    {
+
+        // North Room Check
+        if (currentRoomPosition.Item1 - 1 >= 0 && 
+            !filledRooms.Contains((currentRoomPosition.Item1  - 1, currentRoomPosition.Item2)) && 
+            !validPositions.Contains((currentRoomPosition.Item1 - 1, currentRoomPosition.Item2)))
+        {
+            validPositions.Add((currentRoomPosition.Item1 - 1, currentRoomPosition.Item2));
+        }
+
+        // East Room Check
+        if (currentRoomPosition.Item2 + 1 < FloorManager.MapRows && 
+            !filledRooms.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 + 1)) &&
+            !validPositions.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 + 1)))
+        {
+            validPositions.Add((currentRoomPosition.Item1, currentRoomPosition.Item2 + 2));
+        }
+
+        // South Room Check
+        if (currentRoomPosition.Item1 + 1 < FloorManager.MapColumns && 
+            !filledRooms.Contains((currentRoomPosition.Item1 + 1, currentRoomPosition.Item2)) &&
+            !validPositions.Contains((currentRoomPosition.Item1 + 1, currentRoomPosition.Item2)))
+        {
+            validPositions.Add((currentRoomPosition.Item1 + 1, currentRoomPosition.Item2));
+        }
+
+        // West Room Check
+        if (currentRoomPosition.Item2 - 1 >= 0 && 
+            !filledRooms.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 - 1)) &&
+            !validPositions.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 - 2)))
+        {
+            validPositions.Add((currentRoomPosition.Item1, currentRoomPosition.Item2 - 1));
+        }
+
+        return validPositions;
+    }
     private void onLoadCallback(Scene scene, LoadSceneMode sceneMode)
     {
         if (scene.name != "MainMenu")

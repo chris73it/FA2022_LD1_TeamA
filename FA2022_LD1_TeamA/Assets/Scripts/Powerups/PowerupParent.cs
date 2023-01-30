@@ -24,6 +24,7 @@ public class PowerupParent : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && ShopCost.CanPlayerAfford())
         {
             Debug.Log("PowerupParent onTriggerEnter");
+            FloorManager.CurrentRoom.Reward = null;
             ActivatePowerup(collision);
             GameObject g = Instantiate(GameManager.Instance.PowerupUIPrefab);
             g.GetComponent<PowerupUIControl>().Activate(ItemName, ItemDescription);

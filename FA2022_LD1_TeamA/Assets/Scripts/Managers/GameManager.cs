@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
 
                 case GameStates.Game:
                     MenuState = MenuStates.None;
-                    Debug.Log("Height: " + FloorManager.RoomTreeHeight);
+                    // Debug.Log("Height: " + FloorManager.RoomTreeHeight);
                     break;
 
                 case GameStates.Loading:
@@ -119,8 +119,9 @@ public class GameManager : MonoBehaviour
                     // Load Floor
                     //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), FloorManager.StartingFloor.Type);
                     //SceneManager.LoadScene(roomName, LoadSceneMode.Single);
-                    FloorManager.StartingFloor.IsCleared = true; // Redundant
-                    FloorManager.CurrentRoom = FloorManager.StartingFloor;
+                    
+                    FloorManager.CurrentRoom = FloorManager.StartingRoom;
+
                     //Debug.Log("CurrentRoom assigned");
 
                     // Spawn Player
