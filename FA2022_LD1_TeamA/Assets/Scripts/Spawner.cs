@@ -45,10 +45,16 @@ public class Spawner : MonoBehaviour
                     o.transform.position + GameManager.Instance.TextObject.transform.position, GameManager.Instance.TextObject.transform.rotation);
 
                     t.transform.parent = o.transform;
-                    t.GetComponent<TextMesh>().text = "" + price + "�";
+                    t.GetComponent<TextMesh>().text = "" + price + "$";
                 } else if (Type == SpawnerTypes.Door)
                 {
                     o.GetComponent<RoomTransport>().NextFloor = true;
+                }
+            } else
+            {
+                if (Type == SpawnerTypes.Door)
+                {
+                    o.GetComponent<RoomTransport>().SetRoom(Direction);
                 }
             }
 
