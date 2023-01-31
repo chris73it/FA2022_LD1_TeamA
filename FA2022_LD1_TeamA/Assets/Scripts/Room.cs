@@ -90,7 +90,7 @@ public class Room
         isAlwaysClearedRoom(cleared);
     }
 
-    // Constructor Helpers
+    // Pre generaiton Related
     private static RoomTypes getRandomType(int start = 0, int end = 2) // end is exclusive
     {
         return (RoomTypes)Random.Range(start, end); // might have to cast to int first?
