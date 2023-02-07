@@ -93,13 +93,5 @@ public class PickupLogic : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
-
-    private void OnDestroy()
-    {
-        if (FloorManager.CurrentRoom.PickupsSpawned.Contains(gameObject))
-        {
-            FloorManager.CurrentRoom.PickupsSpawned.Remove(gameObject);
-        }
-    }
+    }    
 }

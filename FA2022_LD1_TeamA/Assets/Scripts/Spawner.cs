@@ -11,7 +11,6 @@ public class Spawner : MonoBehaviour
         Powerup,
         Door,
         Enemy,
-        Obstacles,
         Player
     }
     public SpawnerTypes Type;
@@ -47,52 +46,21 @@ public class Spawner : MonoBehaviour
 
                     t.transform.parent = o.transform;
                     t.GetComponent<TextMesh>().text = "" + price + "$";
-                } /*else if (Type == SpawnerTypes.Door)
+                } else if (Type == SpawnerTypes.Door)
                 {
                     o.GetComponent<RoomTransport>().NextFloor = true;
                 }
-                */
-            } /*else
+            } else
             {
                 if (Type == SpawnerTypes.Door)
                 {
                     o.GetComponent<RoomTransport>().SetRoom(Direction);
                 }
             }
-            */
+
             return o;
         }
 
         return null;
-    }
-
-    public GameObject AddObjectToRoom()
-    {
-        GameObject o = Instantiate(ToSpawn, gameObject.transform.position, gameObject.transform.rotation);
-
-        switch (Type)
-        {
-            case (SpawnerTypes.Pickup):
-                FloorManager.CurrentRoom.PickupsSpawned.Add(o);
-                break;
-
-            case (SpawnerTypes.Powerup):
-                FloorManager.CurrentRoom.PowerupsSpawned.Add(o);
-                break;
-
-            case (SpawnerTypes.Obstacles):
-                FloorManager.CurrentRoom.ObstaclesSpawned.Add(o);
-                break;
-
-            case (SpawnerTypes.Enemy):
-                FloorManager.CurrentRoom.EnemiesSpawned.Add(o);
-                break;
-
-            default:
-                return null;
-                break;
-        }
-
-        return o;
     }
 }
