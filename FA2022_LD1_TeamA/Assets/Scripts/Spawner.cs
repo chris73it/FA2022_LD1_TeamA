@@ -86,10 +86,10 @@ public class Spawner : MonoBehaviour
 
             case (SpawnerTypes.Enemy):
                 FloorManager.CurrentRoom.EnemiesSpawned.Add(o);
-               
                 break;
 
             default:
+                return null;
                 break;
         }
 
