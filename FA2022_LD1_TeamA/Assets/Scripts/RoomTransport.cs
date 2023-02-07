@@ -8,23 +8,19 @@ public class RoomTransport : MonoBehaviour
     public Room NextRoom; // Should be set on creation of door which is after floor manager and its room have been created
     public bool NextFloor = false;
     public int Direction = -1;
+    public bool Active = false;
 
-    // Method: OnCollisionEnter, transports player to nextRoom
+    /// Methods
+   
+    // Transports player to nextRoom
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            //SceneManager.MoveGameObjectToScene(collision.gameObject, nextRoom.SceneRoom);
-            //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), NextRoom.Type);
-            //GameObject p = collision.gameObject;
-            //DontDestroyOnLoad(p); // move dont destroy on load stuff to game manager
-            //Debug.Log(p.ToString());
-            //SceneManager.LoadScene(roomName, LoadSceneMode.Single); 
-
-            //Debug.Log(NextRoom.RoomName);
-           
+  
             if (!NextFloor)
             {
+                SetRoom(Direction);
                 FloorManager.CurrentRoom = NextRoom;
             } else
             {
@@ -38,6 +34,8 @@ public class RoomTransport : MonoBehaviour
             }
         }
     }
+
+    // Sets NextRoom to proper location if it exists
     public void SetRoom(int direction)
     {
         Direction = direction;

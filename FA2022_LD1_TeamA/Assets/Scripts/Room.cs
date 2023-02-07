@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Room
+public class Room : MonoBehaviour   
 {
     /// Properties
 
@@ -56,6 +56,8 @@ public class Room
         }
     }
 
+    public bool HasEntered = false;
+
     // Reward
     public GameObject Reward = null;
 
@@ -63,10 +65,23 @@ public class Room
     // Indices: 0 and 1 North, 2 and 3 West, 4 and 5 South, 6 and 7 East
     public Room[] ConnectedRooms = new Room[8];
 
+    /// GameObjects in Room
     // Enemies
     public List<GameObject> EnemiesSpawned = new List<GameObject>();
 
-    // Methods 
+    // Pickups
+    public List<GameObject> PickupsSpawned = new List<GameObject>();
+
+    // Powerups
+    public List<GameObject> PowerupsSpawned = new List<GameObject>();
+
+    // Obstacles
+    public List<GameObject> ObstaclesSpawned = new List<GameObject>();
+
+    // Traps
+    public List<GameObject> TrapsSpawned = new List<GameObject>();
+
+    /// Methods 
 
     // Constructors
 
@@ -90,7 +105,7 @@ public class Room
         isAlwaysClearedRoom(cleared);
     }
 
-    // Pre generaiton Related
+    // Pre Generation Related
     private static RoomTypes getRandomType(int start = 0, int end = 2) // end is exclusive
     {
         return (RoomTypes)Random.Range(start, end); // might have to cast to int first?
@@ -135,8 +150,16 @@ public class Room
 
         //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
         EnemiesSpawned.Clear();
+        
+        if (!HasEntered)
+        {
+            getAllRoomEntities();
+        } else
+        {
+            spawnRoomEntities();
+        }
 
-        spawnRoomItems();
+        // spawnRoomItems();
 
         GameObject player = GameObject.FindWithTag("Player"); // can be repalced with instance
         GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
@@ -153,15 +176,68 @@ public class Room
             }
         }
 
-        // Debug.Log("IsCleared: " + IsCleared);
-        Debug.Log("Room: " + Row + " " + Column);
+        HasEntered = true;
+    }
 
-        /*
-        foreach (Room r in ConnectedRooms)
+    private void getAllRoomEntities()
+    {
+        GameObject[] spawners  = GameObject.FindGameObjectsWithTag("Spawner");
+        
+        foreach (GameObject o in spawners)
         {
-            Debug.Log(r.RoomName);
+            if (o.GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Player)
+            {
+                o.GetComponent<Spawner>().AddObjectToRoom();
+            }
         }
-        */
+    }
+
+    private void spawnRoomEntities()
+    {
+        // Enemies
+        if (EnemiesSpawned.Count > 0 && !IsCleared)
+        {
+            foreach (GameObject enemy in EnemiesSpawned)
+            {
+                Instantiate(enemy);
+            }
+        }
+
+        // Powerup
+        if (PowerupsSpawned.Count > 0 && IsCleared)
+        {
+            foreach (GameObject powerup in PowerupsSpawned)
+            {
+                Instantiate(powerup); // this doesnt work bc powerups arent stored in spawners
+            }
+        }
+
+        // Pickup
+       if (PickupsSpawned.Count > 0)
+        {
+            foreach (GameObject pickup in PickupsSpawned)
+            {
+                Instantiate(pickup);
+            }
+        }
+
+        // Obstacles
+        if (ObstaclesSpawned.Count > 0)
+        {
+            foreach (GameObject obstacle in ObstaclesSpawned)
+            {
+                Instantiate(obstacle);
+            }
+        }
+
+        // Traps
+        if (TrapsSpawned.Count > 0)
+        {
+            foreach (GameObject trap in TrapsSpawned)
+            {
+                Instantiate(trap);
+            }
+        }
     }
 
     private void spawnRoomItems()
@@ -220,4 +296,6 @@ public class Room
             // set to spawn to reward then instantiate
         }
     }
+
+    
 }

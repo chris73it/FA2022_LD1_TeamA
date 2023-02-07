@@ -24,7 +24,6 @@ public class PowerupParent : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && ShopCost.CanPlayerAfford())
         {
             Debug.Log("PowerupParent onTriggerEnter");
-            FloorManager.CurrentRoom.Reward = null;
             ActivatePowerup(collision);
             GameObject g = Instantiate(GameManager.Instance.PowerupUIPrefab);
             g.GetComponent<PowerupUIControl>().Activate(ItemName, ItemDescription);
@@ -41,5 +40,13 @@ public class PowerupParent : MonoBehaviour
     public virtual void Instantiate()
     {
         ShopCost.Cost = 0;
+    }
+
+    private void OnDestroy()
+    {
+        if (FloorManager.CurrentRoom.PowerupsSpawned.Contains(gameObject))
+        {
+            FloorManager.CurrentRoom.PowerupsSpawned.Remove(gameObject);
+        }
     }
 }

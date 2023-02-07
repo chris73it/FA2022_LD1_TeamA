@@ -118,19 +118,20 @@ public class Health : MonoBehaviour
             // Drop pickup chance
             // if no more enemies in room, set room to is cleared
 
-            //Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
-            for (int i = 0; i < FloorManager.CurrentRoom.EnemiesSpawned.Count; i++)
+            /*ebug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
+            for (int i = 0; i < FloorManager.CurrentRoom.EnemiesSpawned.Count; i++) 
             {
                 if (gameObject == FloorManager.CurrentRoom.EnemiesSpawned[i])
                 {
-                    FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject);
+                    FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject); // onyl needs this
                     Debug.Log("Enemies Spawned:" + FloorManager.CurrentRoom.EnemiesSpawned.Count);
 
                     break;
                 }
             }
+            */
 
-            if (FloorManager.CurrentRoom.EnemiesSpawned.Count <= 0) // The enemy is counted in the array before its destroyed so the length <= 1
+            if (FloorManager.CurrentRoom.EnemiesSpawned.Count <= 0) // The enemy is counted in the array before its destroyed so the length <= 1, deprecated since enemy count is cleared
             {
                 FloorManager.CurrentRoom.IsCleared = true;
             }
@@ -150,5 +151,24 @@ public class Health : MonoBehaviour
             AudioSource.PlayClipAtPoint(SoundClips[0], transform.position, GameManager.Instance.SoundVolume / 10f);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (gameObject.tag == "Enemy")
+        {
+            if (FloorManager.CurrentRoom.EnemiesSpawned.Contains(gameObject))
+            {
+                FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject);
+            }
+        } else if (gameObject.tag == "Obstacle")
+        {
+            if (FloorManager.CurrentRoom.ObstaclesSpawned.Contains(gameObject))
+            {
+                FloorManager.CurrentRoom.ObstaclesSpawned.Remove(gameObject);
+            }
+        }
+
+        
     }
 }
