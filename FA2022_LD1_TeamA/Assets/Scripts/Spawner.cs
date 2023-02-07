@@ -78,7 +78,6 @@ public class Spawner : MonoBehaviour
 
             case (SpawnerTypes.Powerup):
                 FloorManager.CurrentRoom.PowerupsSpawned.Add(o);
-
                 break;
 
             case (SpawnerTypes.Obstacles):

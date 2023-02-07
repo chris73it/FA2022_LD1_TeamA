@@ -15,7 +15,101 @@ public class RoomTransport : MonoBehaviour
     // Sets room
     private void Awake()
     {
-        SetRoom(Direction);
+        Debug.Log("Direction: " + Direction);
+
+        switch (Direction)
+        {
+            // North
+            case 0:
+                Debug.Log("Case 0");
+
+                if (FloorManager.CurrentRoom.Row - 1 >= 0)
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row - 1, FloorManager.CurrentRoom.Column];
+                }
+
+                break;
+
+            case 1:
+                Debug.Log("Case 1");
+
+                if (FloorManager.CurrentRoom.Row - 1 >= 0)
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row - 1, FloorManager.CurrentRoom.Column];
+                }
+
+                break;
+
+            // East
+            case 2:
+                Debug.Log("Case 2");
+
+                if (FloorManager.CurrentRoom.Column + 1 < FloorManager.Instance.Floor.GetLength(1))
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row, FloorManager.CurrentRoom.Column + 1];
+                }
+
+                break;
+
+            case 3:
+                Debug.Log("Case 3");
+
+                if (FloorManager.CurrentRoom.Column + 1 < FloorManager.Instance.Floor.GetLength(1))
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row, FloorManager.CurrentRoom.Column + 1];
+                }
+
+                break;
+
+            // South
+            case 4:
+                Debug.Log("Case 4");
+
+                if (FloorManager.CurrentRoom.Row + 1 < FloorManager.Instance.Floor.GetLength(0))
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row + 1, FloorManager.CurrentRoom.Column];
+                }
+
+                break;
+
+            case 5:
+                Debug.Log("Case 5");
+
+                if (FloorManager.CurrentRoom.Row + 1 < FloorManager.Instance.Floor.GetLength(0))
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row + 1, FloorManager.CurrentRoom.Column];
+                }
+
+                break;
+
+            // West
+            case 6:
+                Debug.Log("Case 6");
+
+                if (FloorManager.CurrentRoom.Column - 1 >= 0)
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row, FloorManager.CurrentRoom.Column - 1];
+                }
+                break;
+
+            case 7:
+                Debug.Log("Case 7");
+
+                if (FloorManager.CurrentRoom.Column - 1 >= 0)
+                {
+                    NextRoom = FloorManager.Instance.Floor[FloorManager.CurrentRoom.Row, FloorManager.CurrentRoom.Column - 1];
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        if (NextRoom == null)
+        {
+            Debug.Log("NextRoom is null");
+            Destroy(gameObject);
+        }
     }
 
     // Transports player to nextRoom

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Room : MonoBehaviour   
+public class Room  
 {
     /// Properties
 
@@ -199,7 +199,7 @@ public class Room : MonoBehaviour
         {
             foreach (GameObject enemy in EnemiesSpawned)
             {
-                Instantiate(enemy);
+                GameObject.Instantiate(enemy);
             }
         }
 
@@ -208,7 +208,7 @@ public class Room : MonoBehaviour
         {
             foreach (GameObject powerup in PowerupsSpawned)
             {
-                Instantiate(powerup); // this doesnt work bc powerups arent stored in spawners
+                GameObject.Instantiate(powerup); // this doesnt work bc powerups arent stored in spawners
             }
         }
 
@@ -217,7 +217,7 @@ public class Room : MonoBehaviour
         {
             foreach (GameObject pickup in PickupsSpawned)
             {
-                Instantiate(pickup);
+                GameObject.Instantiate(pickup);
             }
         }
 
@@ -226,7 +226,7 @@ public class Room : MonoBehaviour
         {
             foreach (GameObject obstacle in ObstaclesSpawned)
             {
-                Instantiate(obstacle);
+                GameObject.Instantiate(obstacle);
             }
         }
 
@@ -235,7 +235,7 @@ public class Room : MonoBehaviour
         {
             foreach (GameObject trap in TrapsSpawned)
             {
-                Instantiate(trap);
+                GameObject.Instantiate(trap);
             }
         }
     }
