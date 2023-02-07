@@ -11,7 +11,13 @@ public class RoomTransport : MonoBehaviour
     public bool Active = false;
 
     /// Methods
-   
+
+    // Sets room
+    private void Awake()
+    {
+        SetRoom(Direction);
+    }
+
     // Transports player to nextRoom
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,7 +26,6 @@ public class RoomTransport : MonoBehaviour
   
             if (!NextFloor)
             {
-                SetRoom(Direction);
                 FloorManager.CurrentRoom = NextRoom;
             } else
             {

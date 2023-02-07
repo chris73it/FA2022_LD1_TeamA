@@ -47,18 +47,19 @@ public class Spawner : MonoBehaviour
 
                     t.transform.parent = o.transform;
                     t.GetComponent<TextMesh>().text = "" + price + "$";
-                } else if (Type == SpawnerTypes.Door)
+                } /*else if (Type == SpawnerTypes.Door)
                 {
                     o.GetComponent<RoomTransport>().NextFloor = true;
                 }
-            } else
+                */
+            } /*else
             {
                 if (Type == SpawnerTypes.Door)
                 {
                     o.GetComponent<RoomTransport>().SetRoom(Direction);
                 }
             }
-
+            */
             return o;
         }
 
@@ -78,9 +79,6 @@ public class Spawner : MonoBehaviour
             case (SpawnerTypes.Powerup):
                 FloorManager.CurrentRoom.PowerupsSpawned.Add(o);
 
-                break;
-
-            case (SpawnerTypes.Door):
                 break;
 
             case (SpawnerTypes.Obstacles):
