@@ -52,9 +52,19 @@ public class Room
         set
         {
             _isCleared = value;
-            spawnRoomItems();  
+            //spawnRoomItems();
+            
+            foreach (GameObject door in DoorsSpawned)
+            {
+                door.GetComponent<RoomTransport>().Active = true;
+            }
+
+            //Debug.Log("ISCLEARED");
+            // activate doors, spawn powerup
         }
     }
+
+    public bool HasEntered = false;
 
     // Reward
     public GameObject Reward = null;
@@ -63,10 +73,16 @@ public class Room
     // Indices: 0 and 1 North, 2 and 3 West, 4 and 5 South, 6 and 7 East
     public Room[] ConnectedRooms = new Room[8];
 
+    // Room Manager
+    public RoomManager Manager;
+
+    /// GameObjects in Room
     // Enemies
     public List<GameObject> EnemiesSpawned = new List<GameObject>();
+    // Doors
+    public List<GameObject> DoorsSpawned = new List<GameObject>(); // Could change DoorsSpawned to an array of 8 since there will always only ever be 8 doors
 
-    // Methods 
+    /// Methods 
 
     // Constructors
 
@@ -77,20 +93,22 @@ public class Room
         Column = column;
         Width = width;
         Height = height;
+        Manager = new RoomManager(this);
         isAlwaysClearedRoom(cleared);
-
     }
 
-    public Room (RoomTypes type, int row, int column, int width = 1, int height = 1, bool cleared = false) {
+    public Room(RoomTypes type, int row, int column, int width = 1, int height = 1, bool cleared = false)
+    {
         Type = type;
         Row = row;
         Column = column;
         Width = width;
         Height = height;
+        Manager = new RoomManager(this);
         isAlwaysClearedRoom(cleared);
     }
 
-    // Pre generaiton Related
+    // Pre Generation Related
     private static RoomTypes getRandomType(int start = 0, int end = 2) // end is exclusive
     {
         return (RoomTypes)Random.Range(start, end); // might have to cast to int first?
@@ -107,7 +125,7 @@ public class Room
             IsCleared = cleared;
         }
     }
-    
+
     // Room Generation
     public void SetReward()
     {
@@ -136,7 +154,18 @@ public class Room
         //Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
         EnemiesSpawned.Clear();
 
-        spawnRoomItems();
+        if (!HasEntered)
+        {
+            Debug.Log("Obtaining Room Entities");
+            getAllRoomEntities();
+        }
+        else
+        {
+            //Debug.Log("Spawning Entities");
+            Manager.SpawnRoomEntities();
+        }
+
+        // spawnRoomItems();
 
         GameObject player = GameObject.FindWithTag("Player"); // can be repalced with instance
         GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
@@ -153,15 +182,36 @@ public class Room
             }
         }
 
-        // Debug.Log("IsCleared: " + IsCleared);
-        Debug.Log("Room: " + Row + " " + Column);
+        HasEntered = true;
+    }
 
-        /*
-        foreach (Room r in ConnectedRooms)
+    private void getAllRoomEntities()
+    {
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+
+        foreach (GameObject o in spawners)
         {
-            Debug.Log(r.RoomName);
+            o.GetComponent<Spawner>().AddObjectToRoom();
         }
-        */
+    }
+
+    /// this doesnt work in general bc once the player leaves the scene the gameobject is destroyed so it cant be coned
+    /// therefore, dontdestroyonload may be the only way
+    private void spawnRoomEntities()
+    {
+        // Enemies
+        if (EnemiesSpawned.Count > 0 && !IsCleared)
+        {
+            foreach (GameObject enemy in EnemiesSpawned)
+            {
+                GameObject.Instantiate(enemy);
+            }
+        }
+    }
+
+    private void spawnReward()
+    {
+
     }
 
     private void spawnRoomItems()

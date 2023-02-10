@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextFloor: 0
+  Direction: -1
+  Active: 0
 --- !u!65 &9196489595442112751
 BoxCollider:
   m_ObjectHideFlags: 0

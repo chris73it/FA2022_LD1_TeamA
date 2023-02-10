@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
         SoundSource = GetComponent<AudioSource>();
         CurrentHealth = MaxHealth;
     }
-    private void Update() 
+    private void Update()
     {
         /*
         if (Input.GetKeyDown("k") && gameObject.tag == "Player") //Debug
@@ -75,7 +75,7 @@ public class Health : MonoBehaviour
         if (EntityCombat.Invulnerability <= 0 || IsDead) // Obstacle doesn't need a Combat
         {
             CurrentHealth -= amount;
-            
+
 
             if (gameObject.tag == "Player")
             {
@@ -106,7 +106,7 @@ public class Health : MonoBehaviour
     public void Die()
     {
         IsDead = true;
-        
+
         if (gameObject.tag == "Player")
         {
             AudioSource.PlayClipAtPoint(SoundClips[1], transform.position, GameManager.Instance.SoundVolume / 10f);
@@ -118,22 +118,18 @@ public class Health : MonoBehaviour
             // Drop pickup chance
             // if no more enemies in room, set room to is cleared
 
-            //Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
-            for (int i = 0; i < FloorManager.CurrentRoom.EnemiesSpawned.Count; i++)
+            /*ebug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
+            for (int i = 0; i < FloorManager.CurrentRoom.EnemiesSpawned.Count; i++) 
             {
                 if (gameObject == FloorManager.CurrentRoom.EnemiesSpawned[i])
                 {
-                    FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject);
+                    FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject); // onyl needs this
                     Debug.Log("Enemies Spawned:" + FloorManager.CurrentRoom.EnemiesSpawned.Count);
 
                     break;
                 }
             }
-
-            if (FloorManager.CurrentRoom.EnemiesSpawned.Count <= 0) // The enemy is counted in the array before its destroyed so the length <= 1
-            {
-                FloorManager.CurrentRoom.IsCleared = true;
-            }
+            */
 
             if (Random.Range(0f, 1f) >= 0.75f)
             {
@@ -141,7 +137,8 @@ public class Health : MonoBehaviour
             }
 
             Destroy(gameObject);
-        } else
+        }
+        else
         {
             if (Random.Range(0f, 1f) >= 0.25f)
             {
@@ -150,5 +147,32 @@ public class Health : MonoBehaviour
             AudioSource.PlayClipAtPoint(SoundClips[0], transform.position, GameManager.Instance.SoundVolume / 10f);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (gameObject.tag == "Enemy")
+        {
+            if (FloorManager.CurrentRoom.EnemiesSpawned.Contains(gameObject)) // O(a) maybe we can just get rid of the check and base it off HasEntered
+            {
+                FloorManager.CurrentRoom.EnemiesSpawned.Remove(gameObject);
+            }
+
+            if (FloorManager.CurrentRoom.EnemiesSpawned.Count <= 0) // The enemy is counted in the array before its destroyed so the length <= 1, deprecated since enemy count is cleared
+            {
+                FloorManager.CurrentRoom.IsCleared = true;
+            }
+        }
+        else if (gameObject.tag == "Obstacle")
+        {
+            /*
+            if (FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().ObstaclesSpawned.Contains(gameObject))
+            {
+                FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().ObstaclesSpawned.Remove(gameObject);
+            }
+            */
+        }
+
+
     }
 }

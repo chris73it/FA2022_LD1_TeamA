@@ -16,13 +16,29 @@ public class PickupLogic : MonoBehaviour
     }
     public Animator Animator;
 
-    public PickupTypes Type;
+    public PickupTypes type;
+    public PickupTypes Type { 
+        get 
+        {
+            return type; 
+        } 
+        set 
+        { 
+            type = value;  
+            Animator.SetInteger("ItemType", (int)Type);
+        } 
+    }
     public int Value = 0;
     public Price ShopCost;
     public bool Active = false;
+    public bool Consumed = false;
 
     private void Awake()
     {
+        SoundSource = GetComponent<AudioSource>();
+
+        Animator = GetComponentInChildren<Animator>();
+
         if (FloorManager.CurrentRoom.Type == Room.RoomTypes.ShopRoom)
         {
             RandomizeType(1);
@@ -32,15 +48,9 @@ public class PickupLogic : MonoBehaviour
             RandomizeType();
         }
 
-        SoundSource = GetComponent<AudioSource>();
-
         ShopCost.Cost = 0;
-        
+
         Value = Random.Range(1, 3);
-
-        Animator = GetComponentInChildren<Animator>();
-
-        Animator.SetInteger("ItemType", (int)Type);
 
         Active = true;
     }
@@ -90,8 +100,18 @@ public class PickupLogic : MonoBehaviour
                 }
 
                 Debug.Log("You got " + Value + " " + PickupTypes.GetName(typeof(PickupTypes), Type));
+                Consumed = true;
                 Destroy(gameObject);
             }
         }
-    }    
+    }
+
+    private void OnDestroy()
+    {
+        if (!Consumed)
+        {
+            Debug.Log("Pickup Added");
+            FloorManager.PreviousRoom.Manager.PickupsSpawned.Add((this, this.gameObject.transform.position, this.gameObject.transform.rotation));
+        }
+    }
 }

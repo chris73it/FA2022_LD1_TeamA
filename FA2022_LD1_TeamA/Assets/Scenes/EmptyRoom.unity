@@ -9164,6 +9164,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2145225911207996290, guid: 4d0eb10259e3b1b4a869aabb0a8b3988, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560065695654217177, guid: 4d0eb10259e3b1b4a869aabb0a8b3988, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4104822971150148576, guid: 4d0eb10259e3b1b4a869aabb0a8b3988, type: 3}
       propertyPath: m_Name
       value: MediumDoorSet

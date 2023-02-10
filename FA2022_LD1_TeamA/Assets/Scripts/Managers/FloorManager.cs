@@ -32,26 +32,29 @@ public class FloorManager : MonoBehaviour
 
     // Powerup List
     public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
-    public List<GameObject> ForestPowerupsPool; 
+    public List<GameObject> ForestPowerupsPool;
 
-    //public static List<GameObject> PickupsList;
-    //public static List<GameObject> EnemiesList;
+    // Prefabs
+    public GameObject PickupPrefab;
 
     // Room Switching
-    private static Room _currentRoom;
+    private static Room currentRoom;
     public static Room CurrentRoom 
     {
         get 
         { 
-            return _currentRoom; 
+            return currentRoom; 
         }
         set
         {
-            _currentRoom = value;
+            PreviousRoom = currentRoom;
+            currentRoom = value;
 
-            SceneManager.LoadScene(_currentRoom.RoomName, LoadSceneMode.Single);
+            SceneManager.LoadScene(currentRoom.RoomName, LoadSceneMode.Single);
         }
     }
+
+    public static Room PreviousRoom;
 
     // Static Rooms
     public static Room StartingRoom { get; set; }
