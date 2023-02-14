@@ -66,3 +66,10 @@ MonoBehaviour:
   - {fileID: 3681328486093042243, guid: c0f2f0e5b3f417046af0aab0a1a82b96, type: 3}
   ForestPowerupsPool: []
   PickupPrefab: {fileID: 5178806108090705305, guid: 2d8cad7c029fbd44a9d0e0b6b889fb45, type: 3}
+  PowerupPrefabs:
+  - {fileID: 6751494983849958918, guid: cca38d383d17d4b488cc7d22d40d8971, type: 3}
+  - {fileID: 3681328486093042243, guid: c0f2f0e5b3f417046af0aab0a1a82b96, type: 3}
+  - {fileID: 7959728355601289928, guid: b1a85e260309198469615a51af0a11b1, type: 3}
+  - {fileID: 7349973125705149942, guid: e6e80c8f1d246664baf4be0f0e86730a, type: 3}
+  ObstaclePrefabs:
+  - {fileID: 3174142538534400647, guid: e6dfd2eef201f9342b5727c399833afe, type: 3}

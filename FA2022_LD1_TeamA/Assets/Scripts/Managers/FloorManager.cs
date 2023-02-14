@@ -36,6 +36,8 @@ public class FloorManager : MonoBehaviour
 
     // Prefabs
     public GameObject PickupPrefab;
+    public List<GameObject> PowerupPrefabs;
+    public List<GameObject> ObstaclePrefabs;
 
     // Room Switching
     private static Room currentRoom;
