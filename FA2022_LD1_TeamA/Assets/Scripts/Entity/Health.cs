@@ -99,6 +99,7 @@ public class Health : MonoBehaviour
 
             if (CurrentHealth <= 0)
             {
+                IsDead = true;
                 Die();
             }
 
@@ -109,8 +110,6 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        IsDead = true;
-
         if (gameObject.tag == "Player")
         {
             AudioSource.PlayClipAtPoint(SoundClips[1], transform.position, GameManager.Instance.SoundVolume / 10f);
