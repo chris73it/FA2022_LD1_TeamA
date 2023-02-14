@@ -28,8 +28,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _DstBlend: 10
-    - _Glossiness: 0.85
-    - _Metallic: 0.522
+    - _Glossiness: 1
+    - _Metallic: 0.734
     - _Mode: 2
     - _SrcBlend: 5
     - _ZWrite: 0
