@@ -15,10 +15,10 @@ public class RoomManager
     public List<(PickupLogic, Vector3, Quaternion)> PickupsSpawned = new List<(PickupLogic, Vector3, Quaternion)>();
 
     // Powerups
-    public List<GameObject> PowerupsSpawned = new List<GameObject>();
+    public List<(PowerupParent, Vector3, Quaternion)> PowerupsSpawned = new List<(PowerupParent, Vector3, Quaternion)>();
 
     // Obstacles
-    public List<GameObject> ObstaclesSpawned = new List<GameObject>();
+    public List<(int, Vector3, Quaternion)> ObstaclesSpawned = new List<(int, Vector3, Quaternion)>();
 
     // Traps
     public List<GameObject> TrapsSpawned = new List<GameObject>();
@@ -40,36 +40,42 @@ public class RoomManager
             foreach ((PickupLogic, Vector3, Quaternion) pickup in PickupsSpawned.ToArray())
             {
                 o = GameObject.Instantiate(FloorManager.Instance.PickupPrefab, pickup.Item2, pickup.Item3); //breaks because when one is spawned, it adds to the list again
-
+                
                 o.GetComponent<PickupLogic>().Type = pickup.Item1.Type;
                 o.GetComponent<PickupLogic>().Value = pickup.Item1.Value; 
+                o.GetComponent<PickupLogic>().ShopCost = pickup.Item1.ShopCost; 
             }
-  
+
+            PickupsSpawned.Clear();
         } else
         {
             Debug.Log("PickupsSpawned empty");
         }
-        /*
-        // Powerup
-        if (PowerupsSpawned.Count > 0 && Owner.IsCleared)
-        {
-            foreach (GameObject powerup in PowerupsSpawned)
-            {
-                GameObject.Instantiate(powerup); // this doesnt work bc powerups arent stored in spawners
-            }
-        }
 
-        
+        // Powerup
+        if (PowerupsSpawned.Count > 0)
+        {
+            foreach ((PowerupParent, Vector3, Quaternion) powerup in PowerupsSpawned)
+            {
+                GameObject.Instantiate(FloorManager.Instance.PowerupPrefabs[powerup.Item1.Index], powerup.Item2, powerup.Item3); 
+            }
+
+            PowerupsSpawned.Clear();
+        } else
+        {
+            Debug.Log("PowerupsSpawned empty");
+        }
 
         // Obstacles
         if (ObstaclesSpawned.Count > 0)
         {
-            foreach (GameObject obstacle in ObstaclesSpawned)
+            foreach ((int, Vector3, Quaternion) obstacle in ObstaclesSpawned)
             {
-                GameObject.Instantiate(obstacle);
+                GameObject.Instantiate(FloorManager.Instance.ObstaclePrefabs[obstacle.Item1], obstacle.Item2, obstacle.Item3);
             }
         }
 
+        /*
         // Traps
         if (TrapsSpawned.Count > 0)
         {

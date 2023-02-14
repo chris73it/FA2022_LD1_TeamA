@@ -14,6 +14,10 @@ public class Health : MonoBehaviour
     public bool IsDoT = false;
     public Combat.DamageOverTime DoT;
 
+    /// Obstacle
+    // Position of appropriate Prefab in List
+    public int ObstacleIndex;
+
     // Audio
     public AudioSource SoundSource;
     public List<AudioClip> SoundClips;
@@ -118,7 +122,8 @@ public class Health : MonoBehaviour
             // Drop pickup chance
             // if no more enemies in room, set room to is cleared
 
-            /*ebug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
+            /*
+            Debug.Log(GameObject.FindGameObjectsWithTag("Enemy"));
             for (int i = 0; i < FloorManager.CurrentRoom.EnemiesSpawned.Count; i++) 
             {
                 if (gameObject == FloorManager.CurrentRoom.EnemiesSpawned[i])
@@ -165,12 +170,11 @@ public class Health : MonoBehaviour
         }
         else if (gameObject.tag == "Obstacle")
         {
-            /*
-            if (FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().ObstaclesSpawned.Contains(gameObject))
+            if (!IsDead)
             {
-                FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().ObstaclesSpawned.Remove(gameObject);
+                Debug.Log("Obstacle Added");
+                FloorManager.PreviousRoom.Manager.ObstaclesSpawned.Add((ObstacleIndex, this.gameObject.transform.position, this.gameObject.transform.rotation));
             }
-            */
         }
 
 

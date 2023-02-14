@@ -8,6 +8,10 @@ public class PowerupParent : MonoBehaviour
     public string ItemName;
     public string ItemDescription;
 
+    // Position of appropriate Prefab in List
+    public int Index;
+    public bool Consumed = false;
+
     // Audio
     public AudioSource SoundSource;
     public List<AudioClip> SoundClips;
@@ -28,6 +32,7 @@ public class PowerupParent : MonoBehaviour
             GameObject g = Instantiate(GameManager.Instance.PowerupUIPrefab);
             g.GetComponent<PowerupUIControl>().Activate(ItemName, ItemDescription);
             AudioSource.PlayClipAtPoint(SoundClips[0], transform.position, GameManager.Instance.SoundVolume / 10f);
+            Consumed = true;
             Destroy(gameObject);
         }
     }
@@ -44,11 +49,10 @@ public class PowerupParent : MonoBehaviour
 
     private void OnDestroy()
     {
-        /*
-        if (FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().PowerupsSpawned.Contains(gameObject))
+        if (!Consumed)
         {
-            FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().PowerupsSpawned.Remove(gameObject);
+            Debug.Log("Powerup Added");
+            FloorManager.PreviousRoom.Manager.PowerupsSpawned.Add((this, this.gameObject.transform.position, this.gameObject.transform.rotation));
         }
-        */
     }
 }

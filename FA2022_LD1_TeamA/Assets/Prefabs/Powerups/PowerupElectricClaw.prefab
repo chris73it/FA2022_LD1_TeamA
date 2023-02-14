@@ -90,6 +90,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: 
   ItemDescription: 
+  Index: 3
+  Consumed: 0
   SoundSource: {fileID: 0}
   SoundClips:
   - {fileID: 8300000, guid: c4390c9da2554e14b9eeeda7e515a1be, type: 3}
