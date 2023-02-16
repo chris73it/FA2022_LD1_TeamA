@@ -28,7 +28,9 @@ public class RoomTransport : MonoBehaviour
 
             if (!NextFloor)
             {
+                FloorManager.LastDoorDirection = Direction;
                 FloorManager.CurrentRoom = NextRoom;
+                
             }
             else
             {

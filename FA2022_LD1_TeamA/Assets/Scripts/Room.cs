@@ -167,18 +167,21 @@ public class Room
 
         // spawnRoomItems();
 
-        GameObject player = GameObject.FindWithTag("Player"); // can be repalced with instance
-        GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
+        int DoorDirection = -1;
 
-        foreach (GameObject element in o)
+       if (FloorManager.LastDoorDirection < 4)
         {
-            if (element.GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Player)
-            {
-                //Debug.Log("Player: " + player.name);
-                //player.GetComponent<CharacterController>().enabled = false;
-                player.transform.position = element.transform.position; // Enabling Auto Sync Transforms in Physics settings
-                //player.GetComponent<CharacterController>().enabled = true;
+            DoorDirection = FloorManager.LastDoorDirection + 4;
+        } else
+        {
+            DoorDirection = FloorManager.LastDoorDirection - 4;
+        }
 
+        foreach (GameObject door in DoorsSpawned)
+        {
+            if (door != null && door.transform.GetChild(1).GetComponent<Spawner>().Direction == DoorDirection)
+            {
+                GameManager.ChosenPlayerCharacter.transform.position = door.transform.GetChild(1).transform.position; // Enabling Auto Sync Transforms in Physics settings
             }
         }
 

@@ -27,8 +27,6 @@ public class FloorManager : MonoBehaviour
     public static int RoomsEntered = 0;
     public static int FloorsCompleted = 0;
     public static int RoomsToGenerate = 10;
-    // public static int BaseRoomTreeHeight = 4; // deprecated 
-    // public static int RoomTreeHeight = BaseRoomTreeHeight; // deprecated 
 
     // Powerup List
     public List<GameObject> ForestPowerupsList; // Does not reset on a game over restart
@@ -57,6 +55,7 @@ public class FloorManager : MonoBehaviour
     }
 
     public static Room PreviousRoom;
+    public static int LastDoorDirection = -1;
 
     // Static Rooms
     public static Room StartingRoom { get; set; }
@@ -79,16 +78,6 @@ public class FloorManager : MonoBehaviour
 
         //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), StartingFloor.Type);
         //SceneManager.LoadScene(roomName, LoadSceneMode.Single);
-    }
-
-    private void Update() // to be removed
-    {
-        /*
-        if (Input.GetButtonDown("Fire2"))
-        {
-            CurrentRoom.IsCleared = true;
-        }
-        */
     }
 
     /// Methods
