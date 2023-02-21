@@ -54,6 +54,12 @@ public class Room
             _isCleared = value;
             //spawnRoomItems();
             
+
+            if (Reward != null)
+            {
+                spawnReward();
+            }
+
             foreach (GameObject door in DoorsSpawned)
             {
                 door.GetComponent<RoomTransport>().Active = true;
@@ -67,6 +73,7 @@ public class Room
     public bool HasEntered = false;
 
     // Reward
+    public Transform RewardLocation;
     public GameObject Reward = null;
 
     // Connected Rooms
@@ -198,23 +205,10 @@ public class Room
         }
     }
 
-    /// this doesnt work in general bc once the player leaves the scene the gameobject is destroyed so it cant be coned
-    /// therefore, dontdestroyonload may be the only way
-    private void spawnRoomEntities()
-    {
-        // Enemies
-        if (EnemiesSpawned.Count > 0 && !IsCleared)
-        {
-            foreach (GameObject enemy in EnemiesSpawned)
-            {
-                GameObject.Instantiate(enemy);
-            }
-        }
-    }
-
     private void spawnReward()
     {
-
+        // create a gameobject spawner with type powerup that adds itself to this room
+        GameObject.Instantiate(Reward, RewardLocation);
     }
 
     private void spawnRoomItems()

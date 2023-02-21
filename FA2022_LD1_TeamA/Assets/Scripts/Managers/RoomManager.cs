@@ -57,7 +57,9 @@ public class RoomManager
         {
             foreach ((PowerupParent, Vector3, Quaternion) powerup in PowerupsSpawned)
             {
-                GameObject.Instantiate(FloorManager.Instance.PowerupPrefabs[powerup.Item1.Index], powerup.Item2, powerup.Item3); 
+                o = GameObject.Instantiate(FloorManager.Instance.PowerupPrefabs[powerup.Item1.Index], powerup.Item2, powerup.Item3);
+                
+                o.GetComponent<PowerupParent>().ShopCost = powerup.Item1.ShopCost;
             }
 
             PowerupsSpawned.Clear();

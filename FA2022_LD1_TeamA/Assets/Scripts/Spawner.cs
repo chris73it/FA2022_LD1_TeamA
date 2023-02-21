@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
     }
     public SpawnerTypes Type;
     public int Direction = -1;
+    public int Price = 0;
 
     public GameObject InstantiateObject()
     {
@@ -73,32 +74,31 @@ public class Spawner : MonoBehaviour
     {
         if (ToSpawn != null)
         {
-
             GameObject o = Instantiate(ToSpawn, gameObject.transform.position, gameObject.transform.rotation);
 
-            switch (Type)
+            if (Type == SpawnerTypes.Enemy)
             {
-                case (SpawnerTypes.Pickup):
-                    //FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().PickupsSpawned.Add((o.GetComponent<PickupLogic>(), o.gameObject.transform));
-                    break;
-
-                case (SpawnerTypes.Powerup):
-                    //FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().PowerupsSpawned.Add(o);
-                    break;
-
-                case (SpawnerTypes.Obstacles): // doesnt work bc obstacles arent spawner based
-                    //FloorManager.CurrentRoom.Manager.GetComponent<RoomManager>().ObstaclesSpawned.Add(o);
-                    break;
-
-                case (SpawnerTypes.Enemy):
-                    FloorManager.CurrentRoom.EnemiesSpawned.Add(o);
-                    break;
-
-                default:
-                    break;
+                FloorManager.CurrentRoom.EnemiesSpawned.Add(o);
+            } else if (Type == SpawnerTypes.Pickup)
+            {
+                if (Price > 0)
+                {
+                    o.GetComponent<PickupLogic>().ShopCost.Cost = Price;
+                }
             }
 
             return o;
+        } else
+        {
+            if (Type == SpawnerTypes.Powerup)
+            {
+                FloorManager.CurrentRoom.RewardLocation = gameObject.transform;
+
+                if (Price > 0)
+                {
+                    FloorManager.CurrentRoom.Reward.GetComponent<PowerupParent>().ShopCost.Cost = Price;
+                }
+            }
         }
 
         return null;
