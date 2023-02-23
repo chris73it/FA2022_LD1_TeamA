@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FloorManagerPrefab: {fileID: 8000454916787698360, guid: d37f71fdc40921344b3b04db5c3e5a51, type: 3}
+  CameraManagerPrefab: {fileID: 8431068288183403237, guid: bc4039b7e26a2b74d8e8ee8a0f1daff2, type: 3}
   PlayerUIPrefab: {fileID: 6744462993505331309, guid: 2005b6c8e826c0340b345e0e0c06fe6c, type: 3}
   PowerupUIPrefab: {fileID: 6490431705279465242, guid: 107e78165a210344b91fe7984efd19b1, type: 3}
   PlayerCharactersPrefab:
@@ -57,5 +58,6 @@ MonoBehaviour:
   TextObject: {fileID: 1500405195388231537, guid: 5f9730c4a68fed845beb18e7c3add1a9, type: 3}
   GameWonText: {fileID: 799750662961261603, guid: be44725d6fb44e44586a89bad274a7c9, type: 3}
   PreivousMenuState: 0
+  GameWon: 0
   MusicVolume: 8
   SoundVolume: 8
