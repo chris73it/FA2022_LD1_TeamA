@@ -144,12 +144,18 @@ public class WerewolfCombat : Combat
         mousePos.z = Camera.main.nearClipPlane + 1;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.y = 0f;
-        mousePos.z = mousePos.z * offsetScaleZ;
-        mousePos.x = mousePos.x * offsetScaleX;
+
         mousePos.z -= AttackerTransform.position.z;
         mousePos.x -= AttackerTransform.position.x;
+
+        /*
+        mousePos.z = mousePos.z * offsetScaleZ;
+        mousePos.x = mousePos.x * offsetScaleX;
+
         mousePos.z *= 2;
         mousePos.x *= 2;
+        */
+
         float radius = Mathf.Sqrt(Mathf.Pow(mousePos.z, 2) + Mathf.Pow(mousePos.x, 2));
         mousePos.x = mousePos.x / radius * 2;
         mousePos.z = mousePos.z / radius * 2;

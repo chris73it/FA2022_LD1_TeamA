@@ -5,25 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Reference to Self
     public static GameManager Instance;
+
+    // Prefabs
     public GameObject FloorManagerPrefab;
+    public GameObject CameraManagerPrefab;
     public GameObject PlayerUIPrefab;
     public GameObject PowerupUIPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
     public List<GameObject> Menus;
     public GameObject TextObject;
-    public static GameObject ChosenPlayerCharacter;
     public GameObject GameWonText;
-    public bool GameWon = false;
-    public static int GameWinCondition = 3;
-    public enum GameStates
-    {
-        Menu,
-        Game,
-        Loading,
-        GameOver,
-    }
 
+    // Current Character
+    public static GameObject ChosenPlayerCharacter;
+
+    // Menu States
     public enum MenuStates
     {
         None,
@@ -78,6 +76,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Game States
+    public enum GameStates
+    {
+        Menu,
+        Game,
+        Loading,
+        GameOver,
+    }
+
+    public bool GameWon = false;
+
     private GameStates gameState = GameStates.Menu;
     public GameStates GameState
     {
@@ -94,12 +103,17 @@ public class GameManager : MonoBehaviour
                 case GameStates.Menu:              
                     Destroy(PlayerUIControl.Instance.gameObject); // Destroying all of these should be in a separate method
                     Destroy(gameObject);
+                    Destroy(FloorManager.Instance.gameObject);
+                    Destroy(CameraManager.Instance.gameObject);
                     FloorManager.Instance.NextFloor = false;
                     SceneManager.LoadScene("MainMenu");
                     break;
 
                 case GameStates.Game:
+                    Debug.Log("Game State = Game");
                     MenuState = MenuStates.None;
+                    DontDestroyOnLoad(Instantiate(CameraManagerPrefab));
+
                     // Debug.Log("Height: " + FloorManager.RoomTreeHeight);
                     break;
 
@@ -163,6 +177,11 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    // Win Condtion
+    public static int GameWinCondition = 3;
+
+    // Sound Settings
 
     public int MusicVolume = 8;
     public int SoundVolume = 8;
