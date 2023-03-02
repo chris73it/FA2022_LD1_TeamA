@@ -16,7 +16,6 @@ public class CameraManager : MonoBehaviour
     }
     private void Update()
     {
-
         if (GameManager.ChosenPlayerCharacter != null)
         {
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(GameManager.ChosenPlayerCharacter.transform.position.x,

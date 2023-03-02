@@ -233,6 +233,7 @@ MonoBehaviour:
   Invulnerability: 0
   StunTimer: 0
   StunChance: 0
+  Animator: {fileID: 0}
   Sprite: {fileID: 529336495728802951}
   DamagedDuration: 0
   DamagedTimer: 0
@@ -241,7 +242,7 @@ MonoBehaviour:
   SoundClips:
   - {fileID: 8300000, guid: adf17681b9d46f64094d473e82c56857, type: 3}
   - {fileID: 8300000, guid: c65162623b655884b80af2e8d058ee22, type: 3}
-  AttackDistance: 64
+  AttackDistance: 2
   AttackRadius: 1
   offsetScaleX: 0
   offsetScaleZ: 0

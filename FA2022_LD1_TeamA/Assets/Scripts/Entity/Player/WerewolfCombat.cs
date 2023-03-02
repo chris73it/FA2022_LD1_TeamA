@@ -140,6 +140,45 @@ public class WerewolfCombat : Combat
     }
     private Vector3 getAttackDistance()
     {
+
+        Vector3 attackPos = new Vector3(-10, -10, -10);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            attackPos = hit.point;
+            attackPos -= GameManager.ChosenPlayerCharacter.transform.position;
+            attackPos.y = 0;
+            attackPos.Normalize();
+            attackPos *= AttackDistance;
+        }
+
+        return attackPos;
+        /*
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.nearClipPlane + 1;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        mousePos.y = 0;
+        mousePos -= GameManager.ChosenPlayerCharacter.transform.position;
+       
+        //mousePos *= offsetScaleX;
+
+        mousePos.Normalize();
+
+        mousePos *= AttackDistance;
+
+        //Debug.Log("mousePos: " + mousePos + "\nPlayerTransform: " + GameManager.ChosenPlayerCharacter.transform.position);
+
+        return mousePos;
+
+        */
+
+
+        /*
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.nearClipPlane + 1;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -148,13 +187,11 @@ public class WerewolfCombat : Combat
         mousePos.z -= AttackerTransform.position.z;
         mousePos.x -= AttackerTransform.position.x;
 
-        /*
         mousePos.z = mousePos.z * offsetScaleZ;
         mousePos.x = mousePos.x * offsetScaleX;
 
         mousePos.z *= 2;
         mousePos.x *= 2;
-        */
 
         float radius = Mathf.Sqrt(Mathf.Pow(mousePos.z, 2) + Mathf.Pow(mousePos.x, 2));
         mousePos.x = mousePos.x / radius * 2;
@@ -162,6 +199,7 @@ public class WerewolfCombat : Combat
 
         Vector3 distance = mousePos;
         return distance;
+        */
     }
     private Vector3 getEnemyDirection(Vector3 enemyDistance)
     {
