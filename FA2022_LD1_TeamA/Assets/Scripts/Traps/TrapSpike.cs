@@ -4,37 +4,75 @@ using UnityEngine;
 
 public class TrapSpike : TrapParent
 {
-    // Time interval
-    public float TriggerTime = 2.5f; //1.5 seconds
+    // Active Duration
+    public float ActiveDuration = 3f;
 
-    // Timer
-    public float ToggleTimer = 0f;
+    // Active Timer
+    public float ActiveTimer = 0f;
 
     // Size
-    public Vector3 Size = new Vector3(64, 64, 64);
+    public float Size = 0.25f;
 
-    // Damage
+    // CanDamage
     public bool CanDamage = false;
 
     public override void Initialize()
     {
         Damage = 1;
+        Size *= transform.parent.transform.localScale.x;
     }
 
     private void Update()
     {
-        if (ToggleTimer > TriggerTime)
+        if (ActiveTimer > ActiveDuration)
         {
-            CanDamage = !CanDamage;
-            ToggleTimer = 0;
+            if (!CanDamage)
+            {
+                Animator.SetTrigger("Attack");
+                ActiveTimer = 0;
+            } else
+            {
+                FlipCanDamage();
+                ActiveTimer = 0;
+                Animator.SetTrigger("FinishAttack");
+            }
+        } else
+        {
+            ActiveTimer += Time.deltaTime;
+
+            if (CanDamage)
+            {
+                Attack();
+            }
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void FlipCanDamage()
     {
-        if (CanDamage && collision.gameObject.tag == "Player")
+        CanDamage = !CanDamage;
+    }
+
+    public void Attack()
+    {
+        Collider[] Damaged = Physics.OverlapSphere(transform.position, Size);
+
+        for (int i = 0; i < Damaged.Length; i++)
         {
-            collision.gameObject.GetComponent<Health>().TakeDamage(Damage);
+            if (Damaged[i].gameObject.tag == "Player")
+            {
+                // Damage
+                Debug.Log(Damaged[i].name);
+                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                break;
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (CanDamage)
+        {
+            Gizmos.DrawWireSphere(transform.position, Size);
         }
     }
 }

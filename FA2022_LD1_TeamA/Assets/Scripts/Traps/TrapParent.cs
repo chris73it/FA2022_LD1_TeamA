@@ -6,6 +6,8 @@ public class TrapParent : MonoBehaviour
 {
     public int Damage;
 
+    public Animator Animator;
+
     public virtual void Initialize()
     {
 
