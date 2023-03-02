@@ -10,6 +10,9 @@ public class TrapSpike : TrapParent
     // Timer
     public float ToggleTimer = 0f;
 
+    // Size
+    public Vector3 Size = new Vector3(64, 64, 64);
+
     // Damage
     public bool CanDamage = false;
 
@@ -29,9 +32,9 @@ public class TrapSpike : TrapParent
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (CanDamage)
+        if (CanDamage && collision.gameObject.tag == "Player")
         {
-
+            collision.gameObject.GetComponent<Health>().TakeDamage(Damage);
         }
     }
 }

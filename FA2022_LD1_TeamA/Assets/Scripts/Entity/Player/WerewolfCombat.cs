@@ -141,13 +141,13 @@ public class WerewolfCombat : Combat
     private Vector3 getAttackDistance()
     {
 
-        Vector3 attackPos = new Vector3(-10, -10, -10);
+        Vector3 attackPos = new Vector3(0, 0, 0);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 300))
         {
             attackPos = hit.point;
             attackPos -= GameManager.ChosenPlayerCharacter.transform.position;
