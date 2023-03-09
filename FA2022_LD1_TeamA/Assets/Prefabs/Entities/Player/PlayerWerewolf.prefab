@@ -141,10 +141,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8510391657642510317, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8510391657642510317, guid: 54e8beb294045ef4eab23f2393a55112, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}

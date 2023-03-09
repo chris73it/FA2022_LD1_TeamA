@@ -6,24 +6,22 @@ public class WerewolfCombat : Combat
 {
     public float AttackDistance;
     public float AttackRadius;
-    public float offsetScaleX;
-    public float offsetScaleZ;
-    public float ChargeCooldown;
-    public Vector3 ChargeDirection;
-    public bool Charging;
-    public bool Charged;
-    public float ChargeAttackTime;
+    public float DashCooldown;
+    public float DashTimeInitial;
+    public float DashDistance;
+    public Vector3 DashDirection;
+    public bool DashCancelled;
+    public float DashTime;
     public int Combo;
     public float ComboCooldown;
 
     void Start()
     {
-        offsetScaleX = 8.4f;
-        offsetScaleZ = 8.4f;
-        ChargeCooldown = 0f;
-        Charging = false;
-        Charged = false;
-        ChargeAttackTime = 0f;
+        DashCooldown = 0f;
+        DashTimeInitial = 0.1f;
+        DashCancelled = false;
+        DashTime = 0f;
+        DashDistance = 5f;
         Combo = 0;
         ComboCooldown = 0f;
     }
@@ -31,79 +29,90 @@ public class WerewolfCombat : Combat
     {
         BaseTimers();
 
+        // Inputs
         if (IsStunned <= 0f)
         {
+            // Light Attack
             if (AttackCooldown <= 0)
             {
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("LightAttack"))
                 {
                     Animator.SetTrigger("Attacking");
                     if (Combo == 0)
                     {
-                        Attack();
+                        Light1();
                     }
                     else if (Combo == 1)
                     {
-                        Attack2();
+                        Light2();
                     }
                     else if (Combo == 2)
                     {
-                        Attack3();
+                        Light3();
                     }
                 }
+            }
 
-                if (Input.GetButtonDown("Fire2") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
+            // Heavy Attack
+
+            // Dash
+            if (DashCooldown <= 0)
+            {
+                if (Input.GetButtonDown("Dash") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
                 {
-                    Animator.SetTrigger("Attacking");
+                    //Animator.SetTrigger("Attacking");
                     GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().UseStamina(0.25f);
                     SetGeneralInvulnerability(GetComponent<Health>().HitInvulnerability);
-                    ChargeAttack();
+                    Dash();
+                    DashTime = DashTimeInitial;
                 }
             }
         }
         
-        if (ChargeCooldown > 0)
+        /// Cooldowns
+        // Dash
+        if (DashCooldown > 0)
         {
-            ChargeCooldown -= Time.deltaTime;
-            controller.Move(ChargeDirection * Time.deltaTime * 10);
-            if (ChargeCooldown <= 0)
-            {
-                AttackRadius = 3;
-                Charged = true;
-                ChargeAttackTime = 0.2f;
-                Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
-                if (Damaged.Length > 0)
-                {
-                    OnDamage(Damaged);
-                }
-            }
+            DashCooldown -= Time.deltaTime;
         }
 
+        // Combo
         if (ComboCooldown > 0)
         {
             ComboCooldown -= Time.deltaTime;
-        }
-        if (ComboCooldown <= 0)
-        {
-            Combo = 0;
-        }
 
-        if (ChargeCooldown > 0)
-        {
-            ChargeCooldown -= Time.deltaTime;
-            controller.Move(ChargeDirection * Time.deltaTime * 10);
-        }
-        if (ChargeCooldown <= 0 && Charging == true)
-        {
-            AttackRadius = 3;
-            Charging = false;
-            Charged = true;
-            ChargeAttackTime = 0.2f;
-            Collider[] Damaged = Physics.OverlapBox(AttackerTransform.position, new Vector3(AttackRadius, AttackRadius, AttackRadius));
-            if (Damaged.Length > 0)
+            if (ComboCooldown <= 0)
             {
-                OnDamage(Damaged);
+                Combo = 0;
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        // Dashing
+        if (DashTime > 0)
+        {
+            DashTime -= Time.deltaTime;
+            controller.Move((DashDistance/DashTimeInitial) * Time.deltaTime * DashDirection);
+
+            // check for obstacles? if touching an obstacle, dashtime = 0;
+
+            if (DashTime <= 0 || DashCancelled)
+            {
+                DashCancelled = false;
+                DashTime = 0;
+                DashCooldown = 1.25f;
+            }
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Cancel Dash if player collides with Obstacle
+        if (DashTime > 0)
+        {
+            DashCancelled = hit.collider.gameObject.CompareTag("Obstacle");
         }
     }
 
@@ -115,8 +124,7 @@ public class WerewolfCombat : Combat
             {
                 // Damage
                 Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage); 
-                Damaged[i].gameObject.GetComponent<Combat>().OnDamageAnimation(); // redundant???
-                
+               
                 if (DoT.Intialized)
                 {
                     Damaged[i].gameObject.GetComponent<Health>().DoT = DoT;
@@ -140,7 +148,6 @@ public class WerewolfCombat : Combat
     }
     private Vector3 getAttackDistance()
     {
-
         Vector3 attackPos = new Vector3(0, 0, 0);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -157,60 +164,10 @@ public class WerewolfCombat : Combat
         }
 
         return attackPos;
-        /*
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane + 1;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-        mousePos.y = 0;
-        mousePos -= GameManager.ChosenPlayerCharacter.transform.position;
-       
-        //mousePos *= offsetScaleX;
-
-        mousePos.Normalize();
-
-        mousePos *= AttackDistance;
-
-        //Debug.Log("mousePos: " + mousePos + "\nPlayerTransform: " + GameManager.ChosenPlayerCharacter.transform.position);
-
-        return mousePos;
-
-        */
-
-
-        /*
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane + 1;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        mousePos.y = 0f;
-
-        mousePos.z -= AttackerTransform.position.z;
-        mousePos.x -= AttackerTransform.position.x;
-
-        mousePos.z = mousePos.z * offsetScaleZ;
-        mousePos.x = mousePos.x * offsetScaleX;
-
-        mousePos.z *= 2;
-        mousePos.x *= 2;
-
-        float radius = Mathf.Sqrt(Mathf.Pow(mousePos.z, 2) + Mathf.Pow(mousePos.x, 2));
-        mousePos.x = mousePos.x / radius * 2;
-        mousePos.z = mousePos.z / radius * 2;
-
-        Vector3 distance = mousePos;
-        return distance;
-        */
     }
-    private Vector3 getEnemyDirection(Vector3 enemyDistance)
-    {
-        enemyDistance.z -= AttackerTransform.position.z;
-        enemyDistance.x -= AttackerTransform.position.x;
-        float radius = Mathf.Sqrt(Mathf.Pow(enemyDistance.z, 2) + Mathf.Pow(enemyDistance.x, 2));
-        enemyDistance.z = enemyDistance.z / radius * 2;
-        enemyDistance.x = enemyDistance.x / radius * 2;
-        return enemyDistance;
-    }
-    public override void Attack()
+
+    // Light Attacks
+    public void Light1()
     {
         Debug.Log("Attack");
 
@@ -225,7 +182,7 @@ public class WerewolfCombat : Combat
         Combo = 1;
         ComboCooldown = 2f;
     }
-    public void Attack2()
+    public void Light2()
     {
         Debug.Log("Attack");
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
@@ -239,7 +196,7 @@ public class WerewolfCombat : Combat
         Combo = 2;
         ComboCooldown = 2f;
     }
-    public void Attack3()
+    public void Light3()
     {
         Debug.Log("Attack");
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
@@ -253,14 +210,16 @@ public class WerewolfCombat : Combat
         Combo = 3;
         ComboCooldown = 1f;
     }
-    public override void ChargeAttack()
+    
+    // Dash
+    public override void Dash()
     {
-        ChargeDirection = getAttackDistance();
+        DashDirection = getAttackDistance();
+        DashDirection.Normalize();
         SoundSource.PlayOneShot(SoundClips[1], GameManager.Instance.SoundVolume / 10f);
-
-        ChargeCooldown = 0.4f;
-        Charging = true;
     }
+
+    // Gizmos
     void OnDrawGizmos()
     {
         if (Combo == 3)
@@ -280,16 +239,7 @@ public class WerewolfCombat : Combat
             Gizmos.color = Color.green;
         }
 
-        if (Charged == true)
-        {
-            Gizmos.DrawWireSphere(AttackerTransform.position, 3);
-            ChargeAttackTime -= Time.deltaTime;
-            if (ChargeAttackTime <= 0)
-            {
-                Charged = false;
-            }
-        }
-        else if (Combo == 0)
+        if (Combo == 0)
         {
             Gizmos.DrawWireSphere(AttackerTransform.position + getAttackDistance(), 1);
         }

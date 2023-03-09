@@ -113,7 +113,7 @@ public class Combat : MonoBehaviour
     }
 
 
-    public virtual void ChargeAttack()
+    public virtual void Dash()
     {
         Debug.Log("Using Base Combat");
     }
