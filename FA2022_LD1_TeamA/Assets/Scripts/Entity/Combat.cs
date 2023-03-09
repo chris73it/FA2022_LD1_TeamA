@@ -16,6 +16,8 @@ public class Combat : MonoBehaviour
     public List<GameObject> BulletsCreated;
     public float Invulnerability;
 
+
+    // Entity's Stun Timer
     private float isStunned = 0f;
     public float IsStunned
     {
@@ -23,12 +25,15 @@ public class Combat : MonoBehaviour
         set 
         { 
             isStunned = value;
-            // do animations
+            StunAnimation();
         }
-    } // Determines how long a person is stunned for
+    } 
+
+    // Entity's Attacking Stun Chance
     public float StunTimer = 0f; // Determines how long the attacker's stunning lasts for
     public float StunChance = 0f; // Determines how often a stun attack lands
 
+  
     public struct DamageOverTime
     {
         public int Damage;
@@ -89,6 +94,11 @@ public class Combat : MonoBehaviour
         if (IsStunned > 0f)
         {
             IsStunned -= Time.deltaTime;
+
+            if (IsStunned <= 0f)
+            {
+                StunAnimation();
+            }
         }
 
         if (DamagedTimer > 0f)
@@ -150,6 +160,21 @@ public class Combat : MonoBehaviour
         Sprite.color = c;
     }
 
+    public void StunAnimation()
+    {
+        Color c = Sprite.color;
+
+        if (IsStunned > 0f)
+        {
+            c.b = 0f;
+       
+        } else
+        {
+            c.b = 255f;
+        }
+
+        Sprite.color = c;
+    }
 
     public void AnimationInitialization()
     {

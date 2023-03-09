@@ -4,15 +4,63 @@ using UnityEngine;
 
 public class WerewolfCombat : Combat
 {
+
+    // HEAVY ATTACKS, COMBOS
+
+    /// General
+    // How far an attack hitbox should be from the player
     public float AttackDistance;
+
+    // How big the attack's hitbox is
     public float AttackRadius;
+
+    /// Input Logger
+    // Input Types
+    public enum AttackTypes
+    {
+        Light1,
+        Light2,
+        Light3,
+        Heavy1,
+        Heavy2,
+        Heavy3,
+        Dash,
+    }
+
+    // Stores the attack inputs of the player
+    public List<AttackTypes> AttackInputs;
+
+    // How long an Input lasts before Input Log is emptied
+    public float InputTimer;
+
+    // Initial value for InputTimer
+    public const float InputDuration = 3f;
+
+    /// Dash 
+ 
+    // How long before a player can dash again
     public float DashCooldown;
+
+    // How long a dash should take
     public float DashTimeInitial;
+
+    // How far a dash should go
     public float DashDistance;
+
+    // Which direction a dash should happen
     public Vector3 DashDirection;
+
+    // Dash cancelled because of obstacles or something else
     public bool DashCancelled;
+
+    // How long until the Dash ends
     public float DashTime;
+
+    /// Combo
+    // Current Combo counter
     public int Combo;
+
+    // How long until the combo ends
     public float ComboCooldown;
 
     void Start()
@@ -23,6 +71,7 @@ public class WerewolfCombat : Combat
         DashTime = 0f;
         DashDistance = 5f;
         Combo = 0;
+        AttackInputs = new List<AttackTypes>();
         ComboCooldown = 0f;
     }
     void Update()
@@ -32,9 +81,9 @@ public class WerewolfCombat : Combat
         // Inputs
         if (IsStunned <= 0f)
         {
-            // Light Attack
             if (AttackCooldown <= 0)
             {
+                // Light Attack
                 if (Input.GetButtonDown("LightAttack"))
                 {
                     Animator.SetTrigger("Attacking");
@@ -51,9 +100,14 @@ public class WerewolfCombat : Combat
                         Light3();
                     }
                 }
-            }
 
-            // Heavy Attack
+                // Heavy Attack
+                if (Input.GetButtonDown("HeavyAttack"))
+                {
+                    Animator.SetTrigger("Attacking");
+
+                }
+            }
 
             // Dash
             if (DashCooldown <= 0)
@@ -70,6 +124,12 @@ public class WerewolfCombat : Combat
         }
         
         /// Cooldowns
+        // Attack
+        if (AttackCooldown > 0)
+        {
+            AttackCooldown -= Time.deltaTime;
+        }
+
         // Dash
         if (DashCooldown > 0)
         {
@@ -84,6 +144,18 @@ public class WerewolfCombat : Combat
             if (ComboCooldown <= 0)
             {
                 Combo = 0;
+            }
+        }
+
+        // Inputs
+        if (AttackInputs.Count > 0 && InputTimer > 0f)
+        {
+            InputTimer -= Time.deltaTime;
+
+            if (InputTimer <= 0f)
+            {
+                AttackInputs.Clear();
+                InputTimer = InputDuration;
             }
         }
     }
@@ -103,6 +175,7 @@ public class WerewolfCombat : Combat
                 DashCancelled = false;
                 DashTime = 0;
                 DashCooldown = 1.25f;
+                AttackInputs.Add(AttackTypes.Dash);
             }
         }
     }
@@ -169,7 +242,7 @@ public class WerewolfCombat : Combat
     // Light Attacks
     public void Light1()
     {
-        Debug.Log("Attack");
+        Debug.Log("Light Attack 1");
 
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
 
@@ -180,11 +253,14 @@ public class WerewolfCombat : Combat
             OnDamage(Damaged);
         }
         Combo = 1;
+        AttackCooldown = 0.25f;
         ComboCooldown = 2f;
+        AttackInputs.Add(AttackTypes.Light1);
     }
     public void Light2()
     {
-        Debug.Log("Attack");
+        Debug.Log("Light Attack 2");
+
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
 
         AttackRadius = 2f;
@@ -194,11 +270,14 @@ public class WerewolfCombat : Combat
             OnDamage(Damaged);
         }
         Combo = 2;
+        AttackCooldown = 0.25f;
         ComboCooldown = 2f;
+        AttackInputs.Add(AttackTypes.Light2);
     }
     public void Light3()
     {
-        Debug.Log("Attack");
+        Debug.Log("Light Attack 3");
+
         SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
 
         AttackRadius = 2f;
@@ -208,9 +287,11 @@ public class WerewolfCombat : Combat
             OnDamage(Damaged);
         }
         Combo = 3;
-        ComboCooldown = 1f;
+        AttackCooldown = 0.25f;
+        ComboCooldown = AttackCooldown;
+        AttackInputs.Add(AttackTypes.Light3);
     }
-    
+
     // Dash
     public override void Dash()
     {
