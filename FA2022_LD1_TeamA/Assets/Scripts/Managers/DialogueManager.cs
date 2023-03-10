@@ -1,69 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using System.Collections.Generic;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager
 {
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI dialogueText;
+    // Reference to Self
+    public static DialogueManager Instance;
 
-    public Animator animator;
+    // Dialogue Textbox Prefab
+    public GameObject DialogueTextboxPrefab;
 
-    private Queue<string> sentences;
+    // Dialogue Textbox Object
+    public GameObject DialogueTextboxObject;
 
-    void Awake()
+    // Determines which dialogue to load
+    public enum Scenarios
     {
-        sentences = new Queue<string>();
+        None,
+        Tutorial,
+        Beginning,
     }
 
-    public void StartDialogue(Dialogue dialogue)
-    {
-        animator.SetBool("IsOpen", true);
-
-        Debug.Log("Starting conversation with " + dialogue.name);
-
-        nameText.text = dialogue.name;
-
-        sentences.Clear();
-
-        foreach (string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
+    private Scenarios currentScenario = Scenarios.None;
+    public Scenarios CurrentScenario { 
+        get 
+        { 
+            return currentScenario; 
         }
-
-        DisplayNextSentence();
-
-    }
-
-    public void DisplayNextSentence()
-    {
-        if (sentences.Count == 0)
+        
+        set
         {
-            EndDialogue();
-            return;
-        }
+            currentScenario = value;
 
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+            Dialogue.Clear();
 
-    }
+            switch (currentScenario)
+            {
+                case Scenarios.Tutorial:
+                    Dialogue.Add(("Wolf", "RAAAAH IM SO MAD"));
+                    break;
 
-    IEnumerator TypeSentence(string sentence)
-    {
-        dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
-        {
-            dialogueText.text += letter;
-            yield return null;
+                default:
+                    Dialogue.Add(("Programmer", "How did you get here?"));
+                    break;
+            }
         }
     }
 
-    void EndDialogue()
+    // Dialogue in current Scenario
+    public List<(string, string)> Dialogue = new List<(string, string)>();
+
+    // Current Dialogue Text to display
+    public int CurrentIndex = 0;
+
+
+    public DialogueManager()
     {
-        animator.SetBool("IsOpen", false);
+        // Intialize instance if null
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
+    public void CreateDialogueBox(Scenarios scenario)
+    {
+        currentScenario = scenario;
+        CurrentIndex = 0;
+        DialogueTextboxObject = GameObject.Instantiate(DialogueTextboxPrefab);
+
+    }
 }

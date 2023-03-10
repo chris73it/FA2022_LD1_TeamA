@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c2f33a810f7b140942a0a41589917b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 220932289515394177, guid: c6816a541fbd3884ab7e7f1d1b16a880, type: 3}
-  dialogueText: {fileID: 1572859572287306722, guid: 7cb5bf123cffc0a4b820fe30ea46963a, type: 3}
-  animator: {fileID: 8731946704276369540, guid: f5066688aca6c794898a5c40de5e29ce, type: 3}
+  DialogueTextboxPrefab: {fileID: 2733951643473294069, guid: 61af7ffa34f2411488835c34c5d5bfe9, type: 3}
+  DialogueTextboxObject: {fileID: 0}
+  CurrentIndex: 0

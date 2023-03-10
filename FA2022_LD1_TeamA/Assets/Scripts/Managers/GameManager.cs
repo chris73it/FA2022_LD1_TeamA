@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     // Prefabs
     public GameObject FloorManagerPrefab;
     public GameObject CameraManagerPrefab;
+    public GameObject DialogueManager;
     public GameObject PlayerUIPrefab;
     public GameObject PowerupUIPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
