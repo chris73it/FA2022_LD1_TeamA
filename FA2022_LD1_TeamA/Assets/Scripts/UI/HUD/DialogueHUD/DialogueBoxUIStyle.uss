@@ -1,0 +1,6 @@
+#Container {
+    transition-duration: 0.5s;
+    transition-delay: 1s;
+    transition-property: all;
+    top: 100%;
+}

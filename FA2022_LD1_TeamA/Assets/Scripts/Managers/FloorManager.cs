@@ -90,7 +90,6 @@ public class FloorManager : MonoBehaviour
         RoomsEntered = 0;
         ForestPowerupsPool = new List<GameObject>(ForestPowerupsList);
 
-
         /// Create starting room
         StartingRoom = createStartingRoom();
 

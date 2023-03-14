@@ -3,24 +3,54 @@ using UnityEngine.UIElements;
 
 public class DialogueUIControl : MonoBehaviour
 {
-    private VisualElement root;
+    public VisualElement Root;
+    public VisualElement Container;
     private Button continueButton;
     private Label nameText;
     private Label dialogueText;
 
     private void Awake()
     {
-        root = GetComponent<UIDocument>().rootVisualElement;
-        continueButton = root.Q<VisualElement>("DialogueBox").Q<Button>("Continue");
-        nameText = root.Q<VisualElement>("DialogueBox").Q<Label>("Name");
-        dialogueText = root.Q<VisualElement>("DialogueBox").Q<Label>("DialogueText");
+        Root = GetComponent<UIDocument>().rootVisualElement;
+        Container = Root.Q<VisualElement>("Container");
+        continueButton = Root.Q<VisualElement>("DialogueBox").Q<Button>("Continue");
+        nameText = Root.Q<VisualElement>("DialogueBox").Q<Label>("Name");
+        dialogueText = Root.Q<VisualElement>("DialogueBox").Q<Label>("DialogueText");
 
         continueButton.clicked += continuePressed;
+
+        Root.RegisterCallback<TransitionStartEvent>(rootTranstionStart);
+    }
+
+
+    private void rootTranstionStart(TransitionStartEvent evt)
+    {
+        Debug.Log("test");
+    }
+
+    private void Start()
+    {
+        Container.style.top = new StyleLength(new Length(0, LengthUnit.Percent));
+
     }
 
     private void continuePressed()
     {
-        DialogueManager.Instance.CurrentIndex++;
+
+        if (DialogueManager.Instance.CurrentIndex + 1 < DialogueManager.Instance.Dialogue.Count)
+        {
+            DialogueManager.Instance.CurrentIndex++;
+
+            UpdateDialogueBox();
+        } else
+        {
+            Destroy(this.gameObject);
+            Time.timeScale = 1;
+        }
+    }
+
+    public void UpdateDialogueBox()
+    {
 
         nameText.text = DialogueManager.Instance.Dialogue[DialogueManager.Instance.CurrentIndex].Item1;
         dialogueText.text = DialogueManager.Instance.Dialogue[DialogueManager.Instance.CurrentIndex].Item2;

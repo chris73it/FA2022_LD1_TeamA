@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour  
+public class CameraManager
 {
-
     public static CameraManager Instance = null;
 
-    private void Awake()
+    public CameraManager()
     {
         if (Instance == null)
         {
             Instance = this;
         }
     }
-    private void Update()
+
+    public void CameraUpdate()
     {
         if (GameManager.ChosenPlayerCharacter != null)
         {

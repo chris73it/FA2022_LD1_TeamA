@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class DialogueManager
+public class DialogueManager : MonoBehaviour
 {
     // Reference to Self
     public static DialogueManager Instance;
@@ -31,12 +31,18 @@ public class DialogueManager
         {
             currentScenario = value;
 
+            Debug.Log("Dialogue Box");
+
             Dialogue.Clear();
 
             switch (currentScenario)
             {
                 case Scenarios.Tutorial:
                     Dialogue.Add(("Wolf", "RAAAAH IM SO MAD"));
+                    Dialogue.Add(("Test1", "Test1"));
+                    Dialogue.Add(("Test2", "Test2"));
+                    Dialogue.Add(("Test3", "Test3"));
+                    Dialogue.Add(("Test4", "Test4"));
                     break;
 
                 default:
@@ -53,7 +59,7 @@ public class DialogueManager
     public int CurrentIndex = 0;
 
 
-    public DialogueManager()
+    private void Awake()
     {
         // Intialize instance if null
         if (Instance == null)
@@ -64,9 +70,17 @@ public class DialogueManager
 
     public void CreateDialogueBox(Scenarios scenario)
     {
-        currentScenario = scenario;
+        CurrentScenario = scenario;
         CurrentIndex = 0;
-        DialogueTextboxObject = GameObject.Instantiate(DialogueTextboxPrefab);
 
+        if (DialogueTextboxObject == null)
+        {
+            DialogueTextboxObject = GameObject.Instantiate(DialogueTextboxPrefab);
+            DontDestroyOnLoad(DialogueTextboxObject);
+        }
+
+        DialogueTextboxObject.GetComponent<DialogueUIControl>().UpdateDialogueBox();
+
+        Time.timeScale = 0;
     }
 }

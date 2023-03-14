@@ -8,10 +8,15 @@ public class GameManager : MonoBehaviour
     // Reference to Self
     public static GameManager Instance;
 
+    // Manager References
+    public CameraManager CameraManager = new CameraManager();
+    // public DialogueManager DialogueManagerReference = new DialogueManager();
+
     // Prefabs
     public GameObject FloorManagerPrefab;
-    public GameObject CameraManagerPrefab;
-    public GameObject DialogueManager;
+    //public GameObject CameraManagerPrefab;
+    public GameObject DialogueManagerPrefab;
+
     public GameObject PlayerUIPrefab;
     public GameObject PowerupUIPrefab;
     public List<GameObject> PlayerCharactersPrefab; // how to find proper prefab...
@@ -105,7 +110,7 @@ public class GameManager : MonoBehaviour
                     Destroy(PlayerUIControl.Instance.gameObject); // Destroying all of these should be in a separate method
                     Destroy(gameObject);
                     Destroy(FloorManager.Instance.gameObject);
-                    Destroy(CameraManager.Instance.gameObject);
+                    //Destroy(CameraManager.Instance.gameObject);
                     FloorManager.Instance.NextFloor = false;
                     SceneManager.LoadScene("MainMenu");
                     break;
@@ -113,20 +118,25 @@ public class GameManager : MonoBehaviour
                 case GameStates.Game:
                     Debug.Log("Game State = Game");
                     MenuState = MenuStates.None;
-                    DontDestroyOnLoad(Instantiate(CameraManagerPrefab));
+
+                    DialogueManager.Instance.CreateDialogueBox(DialogueManager.Scenarios.Tutorial);
+
+                    // DontDestroyOnLoad(Instantiate(CameraManagerPrefab));
 
                     // Debug.Log("Height: " + FloorManager.RoomTreeHeight);
                     break;
 
                 case GameStates.Loading:
-                    // Create Floor Manager
                     Debug.Log("Loading");
+
+                    // Create Floor Manager
                     if (FloorManager.Instance == null)
                     {
                         GameObject FloorManagerObject = Instantiate(FloorManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                         DontDestroyOnLoad(FloorManagerObject);
                         //Debug.Log("Check");
                     }
+                    
 
                     //Generate Floor
                     FloorManager.Instance.ResetFloor(); // false should be replaced by a variable that is properly set after death or clearing a floor
@@ -134,7 +144,8 @@ public class GameManager : MonoBehaviour
                     // Load Floor
                     //string roomName = Room.RoomTypes.GetName(typeof(Room.RoomTypes), FloorManager.StartingFloor.Type);
                     //SceneManager.LoadScene(roomName, LoadSceneMode.Single);
-                    
+
+                    // Set Starting Floor
                     FloorManager.CurrentRoom = FloorManager.StartingRoom;
 
                     //Debug.Log("CurrentRoom assigned");
@@ -154,16 +165,24 @@ public class GameManager : MonoBehaviour
                         DontDestroyOnLoad(ChosenPlayerCharacter);
                     }
 
-
+                    // Create PlayerUI Control
                     if (PlayerUIControl.Instance == null)
                     {
                         GameObject PlayerUIObject = Instantiate(PlayerUIPrefab);
                         DontDestroyOnLoad(PlayerUIObject);
                     }
 
+                    // Intialize Player Stats
                     PlayerUIControl.Instance.InitializeHealth();
                     PlayerUIControl.Instance.UpdateStamina(ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina,
                         ChosenPlayerCharacter.GetComponent<PlayerMovement>().MaxStamina);
+
+                    // Create Dialogue Manager
+                    if (DialogueManager.Instance == null)
+                    {
+                        GameObject DialogueManager = Instantiate(DialogueManagerPrefab);
+                        DontDestroyOnLoad(DialogueManager);
+                    }
 
                     GameState = GameStates.Game;
                     break;
@@ -233,6 +252,11 @@ public class GameManager : MonoBehaviour
             {
                 MenuState = MenuStates.Pause;
             }
+        }
+
+        if (GameState == GameStates.Game)
+        {
+            CameraManager.Instance.CameraUpdate();
         }
     }
 }
