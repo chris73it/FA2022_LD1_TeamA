@@ -19,7 +19,7 @@ public class DialogueUIControl : MonoBehaviour
 
         continueButton.clicked += continuePressed;
 
-        Root.RegisterCallback<TransitionStartEvent>(rootTranstionStart);
+        Container.RegisterCallback<TransitionStartEvent>(rootTranstionStart);
     }
 
 
@@ -31,7 +31,6 @@ public class DialogueUIControl : MonoBehaviour
     private void Start()
     {
         Container.style.top = new StyleLength(new Length(0, LengthUnit.Percent));
-
     }
 
     private void continuePressed()

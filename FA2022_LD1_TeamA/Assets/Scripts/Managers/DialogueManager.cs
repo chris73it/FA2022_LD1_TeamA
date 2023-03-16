@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentScenario = value;
 
-            Debug.Log("Dialogue Box");
+            // Debug.Log("Dialogue Box");
 
             Dialogue.Clear();
 
