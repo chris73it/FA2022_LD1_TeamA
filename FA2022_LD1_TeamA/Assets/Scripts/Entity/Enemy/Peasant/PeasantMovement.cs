@@ -31,11 +31,18 @@ public class PeasantMovement : EnemyMovement
                     break;
 
                 case (PeasantStates.Wander):
+                    SetNavMeshSpeed(1f);
                     Combat.Animator.SetTrigger("Walking");
                     break;
 
                 case (PeasantStates.Pursuit):
+                    SetNavMeshSpeed(2f);
                     Combat.Animator.SetTrigger("Walking");
+                    break;
+
+                case (PeasantStates.Attacking):
+                    NavMeshAgent.speed = 0;
+                    NavMeshAgent.acceleration = -1000;
                     break;
 
                 default:
@@ -123,13 +130,19 @@ public class PeasantMovement : EnemyMovement
 
         if (State == PeasantStates.Attacking)
         {
-            SetNavMeshSpeed(0f);
+            if (transform.position.x < GameManager.ChosenPlayerCharacter.transform.position.x)
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
     }
 
     public void Wander()
     {
-        SetNavMeshSpeed(1f);
         Vector3 randomPosition = Random.insideUnitSphere * WanderRange;
         randomPosition += transform.position;
         Wandering = true;
@@ -142,7 +155,6 @@ public class PeasantMovement : EnemyMovement
 
     public void Pursuit()
     {
-        SetNavMeshSpeed(2f);
         Pursuing = true;
     }
 
