@@ -12,6 +12,7 @@ public class PeasantCombat : EnemyCombat
     {
         base.Initialize();
         SightRange = 10f;
+        Damage = 1;
         AttackRange = 3f;
         Movement = GetComponent<PeasantMovement>();
     }
@@ -22,7 +23,6 @@ public class PeasantCombat : EnemyCombat
         AttackDelay = 0.3f;
         IsAttacking = true;
         Animator.SetTrigger("Attacking");
-        SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
     }
 
     private void Update()
@@ -33,31 +33,14 @@ public class PeasantCombat : EnemyCombat
             if (Movement.State != PeasantMovement.PeasantStates.Attacking)
             {
                 Movement.State = PeasantMovement.PeasantStates.Attacking;
+                Debug.Log("Attacking!");
             }
 
             if (AttackCooldown <= 0 && !IsAttacking)
             {
                 Attack();
-            }
-
-            if (AttackDelay <= 0 && IsAttacking)
-            {
-                Damage = 1;
-                Collider[] Damaged = Physics.OverlapBox(AttackDirection + transform.position, new Vector3(1, 1, 1));
-                if (Damaged.Length > 0)
-                {
-                    for (int i = 0; i < Damaged.Length; i++)
-                    {
-                        if (Damaged[i].gameObject.tag == "Player")
-                        {
-                            Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
-                            Debug.Log("Hit");
-                        }
-                    }
-                }
-                IsAttacking = false;
-                AttackCooldown = 1f;
-                AttackResult = 1f;
+                Movement.Destination = transform.position;
+                Debug.Log("attack destination");
             }
         }
         else if (IsPlayerInRange(SightRange))
@@ -65,13 +48,15 @@ public class PeasantCombat : EnemyCombat
             if (Movement.State != PeasantMovement.PeasantStates.Pursuit)
             {
                 Movement.State = PeasantMovement.PeasantStates.Pursuit;
+                Debug.Log("Pursuit!");
             }
         }
         else
         {
-            if (Movement.State != PeasantMovement.PeasantStates.Wander)
+            if (Movement.State != PeasantMovement.PeasantStates.Wander && Movement.StateTimer <= 0f)
             {
                 Movement.State = PeasantMovement.PeasantStates.Wander;
+                Debug.Log("WanderCombat");
             }
         }
 

@@ -76,4 +76,19 @@ public class EnemyCombat : Combat
 
         return bullet;
     }
+
+    public override void OnDamage(Collider[] Damaged)
+    {
+        if (Damaged.Length > 0)
+        {
+            for (int i = 0; i < Damaged.Length; i++)
+            {
+                if (Damaged[i].gameObject.tag == "Player")
+                {
+                    Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+                    Debug.Log("Hit");
+                }
+            }
+        }
+    }
 }

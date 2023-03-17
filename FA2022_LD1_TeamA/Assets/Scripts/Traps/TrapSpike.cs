@@ -75,4 +75,5 @@ public class TrapSpike : TrapParent
             Gizmos.DrawWireSphere(transform.position, Size);
         }
     }
+
 }

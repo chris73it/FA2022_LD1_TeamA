@@ -83,7 +83,7 @@ PrefabInstance:
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fbd9920a1bd303348bae5a28dba15893, type: 3}
+      objectReference: {fileID: 1041910014, guid: a9bcfc1ef88ce15439932585040c7ccc, type: 3}
     - target: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -171,6 +171,23 @@ MonoBehaviour:
   Wandering: 0
   Pursuing: 0
   Combat: {fileID: -1300784570613502938}
+--- !u!1 &6588662607186043733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6213012212699211929, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}
+  m_PrefabInstance: {fileID: 961144734357687244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2070692127318268858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6588662607186043733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773a5450f81c6274b9f987ec68c76b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &7856903517804595405 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6944541915352269569, guid: 233ec76cd40ecd4438631abe60801ca5, type: 3}

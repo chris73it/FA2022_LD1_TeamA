@@ -32,6 +32,12 @@ public class EnemyMovement : Movement
         }        
     }
 
+    public void SetNavMeshSpeed(float speed)
+    {
+        TopSpeed = speed;
+        NavMeshAgent.speed = TopSpeed;
+        NavMeshAgent.acceleration = TopSpeed;
+    }
     /*
     public virtual void TakeAction()
     {
