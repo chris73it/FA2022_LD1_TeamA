@@ -18,10 +18,10 @@ public class PeasantAnimationEvents : MonoBehaviour
         {
             Collider[] Damaged = Physics.OverlapBox(Combat.AttackDirection + transform.position, new Vector3(1, 1, 1));
             Combat.OnDamage(Damaged);
-            Combat.IsAttacking = false;
-            Combat.AttackCooldown = 1f;
-            Combat.AttackResult = 1f;
         }
+        Combat.IsAttacking = false;
+        Combat.AttackCooldown = 1f;
+        Combat.AttackResult = 1f;
         Combat.SoundSource.PlayOneShot(Combat.SoundClips[0], GameManager.Instance.SoundVolume / 10f);
     }
 }

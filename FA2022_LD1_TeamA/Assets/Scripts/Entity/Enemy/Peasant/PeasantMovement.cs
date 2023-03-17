@@ -38,7 +38,6 @@ public class PeasantMovement : EnemyMovement
                     Combat.Animator.SetTrigger("Walking");
                     break;
 
-                    break;
                 default:
                     break;
             }
