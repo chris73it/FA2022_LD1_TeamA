@@ -77,6 +77,21 @@ public class EnemyCombat : Combat
         return bullet;
     }
 
+    public Vector3 GetEnemyDirection()
+    {
+        Vector3 playerDistance;
+        if (GameManager.ChosenPlayerCharacter != null)
+        {
+            playerDistance = (Player.transform.position - transform.position);
+            float radius = Mathf.Sqrt(Mathf.Pow(playerDistance.z, 2) + Mathf.Pow(playerDistance.x, 2));
+            playerDistance.z = playerDistance.z / radius * 2;
+            playerDistance.x = playerDistance.x / radius * 2;
+            return playerDistance;
+        }
+
+        return new Vector3(-10, -10, -10);
+    }
+
     public override void OnDamage(Collider[] Damaged)
     {
         if (Damaged.Length > 0)

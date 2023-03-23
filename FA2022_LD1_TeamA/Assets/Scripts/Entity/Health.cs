@@ -76,24 +76,47 @@ public class Health : MonoBehaviour
     }
     public int TakeDamage(int amount)
     {
+        Debug.Log("1");
+
         if (EntityCombat.Invulnerability <= 0 || IsDead) // Obstacle doesn't need a Combat
         {
+            Debug.Log("2");
+
             CurrentHealth -= amount;
 
 
+            Debug.Log("3");
+
             if (gameObject.tag == "Player")
             {
+                Debug.Log("3a");
+
                 SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
+
+                Debug.Log("3b");
+
                 EntityCombat.SetGeneralInvulnerability(HitInvulnerability);
+
+                Debug.Log("3c");
+
                 PlayerUIControl.Instance.RemoveHeart(amount);
             }
 
+            Debug.Log("4");
+
             if (gameObject.tag == "Enemy")
             {
+                Debug.Log("4a");
+
                 SoundSource.PlayOneShot(SoundClips[0], GameManager.Instance.SoundVolume / 10f);
             }
 
+            Debug.Log("5");
+
             EntityCombat.OnDamageAnimation();
+
+            Debug.Log("6");
+
             EntityCombat.InvulernabilityAnimation();
 
 

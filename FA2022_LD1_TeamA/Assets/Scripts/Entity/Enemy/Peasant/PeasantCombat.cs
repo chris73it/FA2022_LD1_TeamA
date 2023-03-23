@@ -19,7 +19,7 @@ public class PeasantCombat : EnemyCombat
 
     public override void Attack()
     {
-        AttackDirection = getEnemyDirection();
+        AttackDirection = GetEnemyDirection();
         AttackDelay = 0.3f;
         IsAttacking = true;
         Animator.SetTrigger("Attacking");
@@ -33,14 +33,14 @@ public class PeasantCombat : EnemyCombat
             if (Movement.State != PeasantMovement.PeasantStates.Attacking)
             {
                 Movement.State = PeasantMovement.PeasantStates.Attacking;
-                Debug.Log("Attacking!");
+                //Debug.Log("Attacking!");
             }
 
             if (AttackCooldown <= 0 && !IsAttacking)
             {
                 Attack();
                 Movement.Destination = transform.position;
-                Debug.Log("attack destination");
+                //Debug.Log("attack destination");
             }
         }
         else if (IsPlayerInRange(SightRange))
@@ -48,7 +48,7 @@ public class PeasantCombat : EnemyCombat
             if (Movement.State != PeasantMovement.PeasantStates.Pursuit)
             {
                 Movement.State = PeasantMovement.PeasantStates.Pursuit;
-                Debug.Log("Pursuit!");
+                //Debug.Log("Pursuit!");
             }
         }
         else
@@ -56,7 +56,7 @@ public class PeasantCombat : EnemyCombat
             if (Movement.State != PeasantMovement.PeasantStates.Wander && Movement.StateTimer <= 0f)
             {
                 Movement.State = PeasantMovement.PeasantStates.Wander;
-                Debug.Log("WanderCombat");
+                //Debug.Log("WanderCombat");
             }
         }
 
@@ -75,20 +75,7 @@ public class PeasantCombat : EnemyCombat
 
         BaseTimers();
     }
-    private Vector3 getEnemyDirection()
-    {
-        Vector3 playerDistance;
-        if (GameManager.ChosenPlayerCharacter != null)
-        {
-            playerDistance = (Player.transform.position - transform.position);
-            float radius = Mathf.Sqrt(Mathf.Pow(playerDistance.z, 2) + Mathf.Pow(playerDistance.x, 2));
-            playerDistance.z = playerDistance.z / radius * 2;
-            playerDistance.x = playerDistance.x / radius * 2;
-            return playerDistance;
-        }
-
-        return new Vector3(-10, -10, -10);
-    }
+    
     void OnDrawGizmos()
     {
         if (IsAttacking)
@@ -104,7 +91,7 @@ public class PeasantCombat : EnemyCombat
         else
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(getEnemyDirection() + transform.position, new Vector3(1, 1, 1));
+            Gizmos.DrawWireCube(GetEnemyDirection() + transform.position, new Vector3(1, 1, 1));
         }
     }
 }

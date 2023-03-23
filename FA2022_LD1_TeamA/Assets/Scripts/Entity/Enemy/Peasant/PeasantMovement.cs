@@ -73,6 +73,8 @@ public class PeasantMovement : EnemyMovement
                     Wander();
                 }
 
+
+                // Sprite Flip based on Destination
                 if (transform.position.x < Destination.x)
                 {
                     transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
@@ -84,7 +86,7 @@ public class PeasantMovement : EnemyMovement
 
                 Move();
 
-                Debug.Log("WanderMovement");
+                // Debug.Log("WanderMovement");
 
                 if (NavMeshAgent.remainingDistance <= 0)
                 {
@@ -161,7 +163,7 @@ public class PeasantMovement : EnemyMovement
     public override void Move()
     {
         base.Move();
-        Debug.Log("Animated");
+        //Debug.Log("Animated");
     }
 
     private void OnCollisionStay(Collision collision)

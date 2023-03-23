@@ -196,14 +196,20 @@ public class WerewolfCombat : Combat
             if (Damaged[i].gameObject.tag == "Enemy" || Damaged[i].gameObject.tag == "Obstacle")
             {
                 // Damage
-                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage); 
-               
+                Damaged[i].gameObject.GetComponent<Health>().TakeDamage(Damage);
+
+
                 if (DoT.Intialized)
                 {
+
                     Damaged[i].gameObject.GetComponent<Health>().DoT = DoT;
+
+
                     Damaged[i].gameObject.GetComponent<Health>().IsDoT = true;
+
+
                 }
-               
+
                 // Stun
                 if (StunTimer > 0f)
                 {
