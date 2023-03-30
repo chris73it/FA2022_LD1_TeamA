@@ -114,6 +114,7 @@ public class WerewolfCombat : Combat
             {
                 if (Input.GetButtonDown("Dash") && GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().CurrentStamina > 0.25f)
                 {
+                    Animator.SetTrigger("Dashing");
                     //Animator.SetTrigger("Attacking");
                     GameManager.ChosenPlayerCharacter.GetComponent<PlayerMovement>().UseStamina(0.25f);
                     SetGeneralInvulnerability(GetComponent<Health>().HitInvulnerability);
