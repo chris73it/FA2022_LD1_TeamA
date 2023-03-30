@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 3321780410646150079, guid: d27f3097b052b7c4ba50799465408840, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 08b224e3f1eb831419798d3be43f0fe7, type: 3}
+      objectReference: {fileID: 21300000, guid: 655c6cd5bf3151e4999699342feb7d5a, type: 3}
     - target: {fileID: 3321780410646150079, guid: d27f3097b052b7c4ba50799465408840, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -94,7 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: 
   ItemDescription: 
-  Prefab: {fileID: 6751494983849958918}
+  Index: 0
+  Consumed: 0
   SoundSource: {fileID: 0}
   SoundClips:
   - {fileID: 8300000, guid: c4390c9da2554e14b9eeeda7e515a1be, type: 3}
