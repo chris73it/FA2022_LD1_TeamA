@@ -18,19 +18,6 @@ public class DialogueUIControl : MonoBehaviour
         dialogueText = Root.Q<VisualElement>("DialogueBox").Q<Label>("DialogueText");
 
         continueButton.clicked += continuePressed;
-
-        Container.RegisterCallback<TransitionStartEvent>(rootTranstionStart);
-    }
-
-
-    private void rootTranstionStart(TransitionStartEvent evt)
-    {
-        Debug.Log("test");
-    }
-
-    private void Start()
-    {
-        Container.style.top = new StyleLength(new Length(0, LengthUnit.Percent));
     }
 
     private void continuePressed()
@@ -46,11 +33,11 @@ public class DialogueUIControl : MonoBehaviour
             Destroy(this.gameObject);
             Time.timeScale = 1;
         }
+
     }
 
     public void UpdateDialogueBox()
     {
-
         nameText.text = DialogueManager.Instance.Dialogue[DialogueManager.Instance.CurrentIndex].Item1;
         dialogueText.text = DialogueManager.Instance.Dialogue[DialogueManager.Instance.CurrentIndex].Item2;
     }
