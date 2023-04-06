@@ -204,13 +204,17 @@ public class FloorManager : MonoBehaviour
             if (i == roomsToGenerate - 1)
             {
                 // Place Shop Room
-                Debug.Log("Adding Shop Room");
+                foreach ((int, int) v in validPositions)
+                {
+                    Debug.Log(v);
+                }
+                Debug.Log("Adding Shop Room at " + validPosition.Item1 + " " + validPosition.Item2);
                 Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.ShopRoom, validPosition.Item1, validPosition.Item2, width, height, false); // rooms should be 1,6 but is 1,2 for testing
             }
             else if (i == roomsToGenerate - 2)
             {
                 // Place Boss Room
-                Debug.Log("Adding Boss Room");
+                Debug.Log("Adding Boss Room" + validPosition.Item1 + " " + validPosition.Item2);
                 Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.BossRoom, validPosition.Item1, validPosition.Item2, width, height, false); // rooms should be 1,6 but is 1,2 for testing
                 validPositions.Clear();
             }
@@ -229,9 +233,9 @@ public class FloorManager : MonoBehaviour
             if (validPositions.Contains(validPosition))
             {
                 validPositions.Remove(validPosition);
+                Debug.Log("(" + validPosition.Item1 + ", " + validPosition.Item2 + ") " + " removed");
             }
 
-            Debug.Log("(" + validPosition.Item1 + ", " + validPosition.Item2 + ") " + " removed");
         }
     }
 
@@ -265,7 +269,7 @@ public class FloorManager : MonoBehaviour
         // West Room Check
         if (currentRoomPosition.Item2 - 1 >= 0 && 
             !filledRooms.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 - 1)) &&
-            !validPositions.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 - 2)))
+            !validPositions.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 - 1)))
         {
             validPositions.Add((currentRoomPosition.Item1, currentRoomPosition.Item2 - 1));
         }
@@ -277,7 +281,7 @@ public class FloorManager : MonoBehaviour
         if (scene.name != "MainMenu")
         {
             CurrentRoom.OnRoomEnter();
-            Debug.Log(RoomsEntered + ": " + CurrentRoom.RoomName);
+            Debug.Log(CurrentRoom.Row + " " + CurrentRoom.Column + ": " + CurrentRoom.RoomName);
             RoomsEntered++;
         } else
         {

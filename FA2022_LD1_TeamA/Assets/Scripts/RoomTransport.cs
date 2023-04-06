@@ -138,7 +138,7 @@ public class RoomTransport : MonoBehaviour
                 break;
         }
 
-        if (NextRoom == null)
+        if (NextRoom == null || (NextRoom.Type == Room.RoomTypes.ShopRoom && FloorManager.CurrentRoom.Type != Room.RoomTypes.BossRoom))
         {
             //Debug.Log("NextRoom is null");
             Destroy(gameObject);
@@ -151,3 +151,6 @@ public class RoomTransport : MonoBehaviour
         }
     }
 }
+
+// if nextroom == shop and current room is bossroom, then add
+// if nextroom != shop and current room != bossroom
