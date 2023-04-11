@@ -12,6 +12,7 @@ public class FarmerCombat : EnemyCombat
         base.Initialize();
         AttackRange = 10f;
         Movement = GetComponent<FarmerMovement>();
+        AttackCooldown = 3f;
     }
 
     public override void Attack()

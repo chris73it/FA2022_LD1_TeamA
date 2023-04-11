@@ -13,6 +13,7 @@ public class RedcapFairyCombat : EnemyCombat
         SightRange = 10f;
         Damage = 1;
         AttackRange = 2f;
+        AttackCooldown = 3f;
         Movement = GetComponent<RedcapFairyMovement>();
     }
 

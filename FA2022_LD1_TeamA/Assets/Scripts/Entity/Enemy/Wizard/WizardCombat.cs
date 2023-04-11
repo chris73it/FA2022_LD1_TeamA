@@ -14,6 +14,7 @@ public class WizardCombat : EnemyCombat
         base.Initialize();
         SightRange = 12f;
         AttackRange = 10f;
+        AttackCooldown = 3f;
         RetreatRange = 5f;
         Movement = GetComponent<WizardMovement>();
     }

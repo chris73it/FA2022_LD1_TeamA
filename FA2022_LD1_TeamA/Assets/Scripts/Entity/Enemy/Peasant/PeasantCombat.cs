@@ -14,6 +14,7 @@ public class PeasantCombat : EnemyCombat
         SightRange = 10f;
         Damage = 1;
         AttackRange = 3f;
+        AttackCooldown = 3f;
         Movement = GetComponent<PeasantMovement>();
     }
 

@@ -11,7 +11,7 @@ public class LumberjackCombat : EnemyCombat
     {
         base.Initialize();
         AttackRadius = 3f;
-        AttackCooldown = 1f;
+        AttackCooldown = 3f;
         SlamRadius = 4f;
         Movement = GetComponent<LumberjackMovement>();
     }
