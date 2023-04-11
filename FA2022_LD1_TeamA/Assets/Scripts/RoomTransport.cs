@@ -12,12 +12,19 @@ public class RoomTransport : MonoBehaviour
 
     private void Awake()
     {
-        SetRoom(Direction);
+        if (!NextFloor)
+        {
+            SetRoom(Direction);
 
-        if (FloorManager.CurrentRoom.IsCleared)
+            if (FloorManager.CurrentRoom.IsCleared)
+            {
+                Active = true;
+            }
+        } else
         {
             Active = true;
         }
+        
     }
 
     // Transports player to nextRoom

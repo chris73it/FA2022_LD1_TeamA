@@ -244,7 +244,7 @@ public class FloorManager : MonoBehaviour
             else if (i == roomsToGenerate - 2)
             {
                 // Place Boss Room
-                //Debug.Log("Adding Boss Room" + validPosition.Item1 + " " + validPosition.Item2);
+                Debug.Log("Adding Boss Room" + validPosition.Item1 + " " + validPosition.Item2);
                 Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.BossRoom, validPosition.Item1, validPosition.Item2, width, height, false);
                 BossRoom = Floor[validPosition.Item1, validPosition.Item2];
                 validPositions.Clear();
@@ -312,7 +312,7 @@ public class FloorManager : MonoBehaviour
         if (scene.name != "MainMenu")
         {
             CurrentRoom.OnRoomEnter();
-            //Debug.Log(CurrentRoom.Row + " " + CurrentRoom.Column + ": " + CurrentRoom.RoomName);
+            Debug.Log(CurrentRoom.Row + " " + CurrentRoom.Column + ": " + CurrentRoom.RoomName);
             RoomsEntered++;
         } else
         {
