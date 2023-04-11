@@ -197,25 +197,56 @@ public class FloorManager : MonoBehaviour
             validPositions = addValidRooms(validPositions, filledRooms, check);
 
             /// Choose random valid position
-            validPosition = validPositions[Random.Range(0, validPositions.Count)];
+            if (validPositions.Count > 0)
+            {
+                validPosition = validPositions[Random.Range(0, validPositions.Count)];
+            }
+
             Debug.Log("Position Chosen: " + validPosition);
 
             /// Create new room at valid position   
             if (i == roomsToGenerate - 1)
             {
                 // Place Shop Room
+                /*
                 foreach ((int, int) v in validPositions)
                 {
                     Debug.Log(v);
+                }*/
+                // Debug.Log("Adding Shop Room at " + validPosition.Item1 + " " + validPosition.Item2);
+                if (validPositions.Count > 0)
+                {
+                    Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.ShopRoom, validPosition.Item1, validPosition.Item2, width, height, false);
+                    ShopRoom = Floor[validPosition.Item1, validPosition.Item2];
+                } else
+                {
+                    if (BossRoom.Row - 1 > 0)
+                    {
+                        Floor[BossRoom.Row - 1, BossRoom.Column] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row - 1, BossRoom.Column, width, height, false);
+                        ShopRoom = Floor[BossRoom.Row - 1, BossRoom.Column];
+                    } else if (BossRoom.Row + 1 < roomsToGenerate)
+                    {
+                        Floor[BossRoom.Row + 1, BossRoom.Column] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row + 1, BossRoom.Column, width, height, false);
+                        ShopRoom = Floor[BossRoom.Row + 1, BossRoom.Column];
+
+                    } else if (BossRoom.Column - 1 > 0)
+                    {
+                        Floor[BossRoom.Row, BossRoom.Column - 1] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row, BossRoom.Column - 1, width, height, false);
+                        ShopRoom = Floor[BossRoom.Row, BossRoom.Column - 1];
+                    }
+                    else if (BossRoom.Column + 1 < roomsToGenerate)
+                    {
+                        Floor[BossRoom.Row, BossRoom.Column + 1] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row, BossRoom.Column + 1, width, height, false);
+                        ShopRoom = Floor[BossRoom.Row, BossRoom.Column + 1];
+                    }
                 }
-                Debug.Log("Adding Shop Room at " + validPosition.Item1 + " " + validPosition.Item2);
-                Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.ShopRoom, validPosition.Item1, validPosition.Item2, width, height, false); // rooms should be 1,6 but is 1,2 for testing
             }
             else if (i == roomsToGenerate - 2)
             {
                 // Place Boss Room
                 Debug.Log("Adding Boss Room" + validPosition.Item1 + " " + validPosition.Item2);
-                Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.BossRoom, validPosition.Item1, validPosition.Item2, width, height, false); // rooms should be 1,6 but is 1,2 for testing
+                Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.BossRoom, validPosition.Item1, validPosition.Item2, width, height, false);
+                BossRoom = Floor[validPosition.Item1, validPosition.Item2];
                 validPositions.Clear();
             }
             else
@@ -233,7 +264,7 @@ public class FloorManager : MonoBehaviour
             if (validPositions.Contains(validPosition))
             {
                 validPositions.Remove(validPosition);
-                Debug.Log("(" + validPosition.Item1 + ", " + validPosition.Item2 + ") " + " removed");
+                //Debug.Log("(" + validPosition.Item1 + ", " + validPosition.Item2 + ") " + " removed");
             }
 
         }
