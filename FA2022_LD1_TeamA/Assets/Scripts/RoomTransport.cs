@@ -37,17 +37,19 @@ public class RoomTransport : MonoBehaviour
             {
                 FloorManager.LastDoorDirection = Direction;
                 FloorManager.CurrentRoom = NextRoom;
-                
             }
             else
             {
-                if (FloorManager.FloorsCompleted >= GameManager.GameWinCondition)
+                if (FloorManager.CurrentRoom.IsCleared)
                 {
-                    GameManager.Instance.WinGame();
-                }
-                else
-                {
-                    GameManager.RestartGame(true);
+                    if (FloorManager.FloorsCompleted >= GameManager.GameWinCondition)
+                    {
+                        GameManager.Instance.WinGame();
+                    }
+                    else
+                    {
+                        GameManager.RestartGame(true);
+                    }
                 }
             }
         }

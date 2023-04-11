@@ -187,7 +187,7 @@ public class FloorManager : MonoBehaviour
         /// Get StartingRoom's position and add to filledRooms
         filledRooms.Add((StartingRoom.Row, StartingRoom.Column));
         
-        /// Room Generation
+        /// Room Generation (do it the other way around? start with boss room and shop room connected then build it around that?)
         for (int i = 0; i < roomsToGenerate; i++)
         {
             /// Check latest room added
@@ -213,33 +213,9 @@ public class FloorManager : MonoBehaviour
                 {
                     Debug.Log(v);
                 }*/
-                // Debug.Log("Adding Shop Room at " + validPosition.Item1 + " " + validPosition.Item2);
-                if (validPositions.Count > 0)
-                {
-                    Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.ShopRoom, validPosition.Item1, validPosition.Item2, width, height, false);
-                    ShopRoom = Floor[validPosition.Item1, validPosition.Item2];
-                } else
-                {
-                    if (BossRoom.Row - 1 > 0)
-                    {
-                        Floor[BossRoom.Row - 1, BossRoom.Column] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row - 1, BossRoom.Column, width, height, false);
-                        ShopRoom = Floor[BossRoom.Row - 1, BossRoom.Column];
-                    } else if (BossRoom.Row + 1 < roomsToGenerate)
-                    {
-                        Floor[BossRoom.Row + 1, BossRoom.Column] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row + 1, BossRoom.Column, width, height, false);
-                        ShopRoom = Floor[BossRoom.Row + 1, BossRoom.Column];
 
-                    } else if (BossRoom.Column - 1 > 0)
-                    {
-                        Floor[BossRoom.Row, BossRoom.Column - 1] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row, BossRoom.Column - 1, width, height, false);
-                        ShopRoom = Floor[BossRoom.Row, BossRoom.Column - 1];
-                    }
-                    else if (BossRoom.Column + 1 < roomsToGenerate)
-                    {
-                        Floor[BossRoom.Row, BossRoom.Column + 1] = new Room(Room.RoomTypes.ShopRoom, BossRoom.Row, BossRoom.Column + 1, width, height, false);
-                        ShopRoom = Floor[BossRoom.Row, BossRoom.Column + 1];
-                    }
-                }
+                Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.ShopRoom, validPosition.Item1, validPosition.Item2, width, height, false);
+                ShopRoom = Floor[validPosition.Item1, validPosition.Item2];
             }
             else if (i == roomsToGenerate - 2)
             {
@@ -247,7 +223,7 @@ public class FloorManager : MonoBehaviour
                 Debug.Log("Adding Boss Room" + validPosition.Item1 + " " + validPosition.Item2);
                 Floor[validPosition.Item1, validPosition.Item2] = new Room(Room.RoomTypes.BossRoom, validPosition.Item1, validPosition.Item2, width, height, false);
                 BossRoom = Floor[validPosition.Item1, validPosition.Item2];
-                validPositions.Clear();
+                //validPositions.Clear();
             }
             else
             {
