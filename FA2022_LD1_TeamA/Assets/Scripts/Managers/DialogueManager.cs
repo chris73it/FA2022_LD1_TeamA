@@ -43,11 +43,11 @@ public class DialogueManager : MonoBehaviour
             switch (currentScenario)
             {
                 case Scenarios.Tutorial:
-                    Dialogue.Add(("Wolf", "RAAAAH IM SO MAD"));
-                    Dialogue.Add(("Test1", "Test1"));
-                    Dialogue.Add(("Test2", "Test2"));
-                    Dialogue.Add(("Test3", "Test3"));
-                    Dialogue.Add(("Test4", "Test4"));
+                    Dialogue.Add(("Wolf", "I must escape the forest."));
+                    Dialogue.Add(("", "Use WASD to move."));
+                    Dialogue.Add(("", "Left click to Attack. Right click to Dash."));
+                    Dialogue.Add(("", "Choose a door."));
+                    Dialogue.Add(("", "Good luck."));
                     break;
 
                 case Scenarios.ShopkeeperFirstEncounter:
