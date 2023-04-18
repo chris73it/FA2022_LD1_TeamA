@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Win Condtion
-    public static int GameWinCondition = 2;
+    public static int GameWinCondition = 0;
 
     // Sound Settings
 
