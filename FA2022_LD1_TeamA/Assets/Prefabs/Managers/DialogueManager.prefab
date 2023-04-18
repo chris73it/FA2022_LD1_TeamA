@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2202952084875156551
 MonoBehaviour:
@@ -46,4 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueTextboxPrefab: {fileID: 2733951643473294069, guid: 61af7ffa34f2411488835c34c5d5bfe9, type: 3}
   DialogueTextboxObject: {fileID: 0}
+  WolfSprite: {fileID: 2800000, guid: 0452fe41141daa643896d334b3169ccc, type: 3}
+  ShopekeeperSprite: {fileID: 2800000, guid: 5204568eca6582a45ba7c954f968a77e, type: 3}
   CurrentIndex: 0

@@ -8,6 +8,7 @@ public class DialogueUIControl : MonoBehaviour
     private Button continueButton;
     private Label nameText;
     private Label dialogueText;
+    private VisualElement character;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class DialogueUIControl : MonoBehaviour
         continueButton = Root.Q<VisualElement>("DialogueBox").Q<Button>("Continue");
         nameText = Root.Q<VisualElement>("DialogueBox").Q<Label>("Name");
         dialogueText = Root.Q<VisualElement>("DialogueBox").Q<Label>("DialogueText");
+        character = Root.Q<VisualElement>("Character");
 
         continueButton.clicked += continuePressed;
     }
@@ -40,6 +42,8 @@ public class DialogueUIControl : MonoBehaviour
     {
         nameText.text = DialogueManager.Instance.Dialogue[DialogueManager.Instance.CurrentIndex].Item1;
         dialogueText.text = DialogueManager.Instance.Dialogue[DialogueManager.Instance.CurrentIndex].Item2;
+        character.style.backgroundImage = DialogueManager.Instance.Dialogue[DialogueManager.Instance.CurrentIndex].Item3;
     }
+
 
 }
