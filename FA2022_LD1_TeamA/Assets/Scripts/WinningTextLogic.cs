@@ -15,6 +15,7 @@ public class WinningTextLogic : MonoBehaviour
         if (Timer < Duration)
         {
             Timer += Time.deltaTime;
+            transform.position = new Vector3(Camera.main.transform.position.x, 11, Camera.main.transform.position.z);
         }
         else
         {

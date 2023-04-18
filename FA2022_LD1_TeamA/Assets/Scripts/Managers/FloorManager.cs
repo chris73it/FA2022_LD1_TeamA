@@ -262,7 +262,7 @@ public class FloorManager : MonoBehaviour
             !filledRooms.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 + 1)) &&
             !validPositions.Contains((currentRoomPosition.Item1, currentRoomPosition.Item2 + 1)))
         {
-            validPositions.Add((currentRoomPosition.Item1, currentRoomPosition.Item2 + 2));
+            validPositions.Add((currentRoomPosition.Item1, currentRoomPosition.Item2 + 1));
         }
 
         // South Room Check

@@ -118,7 +118,9 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Game State = Game");
                     MenuState = MenuStates.None;
 
-                    DialogueManager.Instance.CreateDialogueBox(DialogueManager.Scenarios.Tutorial);
+                    if (!FloorManager.Instance.NextFloor) {
+                        DialogueManager.Instance.CreateDialogueBox(DialogueManager.Scenarios.Tutorial);
+                    }
 
                     // DontDestroyOnLoad(Instantiate(CameraManagerPrefab));
 
@@ -198,7 +200,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Win Condtion
-    public static int GameWinCondition = 3;
+    public static int GameWinCondition = 2;
 
     // Sound Settings
 

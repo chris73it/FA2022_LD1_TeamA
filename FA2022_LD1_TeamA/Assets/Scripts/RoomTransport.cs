@@ -22,9 +22,13 @@ public class RoomTransport : MonoBehaviour
             }
         } else
         {
-            Active = true;
+            if (!FloorManager.CurrentRoom.DoorsSpawned.Contains(gameObject))
+            {
+                FloorManager.CurrentRoom.DoorsSpawned.Add(gameObject);
+            }
+
+            transform.gameObject.SetActive(false);
         }
-        
     }
 
     // Transports player to nextRoom
@@ -147,7 +151,7 @@ public class RoomTransport : MonoBehaviour
                 break;
         }
 
-        if (NextRoom == null || (NextRoom.Type == Room.RoomTypes.ShopRoom && FloorManager.CurrentRoom.Type != Room.RoomTypes.BossRoom))
+        if (NextRoom == null) // || (NextRoom.Type == Room.RoomTypes.ShopRoom && FloorManager.CurrentRoom.Type != Room.RoomTypes.BossRoom)
         {
             //Debug.Log("NextRoom is null");
             Destroy(gameObject);

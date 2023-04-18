@@ -63,6 +63,7 @@ public class Room
             foreach (GameObject door in DoorsSpawned)
             {
                 door.GetComponent<RoomTransport>().Active = true;
+                door.SetActive(true);
             }
 
             //Debug.Log("ISCLEARED");
@@ -163,7 +164,7 @@ public class Room
 
         if (!HasEntered)
         {
-            Debug.Log("Obtaining Room Entities");
+            //Debug.Log("Obtaining Room Entities");
             getAllRoomEntities();
         }
         else
@@ -176,21 +177,33 @@ public class Room
 
         int DoorDirection = -1;
 
-       if (FloorManager.LastDoorDirection < 4)
+
+        if (FloorManager.LastDoorDirection >= 0 && FloorManager.LastDoorDirection < 4)
         {
             DoorDirection = FloorManager.LastDoorDirection + 4;
-        } else
+        } else if (FloorManager.LastDoorDirection >= 4)
         {
             DoorDirection = FloorManager.LastDoorDirection - 4;
         }
 
-        foreach (GameObject door in DoorsSpawned)
+        if (DoorDirection == -1)
         {
-            if (door != null && door.transform.GetChild(1).GetComponent<Spawner>().Direction == DoorDirection)
+            
+        } else
+        {
+            foreach (GameObject door in DoorsSpawned)
             {
-                GameManager.ChosenPlayerCharacter.transform.position = door.transform.GetChild(1).transform.position; // Enabling Auto Sync Transforms in Physics settings
+                if (door != null && door.GetComponent<RoomTransport>().Direction != -1 && door.transform.GetChild(1).GetComponent<Spawner>().Direction == DoorDirection)
+                {
+                    GameManager.ChosenPlayerCharacter.transform.position = door.transform.GetChild(1).transform.position; // Enabling Auto Sync Transforms in Physics settings
+                }
+                if (door != null && door.GetComponent<RoomTransport>().NextFloor && IsCleared && HasEntered && door.activeInHierarchy)
+                {
+                    door.SetActive(true);
+                }
             }
         }
+        
 
         HasEntered = true;
     }
@@ -209,62 +222,5 @@ public class Room
     {
         // create a gameobject spawner with type powerup that adds itself to this room
         GameObject.Instantiate(Reward, RewardLocation);
-    }
-
-    private void spawnRoomItems()
-    {
-        //Debug.Log(GameObject.FindGameObjectsWithTag("Spawner").Length);   
-        // Always spawn pickups
-        // Only spawn enemies if not cleared
-        // only spawn doors if cleared
-        GameObject[] o = GameObject.FindGameObjectsWithTag("Spawner");
-        int choicesCounter = 0;
-        GameObject go;
-
-        for (int i = 0; i < o.Length; i++)
-        {
-
-            if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Door) // maybe turn this all into a switch later
-            {
-                if (IsCleared)
-                {
-                    /*
-                    if (choicesCounter < Choices && ConnectedRooms.Count > 0)
-                    {
-                        //Debug.Log("Spawning...");
-                        go = o[i].GetComponent<Spawner>().InstantiateObject();
-                        //Debug.Log(go.name);
-                        //Rooms currently dont spawn anything since they the rest are not cleared
-                        go.GetComponent<RoomTransport>().NextRoom = ConnectedRooms[choicesCounter];
-                        choicesCounter++;
-                    }
-                    */
-                    go = o[i].GetComponent<Spawner>().InstantiateObject();
-                }
-            }
-            else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Enemy && !IsCleared)
-            {
-                go = o[i].GetComponent<Spawner>().InstantiateObject();
-                EnemiesSpawned.Add(go);
-            }
-            else if (o[i].GetComponent<Spawner>().Type == Spawner.SpawnerTypes.Powerup && IsCleared)
-            {
-                if (Reward != null)
-                {
-                    o[i].GetComponent<Spawner>().ToSpawn = Reward;
-                    o[i].GetComponent<Spawner>().InstantiateObject();
-                }
-                else
-                {
-                    Debug.Log("No reward");
-                }
-            }
-            else if (o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Enemy && o[i].GetComponent<Spawner>().Type != Spawner.SpawnerTypes.Powerup) // && not Reward? then u can deal with the reward stuff in another if
-            {
-                o[i].GetComponent<Spawner>().InstantiateObject();
-            }
-            // else if reward and is cleared
-            // set to spawn to reward then instantiate
-        }
     }
 }
