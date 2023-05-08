@@ -39,9 +39,19 @@ public class PlayerMovement : Movement
         else if (Horizontal < 0)
         {
             GetComponent<WerewolfAnimation>().AnimationState = WerewolfAnimation.AnimationStates.WalkLeft;
-        } else if (Horizontal == 0 && Vertical == 0)
+        }
+        else if (Horizontal == 0 && Vertical == 0)
         {
             GetComponent<WerewolfAnimation>().AnimationState = WerewolfAnimation.AnimationStates.Idle;
+        }
+
+        if (Vertical > 0)
+        {
+            GetComponent<WerewolfAnimation>().AnimationState = WerewolfAnimation.AnimationStates.WalkUp;
+        }
+        else
+        {
+            GetComponent<WerewolfAnimation>().AnimationState = WerewolfAnimation.AnimationStates.WalkDown;
         }
 
 

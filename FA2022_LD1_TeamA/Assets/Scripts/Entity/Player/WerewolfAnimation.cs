@@ -9,7 +9,8 @@ public class WerewolfAnimation : MonoBehaviour
         Idle,
         WalkLeft,
         WalkRight,
-        
+        WalkUp,
+        WalkDown,
     }
 
     private AnimationStates _animationState;
@@ -23,17 +24,34 @@ public class WerewolfAnimation : MonoBehaviour
             switch (_animationState)
             {
                 case (AnimationStates.Idle):
+                    GameManager.ChosenPlayerCharacter.GetComponent<WerewolfCombat>().Animator.SetBool("Moving", false);
+
                     break;
 
                 case (AnimationStates.WalkLeft):
+                    GameManager.ChosenPlayerCharacter.GetComponent<WerewolfCombat>().Animator.SetBool("Moving", true);
                     GameManager.ChosenPlayerCharacter.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
                     break;
 
                 case (AnimationStates.WalkRight):
+                    GameManager.ChosenPlayerCharacter.GetComponent<WerewolfCombat>().Animator.SetBool("Moving", true);
+
                     GameManager.ChosenPlayerCharacter.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
                     break;
-               
+
+                case (AnimationStates.WalkUp):
+                    GameManager.ChosenPlayerCharacter.GetComponent<WerewolfCombat>().Animator.SetBool("Moving", true);
+
+                    break;
+
+                case (AnimationStates.WalkDown):
+                    GameManager.ChosenPlayerCharacter.GetComponent<WerewolfCombat>().Animator.SetBool("Moving", true);
+
+                    break;
+
                 default:
+                    GameManager.ChosenPlayerCharacter.GetComponent<WerewolfCombat>().Animator.SetBool("Moving", false);
+
                     break;
             }
         }

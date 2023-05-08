@@ -97,6 +97,8 @@ public class Health : MonoBehaviour
 
                 EntityCombat.SetGeneralInvulnerability(HitInvulnerability);
 
+                EntityCombat.Animator.SetTrigger("Hurt");
+
                 //Debug.Log("3c");
 
                 PlayerUIControl.Instance.RemoveHeart(amount);
